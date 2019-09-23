@@ -24,8 +24,32 @@
   <script src="javascripts/modernizr.custom.js"></script>
   <script src="javascripts/progressive-image.js"></script>
   <body>
+    <div id="particles-js"></div>
     <%- include('navbar') -%>
-    <div id="mainPage"></div>
+    <div id="mainPage">
+      <header class="masthead text-center text-white">
+        <div
+          class="container d-flex align-items-center flex-column"
+          style="padding: 20%; padding-top:10%; position: relative"
+        >
+          <div class="row m-5">
+            <img
+              class="masthead-avatar mb-5"
+              src="/images/logo/logo.png"
+              style="width: 200px; background: #fff; border-radius: 50%"
+              alt=""
+            />
+            <h1 class="masthead-heading text-uppercase mb-0">
+              OpenFuel
+            </h1>
+            <p class="masthead-subheading font-weight-light mb-0">
+              A platform to connect opensource contributors to organizations &
+              startups willing to adopt opensource software.
+            </p>
+          </div>
+        </div>
+      </header>
+    </div>
     <%- include('footer') -%>
     <div id="notify_message" class="notify_message-success"></div>
   </body>
@@ -33,6 +57,51 @@
   <!-- End of your HTML body -->
   <script src="/animations/jquery-sakura.min.js"></script>
   <script src="javascripts/classie.js"></script>
-  <script type="text/javascript" src="/javascripts/like.js"></script>
-  <script type="text/javascript" src="/javascripts/comment.js"></script>
+  <script type="text/javascript" src="/javascripts/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      events: {
+        onresize: {
+          enable: true,
+          density_auto: true,
+          density_area: 400 // nb_particles = particles.nb * (canvas width *  canvas height / 1000) / density_area
+        }
+      },
+      particles: {
+        number: { value: 15, density: { enable: true, value_area: 800 } },
+        color: { value: ["#C00000", "#fcc905"] },
+        shape: {
+          type: "circle",
+          stroke: { width: 0, color: "#000000" },
+          polygon: { nb_sides: 5 }
+        },
+        opacity: {
+          value: 0.7,
+          random: false,
+          anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
+        },
+        size: {
+          value: 40,
+          random: true,
+          anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
+        },
+        line_linked: {
+          enable: false
+        },
+        move: {
+          enable: true,
+          speed: 6,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false,
+          attract: { enable: false, rotateX: 600, rotateY: 1200 }
+        }
+      },
+      retina_detect: true
+    });
+    // $(".particles-js-canvas-el").height(window.innerHeight);
+    // $(".particles-js-canvas-el").width(window.innerWidth);
+  </script>
 </html>
