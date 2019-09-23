@@ -41,7 +41,7 @@ router.get('/', function(req, res, next) {
 		}
   else {
 
-  	 res.render('auth/index', {
+  	 res.render('land', {
   		title: req.app.conf.name,
   		error:false
   	  })
