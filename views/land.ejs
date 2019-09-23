@@ -24,31 +24,87 @@
   <script src="javascripts/modernizr.custom.js"></script>
   <script src="javascripts/progressive-image.js"></script>
   <body>
-    <div id="particles-js"></div>
     <%- include('navbar') -%>
-    <div id="mainPage">
-      <header class="masthead text-center text-white">
-        <div
-          class="container d-flex align-items-center flex-column"
-          style="padding: 20%; padding-top:10%; position: relative"
-        >
-          <div class="row m-5">
-            <img
-              class="masthead-avatar mb-5"
-              src="/images/logo/logo.png"
-              style="width: 200px; background: #fff; border-radius: 50%"
-              alt=""
-            />
-            <h1 class="masthead-heading text-uppercase mb-0">
-              OpenFuel
-            </h1>
-            <p class="masthead-subheading font-weight-light mb-0">
-              A platform to connect opensource contributors to organizations &
-              startups willing to adopt opensource software.
+    <div id="mainPage" style="height:100%">
+      <div id="particles-js"></div>
+      <div class="container">
+        <header class="masthead text-center text-white">
+          <div
+            class="container d-flex align-items-center flex-column"
+            style="padding: 10%; padding-top:10%"
+          >
+            <div class="row m-5">
+              <img
+                class="masthead-avatar mb-5"
+                src="/images/logo/logo.png"
+                style="width: 200px; background: #fff; border-radius: 50%; position: relative;"
+                alt=""
+              />
+              <h1 class="masthead-heading text-uppercase mb-0">
+                OpenFuel
+              </h1>
+              <p class="masthead-subheading font-weight-light mb-0">
+                A platform to connect opensource contributors to organizations &
+                startups willing to adopt opensource software.
+              </p>
+              <a class="btn btn-primary" href="#login">Login</a>
+            </div>
+          </div>
+        </header>
+      </div>
+    </div>
+    <div class="container wave" style="width:100%!important">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path
+          fill="#C00000"
+          fill-opacity="1"
+          d="M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,250.7C672,277,768,267,864,224C960,181,1056,107,1152,101.3C1248,96,1344,160,1392,192L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          style="--darkreader-inline-fill:#c00000;"
+          data-darkreader-inline-fill=""
+        ></path>
+      </svg>
+      <section class="text-center bg-white" style="margin:10%; ">
+        <h2 class="h1-responsive font-weight-bold my-5">
+          The OpenSource Awards India 2019
+        </h2>
+        <p class="lead grey-text w-responsive mx-auto mb-5">
+          In 2019, we're organizing the first OpenSource Awards in India to
+          recognize open source contributors and create more visibility for
+          OpenSource Heroes
+        </p>
+
+        <div class="row">
+          <div class="col-md-4">
+            <i class="fas fa-chart-area fa-3x red-text"></i>
+            <h5 class="font-weight-bold my-4">What's gonna happen 1</h5>
+            <p class="grey-text mb-md-0 mb-5">
+              Description 1
             </p>
           </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4">
+            <i class="fas fa-book fa-3x cyan-text"></i>
+            <h5 class="font-weight-bold my-4">What's gonna happen 2</h5>
+            <p class="grey-text mb-md-0 mb-5">
+              Description 2
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4">
+            <i class="far fa-comments fa-3x orange-text"></i>
+            <h5 class="font-weight-bold my-4">What's gonna happen 3</h5>
+            <p class="grey-text mb-0">
+              Description 3
+            </p>
+          </div>
+          <!-- Grid column -->
         </div>
-      </header>
+        <!-- Grid row -->
+      </section>
     </div>
     <%- include('footer') -%>
     <div id="notify_message" class="notify_message-success"></div>
