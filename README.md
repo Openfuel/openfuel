@@ -1,131 +1,163 @@
-# Welcome
 
-![](./public/images/logo/logo.png)
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-# Openfuel
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/conferly/conferly">
+    <img src="public/images/logo/logo.png" alt="Logo">
+  </a>
 
-[![Financial Contributors on Open Collective](https://opencollective.com/dan_divy/all/badge.svg?label=financial+contributors)](https://opencollective.com/dan_divy) [![Gitter](https://badges.gitter.im/spruce-social/community.svg)](https://gitter.im/spruce-social/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/fae0af1cd8784133bdb3e86727e3ff2a)](https://www.codacy.com/app/DivySrivastava/spruce?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DivySrivastava/spruce&amp;utm_campaign=Badge_Grade) ![](https://img.shields.io/badge/license-MIT-green.svg) ![](https://api.travis-ci.org/DivySrivastava/spruce.svg?branch=master)
+  <h3 align="center">Conferly</h3>
 
-_Deployed_ [_here_](http://openfuel.org/)
+  <p align="center">
+    An awesome command-line utiliy for communication between developers!
+    <br />
+    <a href="https://github.com/conferly/conferly"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://conferly.js.org">View Demo</a>
+    ·
+    <a href="https://github.com/conferly/conferly/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/conferly/conferly/issues">Request Feature</a>
+  </p>
+</p>
 
 
-## Features
 
-* Sign in using local authentication, Instagram or Google.
-* Search for your other users.
-* Chat with your friends in realtime.
-* All feeds divided into 3 categories 
-  * thoughts \(tweets\)
-  * events \(location can be specified\)
-  * moments \(personal post\)
-* Like and comment on a feed.
-* API for developers
-* View your/others profile.
-* Follow a particular user and get notified for his/her activities.
-* Change your profile picture, bio, people who follow you etc.
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
 
-And a lot more to be added soon...
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Usage](#usage)
+* [Roadmap](#roadmap)
+* [Contributing](#contributing)
+* [License](#license)
+* [Contact](#contact)
+* [Acknowledgements](#acknowledgements)
 
-## To Do's
 
-* Activity feature for user to see follow requests and his/her daily activity.
-* Notifications
 
-## Requirements
+<!-- ABOUT THE PROJECT -->
+## About The Project
+<!-- 
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
+-->
+There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
 
-* [Node.js](https://nodejs.org)  
-  * expressjs [ExpressJS HTTP middleware](https://npmjs.org/package/express)
-  * ejs [Embedded JavaScript templates](https://npmjs.org/package/ejs)        
-* [MongoDB](http://mongodb.org)
+Here's why:
+* Your time should be focused on creating something amazing. A project that solves a problem and helps others
+* You shouldn't be doing the same tasks over and over like creating a README from scratch
+* You should element DRY principles to the rest of your life :smile:
 
-## Installation
+Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
 
-Clone the repo locally then install all the dependencies using [NPM](https://npmjs.org/)
+A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
-```bash
-$ git clone https://github.com/dan-divy/spruce.git
-$ cd spruce
-$ npm i
+### Built With
+This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+* [Torpedo.js](https://torpedo.js.org)
+* [Socket.io](https://socket.io)
+* [Node.js](https://nodejs.org)
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+* npm
+```sh
+npm install conferly@latest -g
 ```
 
-## Local Development
+### Installation
 
-Before running, we need to add the Instgram and Google API Credentials to the project. Under the `config` directory of the repo, you will find `instagram.js` and `google.js`. We need to add the `<CLIENT_ID>`, `<CLIENT_SECRET>` and `<host>:<port>` with our own API credentials
-
-```javascript
-/** REPLACE YOUR API CREDENTIALS HERE **/
-var in_client_id = 'XXXXXXXXXXXXXXXXXX', // <CLIENT_ID>
-    in_client_secret = 'XXXXXXXXXXXXXXXXXXXX', // <CLIENT_SECRET>
+1. Get a free room id at [https://conferly.com](https://conferly.com)
+2. Clone the repo
+```sh
+git clone https:://github.com/your_username_/Project-Name.git
+```
+3. Install NPM packages
+```sh
+npm install
+```
+4. Enter your API in `config.js`
+```JS
+const API_KEY = 'ENTER YOUR API';
 ```
 
-Now Replace the `<host>` & `<port>` with the redirect uri specified in the [Instagram API Dashboard](https://www.instagram.com/developer) and [Google API Dashboard](https://developers.google.com). Default is `http://localhost:80/account/oauth`.
 
-```javascript
-var in_redirect_uri = 'http://localhost:80/account/oauth/:service'
-```
 
-Finally start the MongoDB server in a seperate bash/pm2
+<!-- USAGE EXAMPLES -->
+## Usage
 
-```bash
-$ mongod
-```
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-and then start the spruce server via `npm`.
+_For more examples, please refer to the [Documentation](https://conferly.js.org)_
 
-```bash
-$ npm start
-```
 
-## To know
 
-spruce uses [mongoose](https://npmjs.org/package/mongoose) as an ORM for performing CRUD operations on MongoDB and [express.js](https://npmjs.com/package/express) for server-side HTTP routing.
+<!-- ROADMAP -->
+## Roadmap
 
-**This project needs contributors!!**
+See the [open issues](https://github.com/conferly/conferly/issues) for a list of proposed features (and known issues).
 
-## Authors
 
-* [Divy Srivastava](http://github.com/DivySrivastava)
-* [Dan](https://github.com/dan-online)
 
-## Contributors
+<!-- CONTRIBUTING -->
+## Contributing
 
-### Code Contributors
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
-<a href="https://github.com/dan-divy/spruce/graphs/contributors"><img src="https://opencollective.com/dan_divy/contributors.svg?width=890&button=false" /></a>
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-### Financial Contributors
 
-Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/dan_divy/contribute)]
 
-#### Individuals
-
-<a href="https://opencollective.com/dan_divy"><img src="https://opencollective.com/dan_divy/individuals.svg?width=890"></a>
-
-#### Organizations
-
-Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/dan_divy/contribute)]
-
-<a href="https://opencollective.com/dan_divy/organization/0/website"><img src="https://opencollective.com/dan_divy/organization/0/avatar.svg"></a>
-<a href="https://opencollective.com/dan_divy/organization/1/website"><img src="https://opencollective.com/dan_divy/organization/1/avatar.svg"></a>
-<a href="https://opencollective.com/dan_divy/organization/2/website"><img src="https://opencollective.com/dan_divy/organization/2/avatar.svg"></a>
-<a href="https://opencollective.com/dan_divy/organization/3/website"><img src="https://opencollective.com/dan_divy/organization/3/avatar.svg"></a>
-<a href="https://opencollective.com/dan_divy/organization/4/website"><img src="https://opencollective.com/dan_divy/organization/4/avatar.svg"></a>
-<a href="https://opencollective.com/dan_divy/organization/5/website"><img src="https://opencollective.com/dan_divy/organization/5/avatar.svg"></a>
-<a href="https://opencollective.com/dan_divy/organization/6/website"><img src="https://opencollective.com/dan_divy/organization/6/avatar.svg"></a>
-<a href="https://opencollective.com/dan_divy/organization/7/website"><img src="https://opencollective.com/dan_divy/organization/7/avatar.svg"></a>
-<a href="https://opencollective.com/dan_divy/organization/8/website"><img src="https://opencollective.com/dan_divy/organization/8/avatar.svg"></a>
-<a href="https://opencollective.com/dan_divy/organization/9/website"><img src="https://opencollective.com/dan_divy/organization/9/avatar.svg"></a>
-
+<!-- LICENSE -->
 ## License
 
-\(The MIT License\)
+Distributed under the MIT License. See `LICENSE` for more information.
 
-Copyright \(c\) 2019 Divy Srivastava [dj.srivastava23@gmail.com](mailto:dj.srivastava23@gmail.com)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files \(the 'Software'\), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+<!-- CONTACT -->
+## Contact
 
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Divy Srivastava - [@undefined_void](https://twitter.com/@undefined_void) - dj.srivastava23@gmail.com
 
+Project Link: [https://github.com/conferly/conferly](https://github.com/conferly/conferly)
+
+
+[contributors-shield]: https://img.shields.io/github/contributors/conferly/conferly?style=flat-square
+[contributors-url]: https://github.com/conferly/conferly/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/conferly/conferly?style=flat-square
+[forks-url]: https://github.com/conferly/conferly/network/members
+[stars-shield]: https://img.shields.io/github/stars/conferly/conferly?style=flat-square
+[stars-url]: https://github.com/conferly/conferly/stargazers
+[issues-shield]: https://img.shields.io/github/issues/conferly/conferly?style=flat-square
+[issues-url]: https://github.com/conferly/conferly/issues
+[license-shield]: https://img.shields.io/github/license/conferly/conferly?style=flat-square
+[license-url]: https://github.com/conferly/conferly/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/
+[product-screenshot]: docs/img/screenshot.png
