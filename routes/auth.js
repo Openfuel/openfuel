@@ -2,33 +2,11 @@ var express = require('express');
 var router = express.Router();
 var db = require('../utils/handlers/user');
 var formParser = require('../utils/form-parser.js');
-var instagramConf = require('../config/instagram');
-var googleConf = require('../config/google');
-const {google} = require('googleapis');
-const oauth2Client = new google.auth.OAuth2(
-  googleConf.client_id,
-  googleConf.client_secret,
-  googleConf.redirect_uri
-);
 
-var httpRequest = require('request');
 var User = require('../utils/models/user');
-/* GET signup page. */
-router.get('/new', function(req, res, next) {
-  res.render('auth/signup', {
-  	title: req.app.conf.name ,
-  	error:false
-  });
-});
 
-/* GET login page. */
-router.get('/getin', function(req, res, next) {
-	res.render('auth/login', {
-		title: req.app.conf.name ,
-		error:false
-	});
-})
-
+//PS: Passport stuff to be done below...
+/**
 router.post('/new', formParser, function(req, res, next) {
 	db.createNew(req.body, (error, result) => {
 		if(!result) {
@@ -92,7 +70,7 @@ router.get('/oauth/:service', async function(req, res, next) {
 				console.log(r)
 				db.findOne({username:r.user.username},(err, exists) => {
 					console.log(r)
-					if(exists) {
+**/					if(exists) {
 						req.session._id = exists._id;
 						req.session.user = exists.username;
 						res.redirect('/')
