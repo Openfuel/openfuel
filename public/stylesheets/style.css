@@ -2,7 +2,7 @@ html {
   word-break: break-word
 }
 body {
-  color: rgb(192,0,0)
+  color: rgb(192,0,0);
 }
 canvas{
   width: 100%;
@@ -10,14 +10,38 @@ canvas{
   display:block;
   vertical-align:bottom;
 }
+
+.wave {
+  padding: 0!important
+}
+.wave-after::after {
+  content: "";
+  position: relative;
+  /* padding * -1 */
+  /* padding - height/2 */
+  float: left;
+  display: block;
+  height: 4rem;
+  width: 100%;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 70 500 60' preserveAspectRatio='none'><rect x='0' y='0' width='500' height='500' style='stroke: none; fill: %23C00000;' /><path d='M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z' style='stroke: none; fill: %23ffff;'></path></svg>");
+  background-size: 100% 100%;
+}
+.btn-primary {
+  background-color: #c00000;
+  border: none
+}
+.btn:focus, .btn:hover {
+  background-color: #c00000be
+}
+
 #particles-js{
   width: 100%;
-  height: 100%;
+  height: 94.5vh;
   background-image: url('');
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  position: fixed;
+  position: absolute;
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -683,5 +707,5 @@ a {
   }
 }
 #mainPage {
-  margin-top:9rem
+  margin-top:8rem
 }
