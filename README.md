@@ -10,10 +10,10 @@
 <br />
 <p align="center">
   <a href="https://github.com/conferly/conferly">
-    <img src="public/images/logo/logo.png" alt="Logo">
+    <img src="./public/images/logo/logo.png" alt="Logo">
   </a>
 
-  <h3 align="center">Conferly</h3>
+  <h3 align="center">Openfuel</h3>
 
   <p align="center">
     An awesome command-line utiliy for communication between developers!
