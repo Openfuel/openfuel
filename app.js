@@ -23,6 +23,8 @@ app.conf = require("./config/app");
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+require("./utils/handlers/github");
+
 var cooky = {
   secret: "work hard",
   resave: true,
@@ -38,6 +40,7 @@ app.use(logger("tiny"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, "public")));
 app.use((req, res, next) => {
   res.locals.user = req.session.user ? req.session.user : false;
