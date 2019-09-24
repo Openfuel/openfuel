@@ -3,25 +3,23 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/conferly/conferly">
+  <a href="https://github.com/openfuel/openfuel">
     <img src="./public/images/logo/logo.png" alt="Logo">
   </a>
 
   <h3 align="center">Openfuel</h3>
 
   <p align="center">
-    An awesome command-line utiliy for communication between developers!
+    A platform to connect open-source contributors to startups and organisations who are willing to adopt open-source software!
     <br />
     <a href="https://github.com/conferly/conferly"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://conferly.js.org">View Demo</a>
+    <a href="https://openfuel.org">Get started</a>
     ·
     <a href="https://github.com/conferly/conferly/issues">Report Bug</a>
     ·
@@ -148,16 +146,12 @@ Divy Srivastava - [@undefined_void](https://twitter.com/@undefined_void) - dj.sr
 Project Link: [https://github.com/conferly/conferly](https://github.com/conferly/conferly)
 
 
-[contributors-shield]: https://img.shields.io/github/contributors/conferly/conferly?style=flat-square
-[contributors-url]: https://github.com/conferly/conferly/graphs/contributors
+[contributors-shield]: https://img.shields.io/github/contributors/openfuel/openfuel?style=flat-square
+[contributors-url]: https://github.com/openfuel/openfuel/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/conferly/conferly?style=flat-square
 [forks-url]: https://github.com/conferly/conferly/network/members
-[stars-shield]: https://img.shields.io/github/stars/conferly/conferly?style=flat-square
-[stars-url]: https://github.com/conferly/conferly/stargazers
-[issues-shield]: https://img.shields.io/github/issues/conferly/conferly?style=flat-square
+[stars-shield]: https://img.shields.io/github/stars/openfuel/openfuel?style=flat-square
+[stars-url]: https://github.com/openfuel/openfuel/stargazers
+[issues-shield]: https://img.shields.io/github/issues/openfuel/openfuel?style=flat-square
 [issues-url]: https://github.com/conferly/conferly/issues
-[license-shield]: https://img.shields.io/github/license/conferly/conferly?style=flat-square
-[license-url]: https://github.com/conferly/conferly/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/
 [product-screenshot]: docs/img/screenshot.png
