@@ -14,7 +14,7 @@
   <h3 align="center">Openfuel</h3>
 
   <p align="center">
-    An awesome command-line utiliy for communication between developers!
+    A platform to connect open-source contributors to startups and organisations who are willing to adopt open-source software!
     <br />
     <a href="https://github.com/conferly/conferly"><strong>Explore the docs »</strong></a>
     <br />
