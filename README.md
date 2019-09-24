@@ -3,7 +3,6 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -155,6 +154,4 @@ Project Link: [https://github.com/conferly/conferly](https://github.com/conferly
 [stars-url]: https://github.com/openfuel/openfuel/stargazers
 [issues-shield]: https://img.shields.io/github/issues/openfuel/openfuel?style=flat-square
 [issues-url]: https://github.com/conferly/conferly/issues
-[license-shield]: https://img.shields.io/github/license/conferly/conferly?style=flat-square
-[license-url]: https://github.com/conferly/conferly/blob/master/LICENSE.txt
 [product-screenshot]: docs/img/screenshot.png
