@@ -16,6 +16,7 @@ var userSchema = mongoose.Schema({
     chat_rooms:Array, // ["1234", "3456"]
     lastLogin:String, // 10 min ago
     notifications:Array, // [{msg:"New message from @user", link:"/chat/user"}]
+    country: String, // "IN" or "UK"
     developer:Boolean // true or false
 });
 
