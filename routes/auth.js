@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var db = require("../utils/handlers/user");
 var formParser = require("../utils/form-parser.js");
+var passport = require("passport");
 
 var User = require("../utils/models/user");
 
