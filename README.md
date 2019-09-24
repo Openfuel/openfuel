@@ -61,9 +61,10 @@ Of course, no one template will serve all projects since your needs may be diffe
 A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
 ### Built With
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Torpedo.js](https://torpedo.js.org)
-* [Socket.io](https://socket.io)
+This project would never have been possible without these wonderful frameworks and project.
+* [Spruce](https://github.com/dan-divy/spruce)
+  Openfuel is a modified version of Spruce!
+* [Github-resume](https://github.com/)
 * [Node.js](https://nodejs.org)
 
 
@@ -76,13 +77,13 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+Clone the repo and hit npm install.
 * npm
 ```sh
-npm install conferly@latest -g
+npm install
 ```
 
-### Installation
+### Startup
 
 1. Get a free room id at [https://conferly.com](https://conferly.com)
 2. Clone the repo
@@ -140,8 +141,10 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 
 Divy Srivastava - [@undefined_void](https://twitter.com/@undefined_void) - dj.srivastava23@gmail.com
+DanCodes - dan@dancodes.online
+Yash Saxena - add-email-here
 
-Project Link: [https://github.com/conferly/conferly](https://github.com/conferly/conferly)
+Project Link: [https://github.com/openfuel/openfuel](https://github.com/openfuel/openfuel)
 
 
 [contributors-shield]: https://img.shields.io/github/contributors/openfuel/openfuel?style=flat-square
