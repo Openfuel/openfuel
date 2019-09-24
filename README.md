@@ -16,11 +16,9 @@
   <p align="center">
     A platform to connect open-source contributors to startups and organisations who are willing to adopt open-source software!
     <br />
-    <a href="https://github.com/conferly/conferly"><strong>Explore the docs »</strong></a>
+    <a href="https://openfuel.org"><strong>Get started »</strong></a>
     <br />
     <br />
-    <a href="https://openfuel.org">Get started</a>
-    ·
     <a href="https://github.com/conferly/conferly/issues">Report Bug</a>
     ·
     <a href="https://github.com/conferly/conferly/issues">Request Feature</a>
