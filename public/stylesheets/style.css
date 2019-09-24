@@ -30,7 +30,7 @@ canvas{
   background-color: #c00000;
   border: none
 }
-.btn:focus, .btn:hover {
+.btn:focus, .btn:hover, .btn:active {
   background-color: #c00000be
 }
 
@@ -49,17 +49,26 @@ canvas{
     padding-left: 20%;
     padding-right: 20%;
   }
+  #mainPage {
+    height:90vh
+  }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   .form-container {
     padding-left: 20%;
     padding-right: 20%;
   }
+  #mainPage {
+    height:50vh
+  }
 }
 @media (min-width: 1200px) {
   .form-container {
     padding-left: 20%;
     padding-right: 20%;
+  }
+  #mainPage {
+    height:50vh
   }
 }
 
