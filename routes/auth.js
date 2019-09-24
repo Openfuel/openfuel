@@ -6,6 +6,15 @@ var formParser = require("../utils/form-parser.js");
 var User = require("../utils/models/user");
 
 //PS: Passport stuff to be done below...
+router.get('/github',
+  passport.authenticate('github'));
+
+router.get('/github/callback', 
+  passport.authenticate('github', { failureRedirect: '/' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 // router.post('/new', formParser, function(req, res, next) {
 // 	db.createNew(req.body, (error, result) => {
