@@ -24,9 +24,9 @@
   <script src="javascripts/modernizr.custom.js"></script>
   <script src="javascripts/progressive-image.js"></script>
   <body>
+    <div id="particles-js"></div>
     <%- include('navbar') -%>
     <div id="mainPage">
-      <div id="particles-js"></div>
       <div class="container">
         <header class="masthead text-center text-white">
           <div
@@ -69,46 +69,33 @@
         ></path>
       </svg>
       <section class="text-center bg-white" style="margin:10%; ">
-        <h2 class="h1-responsive font-weight-bold my-5">
-          The OpenSource Awards India 2019
-        </h2>
-        <p class="lead grey-text w-responsive mx-auto mb-5">
-          In 2019, we're organizing the first OpenSource Awards in India to
-          recognize open source contributors and create more visibility for
-          OpenSource Heroes
-        </p>
-
         <div class="row">
-          <div class="col-md-4">
-            <i class="fas fa-chart-area fa-3x red-text"></i>
-            <h5 class="font-weight-bold my-4">What's gonna happen 1</h5>
-            <p class="grey-text mb-md-0 mb-5">
-              Description 1
+          <div class="col-md-8 mt-3">
+            <h2
+              class="h1-responsive font-weight-bold my-5"
+              style="text-decoration: underline"
+            >
+              The OpenSource Awards India 2019
+            </h2>
+            <p class="lead grey-text w-responsive mx-auto mb-5">
+              In 2019, we're organizing the first OpenSource Awards in India to
+              recognize open source contributors and create more visibility for
+              OpenSource Heroes. Here is some more text that will need to be
+              filled in because I don't know much about what is going to
+              happen.<br /><br />
+              Where: India (More detail)<br />
+              When: 2019 (More detail)
             </p>
+            <button class="btn btn-primary">Learn More</button>
+            <button class="btn btn-primary">Get involved</button>
           </div>
-          <!-- Grid column -->
-
-          <!-- Grid column -->
-          <div class="col-md-4">
-            <i class="fas fa-book fa-3x cyan-text"></i>
-            <h5 class="font-weight-bold my-4">What's gonna happen 2</h5>
-            <p class="grey-text mb-md-0 mb-5">
-              Description 2
-            </p>
+          <div class="col-md-4 mt-2">
+            <img
+              style="border-radius: 50%; height: 100%; width:100%"
+              src="/images/hackathon.jpg"
+            />
           </div>
-          <!-- Grid column -->
-
-          <!-- Grid column -->
-          <div class="col-md-4">
-            <i class="far fa-comments fa-3x orange-text"></i>
-            <h5 class="font-weight-bold my-4">What's gonna happen 3</h5>
-            <p class="grey-text mb-0">
-              Description 3
-            </p>
-          </div>
-          <!-- Grid column -->
         </div>
-        <!-- Grid row -->
       </section>
     </div>
     <%- include('footer') -%>
