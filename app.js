@@ -18,6 +18,8 @@ var publicApiRouter = require("./routes/developer/api");
 var chatRouter = require("./routes/chat");
 
 var app = express();
+require("dotenv").config();
+
 app.conf = require("./config/app");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
