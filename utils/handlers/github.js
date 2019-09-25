@@ -26,6 +26,7 @@ passport.use(
       User
       .findOne({username: profile.user})
       .exec((err, dbUser) => {
+         if(dbUser) {}
          cb(null, profile);
       })
     }
