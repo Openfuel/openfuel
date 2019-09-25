@@ -48,6 +48,8 @@ app.use((req, res, next) => {
   res.locals.user = req.session.user ? req.session.user : false;
   next();
 });
+app.use(passport.initialize());
+app.use(passport.session());
 app.use("/", indexRouter);
 app.use("/u", usersRouter);
 app.use("/account", accountRouter);
