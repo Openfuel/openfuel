@@ -23,7 +23,11 @@ passport.use(
     },
     function(accessToken, refreshToken, profile, cb) {
       //Do stuff here
-      cb(null, profile);
+      User
+      .findOne({username: profile.user})
+      .exec((err, dbUser) => {
+         cb(null, profile);
+      })
     }
   )
 );
