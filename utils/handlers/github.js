@@ -22,12 +22,17 @@ passport.use(
       callbackURL: "http://localhost:8000/account/github/callback"
     },
     function(accessToken, refreshToken, profile, cb) {
-      //Do stuff here
       User
       .findOne({username: profile.user})
       .exec((err, dbUser) => {
-         if(dbUser) {}
-         cb(null, profile);
+         if(dbUser) return cb(null, profile);
+         var newUser = new User({
+           username: profile.username,
+           // Add other stuff too ..
+         })
+         newUser.save((err, done) => {
+           if(done) return cb(null, profile);
+         });
       })
     }
   )
