@@ -10,6 +10,7 @@ passport.use(
       callbackURL: "http://localhost:8000/account/github/callback"
     },
     function(accessToken, refreshToken, profile, cb) {
+      //Do stuff here
       cb();
     }
   )
