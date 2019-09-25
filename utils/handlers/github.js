@@ -27,7 +27,7 @@ passport.use(
       .exec((err, dbUser) => {
          if(dbUser) return cb(null, profile);
          var newUser = new User({
-           username: profile.username,
+           username: profile.username
            // Add other stuff too ..
          })
          newUser.save((err, done) => {
