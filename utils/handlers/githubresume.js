@@ -2,56 +2,8 @@ var axois = require('axios');
 
 module.exports = (username) => {};
 
-(function () {
-    var e,
-        a = /\+/g,  // Regex for replacing addition symbol with a space
-        r = /([^&=]+)=?([^&]*)/g,
-        d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
-        q = window.location.search.substring(1);
-
-    while (e = r.exec(q)) {
-       urlParams[0] = d(e[1]);
-    }
-})();
-
-$(document).ready(function() {
-    try {
-        if (urlParams[0] !== undefined) {
-            username = urlParams[0];
-            run();
-        } else {
-            home();
-        }
-    } catch (err) {
-        try {
-            console.log(err);
-        } catch (e) {
-            /*fail silently*/
-        }
-    }
-});
-
-var error = function() {
-    $.ajax({
-        url: 'views/error.html',
-        dataType: 'html',
-        success: function(data) {
-            var template = data;
-            $('#resume').html(data);
-        }
-    });
-};
-
-var home = function() {
-    $.ajax({
-        url: 'views/index.html',
-        dataType: 'html',
-        success: function(data) {
-            var template = data;
-            $('#resume').html(data);
-        }
-    });
-};
+var  a = /\+/g; // Regex 
+var s = /([^&=]+)=?([^&]*)/g;
 
 var github_user = function(username, callback) {
     $.getJSON('https://api.github.com/users/' + username + '?callback=?', callback);
