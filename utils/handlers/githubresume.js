@@ -1,6 +1,8 @@
 var urlParams = {};
-var username;
+// We don't need this --> var username;
 var trackerId = 'UA-21222559-1';
+
+module.exports = (username) => {};
 
 (function () {
     var e,
