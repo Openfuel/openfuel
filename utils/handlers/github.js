@@ -3,7 +3,7 @@ const passport = require("passport");
 const User = require("../models/user");
 
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+  done(null, user);
 });
 
 passport.deserializeUser(function(id, done) {
@@ -22,18 +22,18 @@ passport.use(
       callbackURL: "http://localhost:8000/account/github/callback"
     },
     function(accessToken, refreshToken, profile, cb) {
-      User
-      .findOne({username: profile.user})
-      .exec((err, dbUser) => {
-         if(dbUser) return cb(null, profile);
-         var newUser = new User({
-           username: profile.username
-           // Add other stuff too ..
-         })
-         newUser.save((err, done) => {
-           if(done) return cb(null, profile);
-         });
-      })
+      User.findOne({ id: profile.id }).exec((err, dbUser) => {
+        if (dbUser) return cb(null, dbUser);
+        var newUser = new User({
+          id: profile.id,
+          username: profile.username
+          // Add other stuff too ..
+        });
+        newUser.save((err, done) => {
+          if (err) return cb(err);
+          if (done) return cb(null, done);
+        });
+      });
     }
   )
 );

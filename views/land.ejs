@@ -47,12 +47,14 @@
                 A platform to connect opensource contributors to organizations &
                 startups willing to adopt opensource software.
               </p>
+              <% if(!user) { %>
               <a
                 class="btn btn-primary"
                 style="z-index:999; position:sticky"
                 href="/account/github"
                 ><i class="fab fa-github"></i> Login with Github</a
               >
+              <% } %>
             </div>
           </div>
         </header>

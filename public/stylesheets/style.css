@@ -36,7 +36,7 @@ canvas{
   background-color: #c00000be
 }
 
-.navbar-fixed-top, .navbar-fixed-top * {
+.navbar-fixed-top, .navbar-fixed-top .float-left {
   transition: all 1s;
 }
 

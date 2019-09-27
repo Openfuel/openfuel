@@ -7,15 +7,17 @@ var passport = require("passport");
 var User = require("../utils/models/user");
 
 //PS: Passport stuff to be done below...
-router.get('/github',
-  passport.authenticate('github'));
+router.get("/github", passport.authenticate("github"));
 
-router.get('/github/callback', 
-  passport.authenticate('github', { failureRedirect: '/' }),
+router.get(
+  "/github/callback",
+  passport.authenticate("github", { failureRedirect: "/err" }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+    req.session.user = req.session.passport.user;
+    res.redirect("/");
+  }
+);
 
 // router.post('/new', formParser, function(req, res, next) {
 // 	db.createNew(req.body, (error, result) => {
