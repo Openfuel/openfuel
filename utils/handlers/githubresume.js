@@ -1,140 +1,17 @@
 var axois = require('axios');
 
-module.exports = (username) => {};
-
 var  a = /\+/g; // Regex 
 var s = /([^&=]+)=?([^&]*)/g;
+var finalData = {};
 
-var github_user = function(username, callback) {
-    $.getJSON('https://api.github.com/users/' + username + '?callback=?', callback);
-}
+/**
+ USAGE: getDetails('username', data => { } 
+ **/
 
-var github_user_repos = function(username, callback, page_number, prev_data) {
-    var page = (page_number ? page_number : 1),
-        url = 'https://api.github.com/users/' + username + '/repos?per_page=100&callback=?',
-        data = (prev_data ? prev_data : []);
-
-    if (page_number > 1) {
-        url += '&page=' + page_number;
-    }
-    $.getJSON(url, function(repos) {
-        data = data.concat(repos.data);
-        if (repos.data.length == 100) {
-            github_user_repos(username, callback, page + 1, data);
-        } else {
-            callback(data);
-        }
-    });
-}
-
-var github_user_issues = function(username, callback, page_number, prev_data) {
-    var page = (page_number ? page_number : 1),
-        url = 'https://api.github.com/search/issues?q=type:pr+is:merged+author:' + username + '&per_page=100&callback=?'
-        data = (prev_data ? prev_data : []);
-
-    if (page_number > 1) {
-        url += '&page=' + page_number;
-    }
-
-    $.getJSON(url, function(repos) {
-        data = data.concat(repos.data.items);
-        if (repos.data.total_count == 100) {
-            github_user_issues(username, callback, page + 1, data);
-        } else {
-            callback(data);
-        }
-    });
-}
-
-var github_user_orgs = function(username, callback) {
-    $.getJSON('https://api.github.com/users/' + username + '/orgs?callback=?', callback);
-}
-
-// Check to see if the user has starred the resume.github.com repo.
-//
-// Returns true/false.
-var github_user_starred_resume = function(username, page) {
-    var star  = false;
-    var repos = [];
-    var page  = (page ? page : 1);
-    var url   = 'https://api.github.com/users/' + username + '/starred?per_page=100&page=' + page;
-    var errorMsg;
-
-    $.ajax({
-        url: url,
-        async: false,
-        dataType: 'json',
-        success: function(data) {
-            repos = data;
-        },
-        error: function(e) {
-            if (e.status == 403) {
-                errorMsg = 'api_limit'
-            } else if (e.status == 404) {
-                errorMsg = 'not_found'
-            }
-        }
-    });
-
-    if (errorMsg === 'api_limit' || errorMsg === 'not_found') {
-        return errorMsg;
-    }
-
-    $.each(repos, function(i, repo) {
-        if (repo.full_name == "resume/resume.github.com") {
-            star = true;
-            return false; // stop iterating
-        }
-    });
-
-    if (star) {
-        return star;
-    }
-
-    if (repos.length == 100) {
-        star = github_user_starred_resume(username, page + 1);
-    }
-
-    return star;
-}
-
-var run = function() {
+module.exports = (username, cb) => {
     var itemCount = 0,
         maxItems = 5,
-        maxLanguages = 9,
-        starred = github_user_starred_resume(username);
-
-    if (!starred || starred === 'api_limit' || starred === 'not_found') {
-        if (starred === 'api_limit') {
-            $.ajax({
-                url: 'views/api_limit.html',
-                dataType: 'html',
-                success: function(data) {
-                    var template = data;
-                    $('#resume').html(data);
-                }
-            });
-        } else if (starred === 'not_found') {
-            $.ajax({
-                url: 'views/not_found.html',
-                dataType: 'html',
-                success: function(data) {
-                    var template = data;
-                    $('#resume').html(data);
-                }
-            });
-        } else {
-            $.ajax({
-                url: 'views/opt_out.html',
-                dataType: 'html',
-                success: function(data) {
-                    var template = data;
-                    $('#resume').html(data);
-                }
-            });
-        }
-        return;
-    }
+        maxLanguages = 9
 
     var res = github_user(username, function(data) {
         data = data.data;
@@ -247,23 +124,10 @@ var run = function() {
             view.website = addHttp + data.blog;
         }
 
-        var resume = (data.type == 'User' ? 'views/resume.html' : 'views/resumeOrgs.html');
-        $.ajax({
-            url: resume,
-            dataType: 'html',
-            success: function(data) {
-                var template = data,
-                    html = Mustache.to_html(template, view);
-                $('#resume').html(html);
-                document.title = name + "'s Résumé";
-                $("#actions #print").click(function(){
-                    window.print();
-                    return false;
-                });
-            }
-        });
+        finalData.profile =view;
+        return cb(finalData);
     });
-
+    /** WIP....
     github_user_repos(username, function(data) {
         var sorted = [],
             languages = {},
@@ -506,5 +370,55 @@ var run = function() {
             }
         });
     });
+    **/
+ };
+ 
+// ToDo: Change from jQuery to Axios
 
-};
+var github_user = function(username, callback) {
+    // This is supposed to be getJson...
+    axios
+    .get('https://api.github.com/users/' + username + '?callback=?')
+    .then(res => callback(res))
+}
+
+var github_user_repos = function(username, callback, page_number, prev_data) {
+    var page = (page_number ? page_number : 1),
+        url = 'https://api.github.com/users/' + username + '/repos?per_page=100&callback=?',
+        data = (prev_data ? prev_data : []);
+
+    if (page_number > 1) {
+        url += '&page=' + page_number;
+    }
+    $.getJSON(url, function(repos) {
+        data = data.concat(repos.data);
+        if (repos.data.length == 100) {
+            github_user_repos(username, callback, page + 1, data);
+        } else {
+            callback(data);
+        }
+    });
+}
+
+var github_user_issues = function(username, callback, page_number, prev_data) {
+    var page = (page_number ? page_number : 1),
+        url = 'https://api.github.com/search/issues?q=type:pr+is:merged+author:' + username + '&per_page=100&callback=?'
+        data = (prev_data ? prev_data : []);
+
+    if (page_number > 1) {
+        url += '&page=' + page_number;
+    }
+
+    $.getJSON(url, function(repos) {
+        data = data.concat(repos.data.items);
+        if (repos.data.total_count == 100) {
+            github_user_issues(username, callback, page + 1, data);
+        } else {
+            callback(data);
+        }
+    });
+}
+
+var github_user_orgs = function(username, callback) {
+    $.getJSON('https://api.github.com/users/' + username + '/orgs?callback=?', callback);
+}
