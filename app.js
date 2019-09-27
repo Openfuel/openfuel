@@ -1,23 +1,24 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var session = require("express-session");
-var bodyParser = require("body-parser");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var passport = require("passport");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const session = require("express-session");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const passport = require("passport");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var accountRouter = require("./routes/auth");
-var meRouter = require("./routes/settings");
-var extraRouter = require("./routes/extras/wordbeater/main");
-var categoryRouter = require("./routes/category");
-var restApi = require("./routes/api/v1/index");
-var publicApiRouter = require("./routes/developer/api");
-var chatRouter = require("./routes/chat");
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
+const accountRouter = require("./routes/auth");
+const meRouter = require("./routes/settings");
+const extraRouter = require("./routes/extras/wordbeater/main");
+const categoryRouter = require("./routes/category");
+const restApi = require("./routes/api/v1/index");
+const publicApiRouter = require("./routes/developer/api");
+const chatRouter = require("./routes/chat");
 
-var app = express();
+const app = express();
+
 require("dotenv").config();
 
 app.conf = require("./config/app");
@@ -27,7 +28,7 @@ app.set("view engine", "ejs");
 
 require("./utils/handlers/github");
 
-var cooky = {
+const cooky = {
   secret: "work hard",
   resave: true,
   expires: new Date() * 60 * 60 * 24 * 7,
@@ -35,7 +36,23 @@ var cooky = {
 };
 
 app.sessionMiddleware = session(cooky);
-
+if (process.env.NODE_ENV == "production") {
+  //Production middlewares
+  console.log("Production mode on");
+  const compression = require("compression");
+  const minify = require("express-minify");
+  app.use(compression());
+  app.use(
+    minify({
+      cache: __dirname + "/public/cache",
+      uglifyJS: true
+    })
+  );
+  app.use(function(req, res, next) {
+    res.setHeader("Cache-Control", "public, max-age=86400");
+    next();
+  });
+}
 app.set("trust proxy", 1); // trust first proxy
 app.use(app.sessionMiddleware);
 app.use(logger("tiny"));
@@ -43,7 +60,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(passport.initialize());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  express.static(
+    path.join(__dirname, "public"),
+    process.env.NODE_ENV == "production"
+      ? {
+          maxAge: 31557600
+        }
+      : {}
+  )
+);
 app.use((req, res, next) => {
   res.locals.user = req.session.user ? req.session.user : false;
   next();
