@@ -50,8 +50,8 @@
               <a
                 class="btn btn-primary"
                 style="z-index:999; position:sticky"
-                href="#login"
-                >Login</a
+                href="/account/github"
+                ><i class="fab fa-github"></i> Login with Github</a
               >
             </div>
           </div>
@@ -108,19 +108,34 @@
   <script type="text/javascript" src="/javascripts/particles.min.js"></script>
   <script>
     particlesJS("particles-js", {
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: {
+            enable: false
+          },
+          onclick: {
+            enable: false
+          },
+          resize: true
+        }
+      },
       events: {
         onresize: {
           enable: true,
           density_auto: true,
           density_area: 400 // nb_particles = particles.nb * (canvas width *  canvas height / 1000) / density_area
+        },
+        onclick: {
+          enable: false
         }
       },
       particles: {
-        number: { value: 15, density: { enable: true, value_area: 800 } },
+        number: { value: 20, density: { enable: true, value_area: 800 } },
         color: { value: ["#C00000", "#fcc905"] },
         shape: {
           type: "circle",
-          stroke: { width: 0, color: "#000000" },
+          stroke: { width: 0, color: "#fff" },
           polygon: { nb_sides: 5 }
         },
         opacity: {
@@ -128,28 +143,26 @@
           random: false,
           anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
         },
+        line_linked: {
+          enable: false
+        },
         size: {
           value: 40,
           random: true,
           anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
         },
-        line_linked: {
-          enable: false
-        },
         move: {
           enable: true,
           speed: 6,
           direction: "none",
-          random: false,
+          random: true,
           straight: false,
           out_mode: "out",
-          bounce: false,
+          bounce: true,
           attract: { enable: false, rotateX: 600, rotateY: 1200 }
         }
       },
       retina_detect: true
     });
-    // $(".particles-js-canvas-el").height(window.innerHeight);
-    // $(".particles-js-canvas-el").width(window.innerWidth);
   </script>
 </html>
