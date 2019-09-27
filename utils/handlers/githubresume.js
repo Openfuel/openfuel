@@ -127,7 +127,7 @@ module.exports = (username, cb) => {
         finalData.profile =view;
         return cb(finalData);
     });
-
+    /** WIP....
     github_user_repos(username, function(data) {
         var sorted = [],
             languages = {},
@@ -370,6 +370,7 @@ module.exports = (username, cb) => {
             }
         });
     });
+    **/
  };
  
 // ToDo: Change from jQuery to Axios
