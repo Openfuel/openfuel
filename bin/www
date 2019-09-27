@@ -7,8 +7,9 @@
 var app = require("../app");
 var io = require("socket.io");
 var debug = require("debug")("v2.0.0:server");
+//var http = process.env.NODE_ENV == "production" ? require("https") : require("http");
 var http = require("http");
-
+http.globalAgent.maxSockets = Infinity;
 /**
  * Get port from environment and store in Express.
  */
