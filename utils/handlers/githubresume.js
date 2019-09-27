@@ -1,6 +1,5 @@
 var axois = require('axios');
 
-var  a = /\+/g; // Regex 
 var s = /([^&=]+)=?([^&]*)/g;
 var finalData = {};
 
