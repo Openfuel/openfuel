@@ -4,20 +4,27 @@ var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 // define the schema for our user model
 var userSchema = mongoose.Schema({
-    username:String, // _username_
-    password: String, // 123rikwdjbfp2ioeurroasodfj[OJ[Ojsjdfag*wef
-    firstname: String, // firstName
-    lastname: String, // lastName
-    bio: String, // A new bio
-    dob: String, // 23rd july 2018
-    followers: Array, // ["134wr3","1q2easd2"]
-    posts:Array, 
-    profile_pic:String, // /public/profile_pic/username/user.png
-    chat_rooms:Array, // ["1234", "3456"]
-    lastLogin:String, // 10 min ago
-    notifications:Array, // [{msg:"New message from @user", link:"/chat/user"}]
-    country: String, // "IN" or "UK"
-    developer:Boolean // true or false
+    username:String,
+    access_token: String,
+    refresh_token: String,
+    id: String,
+    username:String,
+    profile_url: String,
+    email: String,
+    profile_picture: String,
+    name: String,
+    website: String,
+    location: String,
+    hirable: Boolean,
+    bio:String,
+    since:String,
+    created_at: String,
+    repos: Number,
+    user_status: String,
+    new: String,
+    gists: Number,
+    followers: Number,
+    following: Number
 });
 
 // methods ======================

@@ -41,9 +41,13 @@ passport.use(
             since: data.since,
             created_at: data.created_at,
             repos: data.repos,
+            gists: profile._json.public_gists,
             user_status: data.userStatus,
             new: data.earlyAdopter,
-            followers: data.followers
+            followers: data.followers,
+            following: profile._json.following,
+            access_token: accessToken,
+            refresh_token: refreshToken
           });
           newUser.save((err, done) => {
             if (err) return cb(err);
