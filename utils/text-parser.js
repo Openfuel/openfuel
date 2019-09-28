@@ -34,6 +34,7 @@ function emailParser(str) {
 //console.log(emailParser("DivySrivastava <dj@123.com>"));
 
 module.exports = function(str) {
+	if(!str) return;
 	str = makeBold(str);
 	str = makeItalic(str);
 	str = newLineParser(str);

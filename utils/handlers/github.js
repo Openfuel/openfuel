@@ -30,9 +30,9 @@ passport.use(
           var newUser = new User({
             id: profile.id,
             username: profile.username,
-            profile_url: profile._json.avatar_url,
+            profile_url: profile.profileUrl,
             email: profile._json.email,
-            profile_picture: profile.photos[0].value,
+            profile_picture: profile._json.avatar_url,
             name: profile._json.name,
             website: profile._json.blog,
             location: profile._json.location,
@@ -44,7 +44,7 @@ passport.use(
             gists: profile._json.public_gists,
             user_status: data.userStatus,
             new: data.earlyAdopter,
-            followers: data.followers,
+            followers: profile._json.followers,
             following: profile._json.following,
             access_token: accessToken,
             refresh_token: refreshToken
