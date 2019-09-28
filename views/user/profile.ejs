@@ -7,7 +7,7 @@
       <a href="/" class="float-left">
       <h2>
         <img src="/images/logo/logo.png" class="logo">
-        spruce
+        openfuel
       </h2>
       </a>
       <div class="float-right margin-top-20">
@@ -18,31 +18,28 @@
     </div>
     <br>
     <div class="container">
-      <img src="<%= user.profile_pic %>" class="logo">
+      <img src="<%= user.profile_picture %>" class="logo">
       <a class="gram-card-user-name" href="">@<%= user.username %></a>
-      (<%= user.fistname %> <%= user.lastname %>)
-      <br><br>
-        <span class="bio"><%- user.bio %></span>
+      (<%= user.name %>)
+            <br><br>
+        <span class="bio"><%- user.bio %></span><br>
+        <blockquote>
+          Github: <a href="<%- user.profile_url %>"><%- user.profile_url %></a><br>
+          Followers: <%- user.followers %><br>
+          Following: <%- user.following %>
+          <br>
+          <% if(user.website) { %>
+            Website: <a href="<%- user.website %>"><%- user.website %></a>
+          <% } %>
+        </blockquote>
       <br><br>
       <div class="float-right margin-right-10">
-
-
-        <button class="btn btn-action btn-sm btn-default" onclick="follow()" ="follow"<% for(var i=0;i<user.followers.length;i++) { %><% if(user.followers[i] == userId) { %> disabled<% } %><% } %>>Follow</button>
-
-
-
-        <a class="btn btn-action btn-sm btn-danger" href="/chat/<%= user.id %>">Talk</a>
+      <a class="btn btn-action btn-sm btn-danger" href="/chat/<%= user.id %>">Talk</a>
       </div>
       <br><br><br>
-
-
     </div>
     <div class="container">
-      <center>
-      <% for(var x=0;x<user.posts.length;x++) { %>
-        <img src="<% if(user.posts[x].static_url) { %><%= user.posts[x].static_url %><% } else {%>/images/logo/logo.png<% } %>" class="feed-view-img">
-      <% } %>
-      </center>
+    
     </div>
     <div id="notify_message" class="notify_message-success">
     	<center>Follow @<%= user.username %>!</center>
