@@ -1,4 +1,4 @@
-var axois = require('axios');
+var axios = require('axios');
 
 var s = /([^&=]+)=?([^&]*)/g;
 var finalData = {};
@@ -62,8 +62,7 @@ module.exports = (username, cb) => {
             followersLabel: data.followers > 1 ? 'followers' : 'follower',
             username: username,
             userStatus: 'GitHub user',
-            since: since,
-            resume_url: window.location
+            since: since
         };
 
         // We consider a limit of 4 months since the GitHub opening (Feb 2008) to be considered as an early adopter
@@ -377,7 +376,7 @@ module.exports = (username, cb) => {
 var github_user = function(username, callback) {
     // This is supposed to be getJson...
     axios
-    .get('https://api.github.com/users/' + username + '?callback=?')
+    .get('https://api.github.com/users/' + username)
     .then(res => callback(res))
 }
 
