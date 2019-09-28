@@ -9,6 +9,7 @@
   "dependencies": {
     "apikeygen": "^1.1.0",
     "array-tools": "1.8.6",
+    "axios": "^0.19.0",
     "bcrypt-nodejs": "0.0.3",
     "chai": "^4.2.0",
     "compression": "^1.7.4",
@@ -38,9 +39,7 @@
     "socket.io": "^2.2.0",
     "time-ago": "0.2.1"
   },
-  "devDependencies": {
-    "electron": "2.0.12"
-  },
+  "devDependencies": {},
   "description": "A social media platform written in Node.js (the 5th time)",
   "main": "./bin/www",
   "keywords": [
