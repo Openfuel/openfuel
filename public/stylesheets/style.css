@@ -2,7 +2,7 @@ html {
   word-break: break-word
 }
 body {
-  color: rgb(192,0,0);
+  color: #001f3f;
 }
 canvas{
   width: 100%;
@@ -25,17 +25,19 @@ canvas{
   display: block;
   height: 4rem;
   width: 100%;
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 70 500 60' preserveAspectRatio='none'><rect x='0' y='0' width='500' height='500' style='stroke: none; fill: %23C00000;' /><path d='M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z' style='stroke: none; fill: %23ffff;'></path></svg>");
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 70 500 60' preserveAspectRatio='none'><rect x='0' y='0' width='500' height='500' style='stroke: none; fill: %23001f3f' /><path d='M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z' style='stroke: none; fill: %23ffff;'></path></svg>");
   background-size: 100% 100%;
 }
 .btn-primary {
-  background-color: #c00000;
+  background-color: #001f3f;
   border: none
 }
 .btn:focus, .btn:hover, .btn:active {
-  background-color: #c00000be
+  background-color: #001f3f;
 }
-
+a {
+  color: #0074D9
+}
 .navbar-fixed-top, .navbar-fixed-top .float-left {
   transition: all 1s;
 }
@@ -43,7 +45,7 @@ canvas{
 .invert-navbar {
   border: none!important;
   color: white!important;
-  background: #c00000!important
+  background: #001f3f!important
 }
 
 .invert-navbar a, .invert-navbar small {
@@ -93,10 +95,10 @@ canvas{
 }
 
 .bg-primary {
-  background: #C00000
+  background: #001f3f
 }
 .text-primary {
-  color: #c00000
+  color: #001f3f;
 }
 
 .btn-toggle {
