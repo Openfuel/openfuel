@@ -7,10 +7,10 @@
   * Re-written for better code quality.
   * Both Instagram and Google OAuth working.
   * NEW Releases for MAC, Windows, Linux and Android devices.
-  * Demo website changed to https://spruce.dancodes.online.
+  * Demo website changed to https://openfuel.dancodes.online.
   * MongoDB host to be declared as env variable when not using on localhost. 
     `dbHost=host.com node ./bin/www`
-  * A brand new developer API for officially accessing spruce from within.
+  * A brand new developer API for officially accessing openfuel from within.
   * Code of Conduct adopted.
   * Ownership transfered to the Dan-Divy Organisation [@dan-divy](https://github.com/dan-divy).
   * Sponsors and Backers are most welcome to support this growing project.  
@@ -22,7 +22,7 @@
   * Added the basic api structure for likes and comments.
   * New AUTHORS file added.
   * View a post from its category.
-  * **NEW** An electron.js file has been added for creating a desktop appilication. See ```release/spruce-linux-ia32``` for 32bit linux computers.
+  * **NEW** An electron.js file has been added for creating a desktop appilication. See ```release/openfuel-linux-ia32``` for 32bit linux computers.
 
   Note: _Instagram OAuth2 is still disabled._
 

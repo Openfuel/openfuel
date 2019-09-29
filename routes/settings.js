@@ -76,8 +76,8 @@ router.post('/upload', formParser,function(req, res, next) {
 			if(req.files.filetoupload.name) {
 			// Assign static_url path
 			var oldpath = req.files.filetoupload.path;
-		    var newpath = path.join(__dirname, `../public/feeds/${req.session.user}_${random_id}${req.files.filetoupload.name}`);
-		    var final_location = `/feeds/${req.session.user}_${random_id}${req.files.filetoupload.name}`;
+		    var newpath = path.join(__dirname, `../public/feeds/${req.session.user.username}_${random_id}${req.files.filetoupload.name}`);
+		    var final_location = `/feeds/${req.session.user.username}_${random_id}${req.files.filetoupload.name}`;
 
 		    console.log(`${oldpath} - OldPath\n ${newpath} - Newpath\n ${final_location} - DiskLocation\n`)
 		    // Finally upload the file to disk and save the feed to users profile.
@@ -88,12 +88,12 @@ router.post('/upload', formParser,function(req, res, next) {
 		} else {
 			final_location = null;
 		}
-			db.findOne({username:req.session.user}, (err, u) => {
+			db.findOne({username:req.session.user.username}, (err, u) => {
 				console.log(u)
 				u.posts.push({
 					_id:random_id,
-					author:req.session.user,
-					authorID: req.session._id,
+					author:req.session.user.username,
+					authorID: req.session.user.id,
 					static_url:final_location,
 					caption:req.body.caption,
 					category:req.body.type,

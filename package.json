@@ -56,10 +56,10 @@
       {
         "provider": "github",
         "owner": "DivySrivastava",
-        "repo": "spruce"
+        "repo": "openfuel"
       }
     ],
-    "appId": "com.divysrivastava.desktop.spruce",
+    "appId": "com.divysrivastava.desktop.openfuel",
     "copyright": "Divy Srivastava 2019",
     "mac": {
       "target": [
