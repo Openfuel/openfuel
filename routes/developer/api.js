@@ -82,7 +82,7 @@ router.get('/userInfo', function(req, res, next) {
         .findOne({username:req.query.username})
         .exec((err, userDetails) => {
             if(!userDetails) return res.status(404)
-            var profile_picture = "https://spruce.divy.work"+userDetails.profile_picture
+            var profile_picture = "https://openfuel.divy.work"+userDetails.profile_picture
             var toBeSent = {
                 username:userDetails.username,
                 profile_picture:profile_picture,

@@ -4,7 +4,7 @@ module.exports = {
   title: "openfuel",
   commands: {
     package:
-      "electron-packager electron.js spruce --electronVersion=2.0.12 --overwrite --icon=/public/images/logo/logo.png --prune=true --out=release",
+      "electron-packager electron.js openfuel --electronVersion=2.0.12 --overwrite --icon=/public/images/logo/logo.png --prune=true --out=release",
     build: ""
   },
   http: {

@@ -62,8 +62,8 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 
 ### Built With
 This project would never have been possible without these wonderful frameworks and project.
-* [Spruce](https://github.com/dan-divy/spruce)
-  Openfuel is a modified version of Spruce!
+* [openfuel](https://github.com/dan-divy/openfuel)
+  Openfuel is a modified version of openfuel!
 * [Github-resume](https://github.com/)
 * [Node.js](https://nodejs.org)
 

@@ -8,6 +8,7 @@ var userSchema = mongoose.Schema({
     access_token: String,
     refresh_token: String,
     id: String,
+    posts: Array,
     username:String,
     profile_url: String,
     email: String,

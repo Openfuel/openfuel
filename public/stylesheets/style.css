@@ -38,6 +38,9 @@ canvas{
 a {
   color: #0074D9
 }
+a:hover {
+  color:blue;
+}
 .navbar-fixed-top, .navbar-fixed-top .float-left {
   transition: all 1s;
 }
