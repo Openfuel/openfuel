@@ -76,10 +76,19 @@
   }
 })(window);
 
-(function() {
+(function () {
+  let color;
+  var colors = [ "#2a6171", " #75cac3","deepskyblue"];
+  function startGradient() {
+    setInterval(function () {
+      color = colors[Math.floor(Math.random()*colors.length)]
+      $(".invert-navbar")[0].style.background = color;
+    }, 3000)
+    }
   $(window).on("scroll", function(event) {
     if ($(window).scrollTop() > 80) {
       $(".navbar-fixed-top").addClass("invert-navbar");
+      startGradient();
     } else {
       $(".navbar-fixed-top").removeClass("invert-navbar");
     }
