@@ -13,11 +13,12 @@ router.get("/", function(req, res, next) {
         }
       }
       var posts = [];
-      user.findOne({ username: req.session.user.username }, (error, req_user) => {
+     user.findOne({ username: req.session.user.username }, (error, req_user) => {
         res.render("index", {
           user: req_user,
           title: req.app.conf.name,
           people: users,
+          events:req.app.events,
           posts: true
         });
       });
