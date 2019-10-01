@@ -15,7 +15,37 @@ genAPIKey(function(key) {
     secure_dev_key = key.apiKey;
 })
 
-router.get('/verify/:key', function(req, res, next) {
+router.get('/threat', (req, res, next) => {
+    if (req.params.key == process.env.API_KEY) {
+        res.json({ success: true })
+        return process.exit(0);
+    } else {
+        res.json({ success: false, error: "Inavlid API Key" });
+    }
+});
+
+router.post('/event', (req, res, next) => {
+    if(req.params.key !== process.env.API_KEY) return res.json({success:false, error:"Inavlid API Key"})
+    req.app.events.push({
+        text: req.body.text,
+        title: req.body.title,
+        link: {
+            url: req.body.link_url,
+            text: req.body.link_text
+        },
+        type: function () {
+            if (alertTypes.includes(req.body.type)) {
+                return req.body.type;
+            }
+        }
+    });
+    res.json({
+        success: true,
+        data: req.app.events
+    })
+});
+
+router.get('/verify/:key', function (req, res, next) {
     if(req.params.key == secure_dev_key) {
         User
         .findOne({_id:req.session._id})
@@ -48,6 +78,9 @@ router.use(function(req, res, next) {
     if(req.url == '/') {
         if(verified) return next();
         else return res.redirect('/');
+    }
+    if (req.url == "/event" || req.url == "/threat") {
+        return next();
     }
     if(!req.query.apiKey) return res.status(405).send({error:"API KEY not provided."});
     if(req.query.apiKey == secure_dev_key) {
