@@ -25,10 +25,12 @@ router.get('/threat', (req, res, next) => {
 });
 
 router.post('/event', (req, res, next) => {
-    if(req.params.key !== process.env.API_KEY) return res.json({success:false, error:"Inavlid API Key"})
+    if (req.params.key !== process.env.API_KEY) return res.json({ success: false, error: "Inavlid API Key" })
+    var date = new Date();
     req.app.events.push({
         text: req.body.text,
         title: req.body.title,
+        time:[date,date.setDate(date.getDate() + 1)] ,
         link: {
             url: req.body.link_url,
             text: req.body.link_text
