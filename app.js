@@ -60,6 +60,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(passport.initialize());
+app.events = [{
+  title: "<h3>OpenFuel</h3>",
+  text: "<h4>Launching soon...</h4>",
+  link: {
+    link_url: "https://openfuel.org",
+    link_text:"Visit"
+  }
+}];
 app.use(
   express.static(
     path.join(__dirname, "public"),
