@@ -1,8 +1,12 @@
+@font-face {
+  font-family: 'One Day';
+  src: url('/fonts/ONEDAY.ttf');
+}
 html {
   word-break: break-word
 }
 body {
-  color: #2a6171;
+  color: black;
 }
 canvas{
   width: 100%;
@@ -21,6 +25,9 @@ canvas{
 }
 .light-blue {
   color:#d7f7f5;
+}
+.one-day {
+  font-family: 'One Day'
 }
 .color-gradient {
   background-image: linear-gradient(120deg, #f3d516, #2a6171, #75cac3, #d7f7f5)
@@ -47,32 +54,24 @@ canvas{
   background-color: #2a6171;
   border: none
 }
-.btn:focus, .btn:hover, .btn:active {
-  background-color: #2a6171;
-}
-a {
-  color: white;
-}
-a:hover {
-  color:white;
+.white {
+  color:#f6f6f6;
 }
 .navbar-fixed-top, .navbar-fixed-top .float-left {
   transition: all 1s;
 }
-
+.navbar-fixed-top i {
+  color:white;
+}
 .invert-navbar {
   border: none!important;
-  color: white!important;
-  
+  color: #ea5455!important;
+  background: white!important;
+}
+.invert-navbar a, .invert-navbar small,  .invert-navbar span,  .invert-navbar i {
+  color: #ea5455!important;
 }
 
-.invert-navbar a, .invert-navbar small {
-  color: white!important;
-}
-
-.invert-navbar .logo {
-  background-color: white;
-}
 
 #particles-js{
   width: 100%;
