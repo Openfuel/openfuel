@@ -68,6 +68,11 @@ canvas{
   color: #ea5455!important;
   background: white!important;
 }
+.bottom-navbar {
+  border: none!important;
+  background: #ea5455!important;
+  color: white!important;
+}
 .invert-navbar a, .invert-navbar small,  .invert-navbar span,  .invert-navbar i {
   color: #ea5455!important;
 }

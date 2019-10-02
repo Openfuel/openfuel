@@ -10,7 +10,7 @@
         <br>  
         <center>
           <b>
-            <img src="<%= reciever.profile_pic %>" class="logo">
+            <img src="<%= reciever.profile_picture %>" class="logo">
             <%= reciever.username %>
           </b>
           </center>
@@ -28,7 +28,7 @@
         </div>
       <% } %>
   <% for(var i=0;i<room.chats.length;i++) {
-    if(room.chats[i].by && room.chats[i].by.profile_pic) { %>
+    if(room.chats[i].by && room.chats[i].by.profile_picture) { %>
       <!--<div class="col-md-4">
         <li class="list-group-item" style="display:inline-block">
           <img class="logo" style=" border-radius: 50%;" src="<%= room.chats[i].by.profile_pic %>">  

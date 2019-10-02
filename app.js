@@ -60,9 +60,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(passport.initialize());
+ var date = new Date();
 app.events = [{
   title: "<h3>OpenFuel</h3>",
   text: "<h4>Launching soon...</h4>",
+  time:[date,date.setDate(date.getDate() + 1)] ,
   link: {
     link_url: "https://openfuel.org",
     link_text:"Visit"

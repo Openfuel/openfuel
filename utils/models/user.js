@@ -25,7 +25,8 @@ var userSchema = mongoose.Schema({
     new: String,
     gists: Number,
     followers: Number,
-    following: Number
+    following: Number,
+    notifications: Array
 });
 
 // methods ======================
