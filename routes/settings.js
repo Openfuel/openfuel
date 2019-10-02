@@ -30,7 +30,7 @@ router.get('/settings', function(req, res, next) {
 });
 
 router.get('/activity', function(req, res, next) {
-  db.findOne({_id:req.session._id}, (err, user) => {
+  db.findOne({_id:req.session.user._id}, (err, user) => {
   	res.render('me/activity', {
   		title: req.app.conf.name,
   		activity: user.notifications
@@ -44,7 +44,7 @@ router.get('/post/:action/:query', function(req, res, next) {
       res.render('index');
       break;
     case "delete": {
-			db.findOne({username:req.session.user}, (err, u) => {
+			db.findOne({username:req.session.user.username}, (err, u) => {
 				let id = req.params.query
 				console.log(u);
 				if(u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))].static_url) fs.unlinkSync('./public' + u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))].static_url);

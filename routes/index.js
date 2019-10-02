@@ -15,7 +15,7 @@ router.get("/", function(req, res, next) {
       var posts = [];
      user.findOne({ username: req.session.user.username }, (error, req_user) => {
        req.app.events.map((a, b) => {
-         if (a.expiry[1] < new Date()) {
+         if (a.time[1] < new Date()) {
            req.app.events.slice(a);
           }
         })

@@ -27,7 +27,7 @@
       <% for(var i=0;i<list.length;i++) { %>
          <li class="list-group-item">
             <img src="<%= list[i].profile_picture %>" class="logo">
-            <b><a href="/u/<%= list[i].username %>" id="list-username"><%= list[i].username %></a></b>
+            <b><a href="/u/@<%= list[i].username %>" id="list-username"><%= list[i].username %></a></b>
          </li>
       <% } %>
     </div>

@@ -47,7 +47,8 @@ passport.use(
             followers: profile._json.followers,
             following: profile._json.following,
             access_token: accessToken,
-            refresh_token: refreshToken
+            refresh_token: refreshToken,
+            notifications:[]
           });
           newUser.save((err, done) => {
             if (err) return cb(err);
