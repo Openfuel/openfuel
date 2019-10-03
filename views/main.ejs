@@ -3,8 +3,8 @@
    <% for(var y=0;y<events.length;y++) { %>
 <ul class="list-group" style="background-color:black;background-image: url('<%= events[y].img %>');background-repeat: no-repeat;border-radius:10px;">
   <li class="list-group-item list-group-item-primary" style="background: transparent; color:#fff;">
-    <%- events[y].title %>
-    <%- events[y].text %>
+      <h3><%- events[y].title %></h3>
+    <h4><%- events[y].text %></h4>
      <a class="float-right" style="color:#fff"  href="<%= events[y].link.link_url %>"><%= events[y].link.link_text %></a> <br>
      </li>
     
@@ -53,7 +53,7 @@
     </div>
     <div class="gram-card-content">
 
-      <p><a class="gram-card-content-user" href="/u/@<%= people[i].posts[z].author %>"></a><%= people[i].posts[z].author %></a>
+      <p><a class="gram-card-content-user" href="/u/@<%= people[i].posts[z].author %>"><%= people[i].posts[z].author %></a>
         <%= people[i].posts[z].caption %>
         <span class="label label-info"><%= people[i].posts[z].category %></span>
 
@@ -72,7 +72,7 @@
        <%= people[i].posts[z].comments[c].text %>
        <br>
        <% } %>
-     </div>
+      </div>
 
       </div>
     <hr>

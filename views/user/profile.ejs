@@ -18,24 +18,39 @@
     </div>
     <br>
     <div class="container">
-      <img src="<%= user.profile_picture %>" class="logo">
-      <a class="gram-card-user-name" href="">@<%= user.username %></a>
-      (<%= user.name %>)
+      <div class="row"><h2>
+        <div class="col-md-2">
+          <img src="<%= user.profile_picture %>" width="100px" style="border-radius: 50%">
+        </div>
+        <div class="col-md-10">
+          <a style="margin: 0" href="">@<%= user.username %></a> (<%= user.name %>)<br>
+          <a class="btn btn-action btn-sm btn-primary" style="margin-left: 0" href="/chat/<%= user._id %>">Text</a>
+        </div>
+      </h2>
+      </div>
             <br><br>
-        <span class="bio"><%- user.bio %></span><br>
+        <h3>About</h3><br><span class="bio"><%- user.bio %></span><br><br>
         <blockquote>
           Github: <a href="<%- user.profile_url %>"><%- user.profile_url %></a><br>
           Followers: <%- user.followers %><br>
           Following: <%- user.following %>
           <br>
           <% if(user.website) { %>
-            Website: <a href="<%- user.website %>"><%- user.website %></a>
+            Website: <a style="margin: 0" href="<%- user.website %>"><%- user.website %></a>
           <% } %>
         </blockquote>
+        <h1>Posts</h1><br>
+        <% if(user.posts) { for(var x=0;x<user.posts.length;x++) {
+          if(user.posts[x].static_url) { %>
+            <blockquote>
+              <img src="<%= user.posts[x].static_url %>" class="feed-view-img">
+            </blockquote>
+        <%} else { %>
+          <blockquote>
+              <a href="/post/<%= user.posts[x]._id %>"><%= user.posts[x].caption.length > 10 ? user.posts[x].caption.slice(0, 10) + "..." : user.posts[x].caption %></a> posted on <%= new Date(user.posts[x].createdAt.toString()).toISOString().split("T")[0] %>
+          </blockquote>
+        <% } }} %>
       <br><br>
-      <div class="float-right margin-right-10">
-      <a class="btn btn-action btn-sm btn-danger" href="/chat/<%= user._id %>">Talk</a>
-      </div>
       <br><br><br>
     </div>
     <div class="container">

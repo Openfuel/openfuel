@@ -62,8 +62,8 @@ app.use(cookieParser());
 app.use(passport.initialize());
  var date = new Date();
 app.events = [{
-  title: "<h3>OpenFuel</h3>",
-  text: "<h4>Launching soon...</h4>",
+  title: "OpenFuel",
+  text: "Launching soon...",
   img: "/images/universe.png",
   time:[date,date.setDate(date.getDate() + 1)] ,
   link: {
