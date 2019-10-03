@@ -57,6 +57,9 @@ canvas{
 .white {
   color:#f6f6f6;
 }
+.code_block {
+  border: .5px #2c3e50 solid;
+}
 .navbar-fixed-top, .navbar-fixed-top .float-left {
   transition: all 1s;
 }
