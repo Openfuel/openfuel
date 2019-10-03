@@ -5,20 +5,26 @@
   <script src="/javascripts/codemirror.js"></script>
 <link rel="stylesheet" href="/stylesheets/codemirror.css">
 <script src="/javascripts/mode/javascript/javascript.js"></script>
-  <body>
-  <div class="container-fluid top-navbar box-shadow">
-      <a href="/" class="float-left black">
-      <h2>
-        <img src="/images/logo/logo.png" class="logo">
-        openfuel
+  <body style="background-color:#ea5455;">
+ <div
+  class="container-fluid navbar-fixed-top box-shadow switch-gradient"
+  style="background-color:#ea5455; margin-bottom:2rem; border:none;"
+>
+  <div class="float-left black" href="/">
+    <a href="/">
+      <h2 class="white">
+        <img src="/images/logo/logo.png" class="logo" />
+        <span class="white one-day">openfuel</span>
+       
       </h2>
+    </a>
+  </div>
+  <div class="float-right margin-top-20">
+    <a href="/" class="btn btn-link">
+      <i class="fa fa-lg fa-igloo pills"></i>
       </a>
-      <div class="float-right margin-top-20">
-        <a href="/" class="btn btn-link">
-          <i class="fa fa-lg fa-igloo pills"></i>
-        </a>
-      </div>
-    </div>
+     </div>
+ </div><br><br><br><br><br> 
     <br>
     <div class="column no-side-pad col-xs-12 col-sm-12 col-lg-6 sidebar-offcanvas">
 
@@ -87,7 +93,8 @@
     </div>
     <div class="column col-xs-12 col-sm-9 col-lg-6">
       <form action="/me/upload/code" method="post"  class="gram-card" enctype="multipart/form-data">
-        <textarea name="code" id="code" height="500" class="form-control"></textarea>
+        <textarea name="code" id="code" height="500" class="form-control"></textarea><br>
+        <button type="submit" class="btn btn-success">Upload</button>
       </form>
     </div>
     
