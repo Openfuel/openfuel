@@ -8,7 +8,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/openfuel/openfuel">
-    <img src="./public/images/logo/logo.png" alt="Logo">
+    <img src="./public/images/logo/logo.png" width="200" alt="Logo">
   </a>
 
   <h3 align="center">Openfuel</h3>
@@ -32,10 +32,9 @@
 
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
-* [Getting Started](#getting-started)
+* [Development](#develipment)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-* [Usage](#usage)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -62,15 +61,16 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 
 ### Built With
 This project would never have been possible without these wonderful frameworks and project.
-* [openfuel](https://github.com/dan-divy/openfuel)
-  Openfuel is a modified version of openfuel!
-* [Github-resume](https://github.com/)
-* [Node.js](https://nodejs.org)
+* [Spruce](https://github.com/dan-divy/spruce)
+  Openfuel is a modified version of Spruce!
+* [Github-resume](https://resume.github.io/)
+  We use github-resume to customize our experience!
+
 
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Development
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
@@ -101,19 +101,13 @@ const API_KEY = 'ENTER YOUR API';
 
 
 
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://conferly.js.org)_
 
 
 
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/conferly/conferly/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/openfuel/openfuel/issues) for a list of proposed features (and known issues).
 
 
 
@@ -133,24 +127,26 @@ Contributions are what make the open source community such an amazing place to b
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License. See `LICENSE.md` for more information.
 
 
 
 <!-- CONTACT -->
 ## Contact
 
-Divy Srivastava - [@undefined_void](https://twitter.com/@undefined_void) - dj.srivastava23@gmail.com
-DanCodes - dan@dancodes.online
-Yash Saxena - add-email-here
+- Divy Srivastava - [@undefined_void](https://twitter.com/@undefined_void) - dj.srivastava23@gmail.com
+
+- DanCodes - [dan-online](https://github.com/dan-online) - <dan@dancodes.online>
+
+- Yash Saxena - add-email-here
 
 Project Link: [https://github.com/openfuel/openfuel](https://github.com/openfuel/openfuel)
 
 
 [contributors-shield]: https://img.shields.io/github/contributors/openfuel/openfuel?style=flat-square
 [contributors-url]: https://github.com/openfuel/openfuel/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/conferly/conferly?style=flat-square
-[forks-url]: https://github.com/conferly/conferly/network/members
+[forks-shield]: https://img.shields.io/github/forks/openfuel/openfuel?style=flat-square
+[forks-url]: https://github.com/openfuel/openfuel/network/members
 [stars-shield]: https://img.shields.io/github/stars/openfuel/openfuel?style=flat-square
 [stars-url]: https://github.com/openfuel/openfuel/stargazers
 [issues-shield]: https://img.shields.io/github/issues/openfuel/openfuel?style=flat-square
