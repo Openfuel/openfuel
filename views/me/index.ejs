@@ -7,7 +7,7 @@
   <%- include('../navbar')	-%>
     <br>
     <div class="container" id="mainPage">
-      <img src="<%= user.profile_pic %>" class="logo">
+      <img src="<%= user.profile_picture %>" class="logo">
       <a class="gram-card-user-name" href="">@<%= user.username %></a>
       (<%= user.name %>) 
      
@@ -21,14 +21,15 @@
       <br><br><br>
       
      
-    </div>
-    
-    <div class="container">
-      <center>
-      <% for(var x=0;x<user.posts.length;x++) { %>
+      <h1>Posts</h1>
+      <% if(user.posts) { for(var x=0;x<user.posts.length;x++) {
+        if(user.posts[x].static_url) { %>
         <img src="<%= user.posts[x].static_url %>" class="feed-view-img">
-      <% } %>
-      </center>
+      <%} else { %>
+        <blockquote>
+            <a href="/post/<%= user.posts[x]._id %>"><%= user.posts[x].caption.length > 10 ? user.posts[x].caption.slice(0, 10) + "..." : user.posts[x].caption %></a> posted on <%= user.posts[x].createdAt.toString().split("T")[0] %>
+        </blockquote>
+      <% } }} %>
     </div>
     <div class="container">
       <br><br>

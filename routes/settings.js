@@ -12,12 +12,7 @@ var image_types = ["png","jpeg","gif"];
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  db.findOne({_id:req.session._id}, (err, user) => {
-  	res.render('me/index', {
-  		title: req.app.conf.name,
-  		user: user
-  	});
-  })
+  	res.redirect("/u/@" + req.session.user.username)
 });
 
 router.get('/settings', function(req, res, next) {
