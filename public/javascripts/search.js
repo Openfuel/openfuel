@@ -13,7 +13,7 @@ function updateList(query) {
         for (var i = 0; i < data.length; i++) {
           $("#user-list").append(`<li class="list-group-item">
              <img src="${data[i].profile_pic}" class="logo">
-             <b><a href="/u/${data[i].username}" id="list-username">${data[i].username}</a></b>
+             <b><a href="/u/@${data[i].username}" id="list-username">${data[i].username}</a></b>
           </li>`)
         }
 
