@@ -117,7 +117,8 @@ router.post('/upload/code', (req, res, next) => {
 					author:req.session.user.username,
 					authorID: req.session.user.id,
 					code:req.body.code,
-					comments:[],
+					comments: [],
+					caption:req.body.caption,
 					likes:[],
 					createdAt:new Date(),
 					lastEditedAt:new Date()
