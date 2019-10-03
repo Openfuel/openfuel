@@ -2,22 +2,31 @@
 <html>
   <%- include('../head') -%>
   <link rel="stylesheet" type="text/css" href="/stylesheets/moment.css">
-  <body>
-  <div class="container-fluid top-navbar box-shadow">
-      <a href="/" class="float-left black">
-      <h2>
-        <img src="/images/logo/logo.png" class="logo">
-        openfuel
+  <script src="/javascripts/codemirror.js"></script>
+<link rel="stylesheet" href="/stylesheets/codemirror.css">
+<script src="/javascripts/mode/javascript/javascript.js"></script>
+  <body style="background-color:#ea5455;">
+ <div
+  class="container-fluid navbar-fixed-top box-shadow switch-gradient"
+  style="background-color:#ea5455; margin-bottom:2rem; border:none;"
+>
+  <div class="float-left black" href="/">
+    <a href="/">
+      <h2 class="white">
+        <img src="/images/logo/logo.png" class="logo" />
+        <span class="white one-day">openfuel</span>
+       
       </h2>
+    </a>
+  </div>
+  <div class="float-right margin-top-20">
+    <a href="/" class="btn btn-link">
+      <i class="fa fa-lg fa-igloo pills"></i>
       </a>
-      <div class="float-right margin-top-20">
-        <a href="/" class="btn btn-link">
-          <i class="fa fa-lg fa-igloo pills"></i>
-        </a>
-      </div>
-    </div>
+     </div>
+ </div><br><br><br><br><br> 
     <br>
-    <div class="container form-container">
+    <div class="column no-side-pad col-xs-12 col-sm-12 col-lg-6 sidebar-offcanvas">
 
       <form action="/me/upload" method="post" enctype="multipart/form-data">
         <div class="gram-card">
@@ -54,8 +63,8 @@
       <p><a class="gram-card-content-user" href="/u/@<%= user.username %>"><%= user.username %></a><br>
         <input type="text" name="caption" placeholder="some_cool_text" class="form-control">
         <select class="form-control" name="type">
-          <option>thoughts</option>
-          <option>moments</option>
+          <option>promotions</option>
+          <option>tutorials</option>
           <option>events</option>
         </select>
      </p>
@@ -82,15 +91,30 @@
 </div>
       </form>
     </div>
+    <div class="column col-xs-12 col-sm-9 col-lg-6">
+      <form action="/me/upload/code" method="post"  class="gram-card">
+        <textarea name="code" id="code" height="500" class="form-control"></textarea><br>
+        <div class="container-fluid">
+          <input type="text" name="caption" class="form-control" placeholder="about_your_code"><br>
+          <button type="submit" class="btn btn-warning">Upload</button><br><br>
+        </div>
+      </form>
+    </div>
+    
   <div id="notify_message" class=" notify_message-success">
   	<center>You are now a part of openfuel!</center>
   </div>
-  <%- include('../footer') -%>
   </body>
   <script type="text/javascript">
     show_notification('Upload something here!','success')
   </script>
   <script type="text/javascript">
+      CodeMirror.fromTextArea(document.getElementById("code"), {
+        value:"/** Enter your code here **/",
+        autocorrect:true,
+        lineNumbers: true,
+        mode: "javascript"
+      });
        function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();

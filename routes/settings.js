@@ -84,7 +84,6 @@ router.post('/upload', formParser,function(req, res, next) {
 			final_location = null;
 		}
 			db.findOne({username:req.session.user.username}, (err, u) => {
-				console.log(u)
 				u.posts.push({
 					_id:random_id,
 					author:req.session.user.username,
@@ -107,4 +106,32 @@ router.post('/upload', formParser,function(req, res, next) {
 			
 		})
 })
+
+router.post('/upload/code', (req, res, next) => {
+	var random_id = guid.raw();
+	console.log(req.body)
+	if (req.body.code) {
+		db
+			.findOne({ username: req.session.user.username }, function (err, user) {
+				user.posts.push({
+						_id:random_id,
+					author:req.session.user.username,
+					authorID: req.session.user.id,
+					code:req.body.code,
+					comments: [],
+					caption:req.body.caption,
+					likes:[],
+					createdAt:new Date(),
+					lastEditedAt:new Date()
+				})
+				user.save(err => {
+					if (err) throw err;
+					console.log('Gist Saved');
+					// Redirect back after the job is done.
+					res.redirect('/');
+				})
+			})
+	}
+});
+
 module.exports = router;
