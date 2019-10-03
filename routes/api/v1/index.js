@@ -55,7 +55,7 @@ router.post("/v1/follow", function(req, res, next) {
       user.followers.push(req.session.user._id);
       user.notifications.push({
         msg: `${req.session.user.username} started following you.`,
-        link: `/u/${req.session.user.username}`,
+        link: `/u/@${data[i].username}`,
         time: new Date()
       });
       user = User(user);
