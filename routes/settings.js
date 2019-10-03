@@ -109,10 +109,11 @@ router.post('/upload', formParser,function(req, res, next) {
 
 router.post('/upload/code', (req, res, next) => {
 	var random_id = guid.raw();
+	console.log(req.body)
 	if (req.body.code) {
 		db
 			.findOne({ username: req.session.user.username }, function (err, user) {
-				u.posts.push({
+				user.posts.push({
 						_id:random_id,
 					author:req.session.user.username,
 					authorID: req.session.user.id,
@@ -123,7 +124,7 @@ router.post('/upload/code', (req, res, next) => {
 					createdAt:new Date(),
 					lastEditedAt:new Date()
 				})
-				u.save(err => {
+				user.save(err => {
 					if (err) throw err;
 					console.log('Gist Saved');
 					// Redirect back after the job is done.
