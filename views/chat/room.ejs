@@ -43,7 +43,7 @@
     <ul class="list-group">
       <li class="list-group-item">
         <img class="logo" style="height: 30px;width: 30px;" src="<%= room.chats[i].by.profile_pic %>">
-        <a href="/u/<%= room.chats[i].by.username %>"><b><%= room.chats[i].by.username %></b></a><span data-time="<%= room.chats[i].time %>" class="timeSince float-right"><%= timeSince(new Date(room.chats[i].time)) %></span>
+        <a href="/u/@<%= room.chats[i].by.username %>"><b><%= room.chats[i].by.username %></b></a><span data-time="<%= room.chats[i].time %>" class="timeSince float-right"><%= timeSince(new Date(room.chats[i].time)) %></span>
         <br><br> <span class="msg"><%= room.chats[i].txt %></span> 
         
       </li>
@@ -89,7 +89,7 @@
       list.innerHTML += `<ul class="list-group">
         <li class="list-group-item">
           <img class="logo" style="height: 30px;width: 30px;" src="${data.by.profile_pic}">
-          <a href="/u/${data.by._id}"><b>${data.by.username}</b></a><span data-time="${data.time}" class="timeSince float-right">${timeSince(new Date(data.time))}</span>
+          <a href="/u/@${data[i].username}"><b>${data.by.username}</b></a><span data-time="${data.time}" class="timeSince float-right">${timeSince(new Date(data.time))}</span>
           <br><br> <span class="msg">${data.txt}</span> 
         </li>
       </ul>`;
