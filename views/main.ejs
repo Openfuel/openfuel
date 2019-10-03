@@ -22,7 +22,7 @@
 <div class="gram-card">
     <div class="gram-card-header">
       <img src="<%= people[i].profile_picture %>?cache=<%= Math.random() %>" class="gram-card-user-image lozad">
-      <a class="gram-card-user-name" href="/u/@<%= people[i].posts[z].author %>"><%= people[i].posts[z].author %></a>
+      <a class="gram-card-user-name" href="/u/<%= people[i].posts[z].authorID %>"><%= people[i].posts[z].author %></a>
 
             <div class="dropdown gram-card-time">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-option-vertical"></i></a>
@@ -53,7 +53,7 @@
     </div>
     <div class="gram-card-content">
 
-      <p><a class="gram-card-content-user" href="/u/@<%= people[i].posts[z].author %>"></a><%= people[i].posts[z].author %></a>
+      <p><a class="gram-card-content-user" href="/u/undefined_void"><%= people[i].posts[z].author %></a>
         <%= people[i].posts[z].caption %>
         <span class="label label-info"><%= people[i].posts[z].category %></span>
 
@@ -66,7 +66,7 @@
 
       <div>
         <% for(var c=0;c<people[i].posts[z].comments.length;c++) { %>
-        <a class="user-comment" href="/u/@<%= people[i].posts[z].comments[c].by %>">
+        <a class="user-comment" href="/u/<%= people[i].posts[z].comments[c].by %>">
         <%= people[i].posts[z].comments[c].by %>
       </a>
        <%= people[i].posts[z].comments[c].text %>

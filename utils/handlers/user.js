@@ -162,7 +162,7 @@ function comment(user, comment, _id, cb) {
         obj.posts[i].comments.push(comment);
         obj.notifications.push({
           msg: `@${comment.by} reacted to your post.`,
-          link: `/u/@${data[i].username}`,
+          link: `/u/${comment.by}`,
           time: new Date()
         });
         obj = new User(obj);
@@ -182,7 +182,7 @@ function like(user, like, _id, cb) {
         obj.posts[i].likes.push(like.by);
         obj.notifications.push({
           msg: `@${like.by} liked your post.`,
-          link: `/u/@${data[i].username}`,
+          link: `/u/${like.by}`,
           time: new Date()
         });
         obj = new User(obj);

@@ -71,7 +71,7 @@
                             <% for(var i=0;i<(people.length/2);i++) { %>
                                 <li class="list-group-item">
                                     <img src="<%= people[i].profile_picture %>?cache=<%= Math.random() %>" class="logo">
-                                    <a href="/u/@<%= people[i].username %>"><%= people[i].username %></a>
+                                    <a href="/u/<%= people[i].username %>"><%= people[i].username %></a>
                                 </li>
                             <% } %>
                         </ul>
