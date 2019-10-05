@@ -5,6 +5,7 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const proxy = require('express-http-proxy');
 const passport = require("passport");
 
 const indexRouter = require("./routes/index");
@@ -96,6 +97,7 @@ app.use("/category", categoryRouter);
 app.use("/products", extraRouter);
 app.use("/chat", chatRouter);
 app.use("/developer", publicApiRouter);
+app.use('/console', proxy('http://localhost:5000'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
