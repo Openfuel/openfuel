@@ -4,7 +4,7 @@ var s = /([^&=]+)=?([^&]*)/g;
 var finalData = {};
 
 /**
- USAGE: getDetails('username', data => { } 
+ USAGE: getDetails('username', data => { }
  **/
 
 module.exports = (username, cb) => {
@@ -122,8 +122,23 @@ module.exports = (username, cb) => {
             view.website = addHttp + data.blog;
         }
 
-        finalData.profile =view;
-        return cb(finalData);
+        finalData.profile = view;
+        github_user_repos(username, function(data) {
+             var languages = {},
+                popularity;
+            for (var i = 0; i < data.length; i++) {
+              if (data[i].language) {
+                  if (data[i].language in languages) {
+                      languages[data[i].language]++;
+                  } else {
+                      languages[data[i].language] = 1;
+                  }
+              }
+            }
+            finalData.repos = data;
+            finalData.languages = languages;
+            cb(finalData)
+        })
     });
     /** WIP....
     github_user_repos(username, function(data) {
@@ -370,7 +385,7 @@ module.exports = (username, cb) => {
     });
     **/
  };
- 
+
 // ToDo: Change from jQuery to Axios
 
 var github_user = function(username, callback) {
@@ -382,21 +397,19 @@ var github_user = function(username, callback) {
 
 var github_user_repos = function(username, callback, page_number, prev_data) {
     var page = (page_number ? page_number : 1),
-        url = 'https://api.github.com/users/' + username + '/repos?per_page=100&callback=?',
+        url = 'https://api.github.com/users/' + username + '/repos?per_page=100',
         data = (prev_data ? prev_data : []);
 
     if (page_number > 1) {
         url += '&page=' + page_number;
     }
-    $.getJSON(url, function(repos) {
+    axios
+    .get(url)
+    .then(repos => {
         data = data.concat(repos.data);
-        if (repos.data.length == 100) {
-            github_user_repos(username, callback, page + 1, data);
-        } else {
-            callback(data);
-        }
-    });
-}
+        callback(data)
+      })
+ }
 
 var github_user_issues = function(username, callback, page_number, prev_data) {
     var page = (page_number ? page_number : 1),

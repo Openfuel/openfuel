@@ -26,7 +26,7 @@ passport.use(
       User.findOne({ id: profile.id }).exec((err, dbUser) => {
         if (dbUser) return cb(null, dbUser);
         console.info(profile)
-        github(profile.username, data => {
+        github(profile.username, (data) => {
           var newUser = new User({
             id: profile.id,
             username: profile.username,
@@ -38,12 +38,13 @@ passport.use(
             location: profile._json.location,
             hirable: profile._json.hirable,
             bio: profile._json.bio,
-            since: data.since,
-            created_at: data.created_at,
+            since: data.profile.since,
+            created_at: data.profile.created_at,
             repos: data.repos,
+            languages: data.languages,
             gists: profile._json.public_gists,
-            user_status: data.userStatus,
-            new: data.earlyAdopter,
+            user_status: data.profile.userStatus,
+            new: data.profile.earlyAdopter,
             followers: profile._json.followers,
             following: profile._json.following,
             access_token: accessToken,
