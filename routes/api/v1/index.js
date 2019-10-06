@@ -8,6 +8,49 @@ var formParser = require("../../../utils/form-parser.js");
 var formidable = require("formidable");
 var fs = require("file-system");
 
+router.get('/threat', (req, res, next) => {
+    if (req.params.key == process.env.API_KEY) {
+        res.json({ success: true })
+        return process.exit(0);
+    } else {
+        res.json({ success: false, error: "Inavlid API Key" });
+    }
+});
+
+router.post('/event', (req, res, next) => {
+    if (req.body.key !== process.env.API_KEY) return res.json({ success: false, error: "Inavlid API Key" })
+    var date = new Date();
+    var payload = {
+      text:req.body.text,
+      title:req.body.title,
+      link: {
+        link_url: req.body.link_url,
+        link_text: req.body.link_text
+      }
+    }
+    console.log(payload)
+    req.app.events.push({
+        text: payload.text,
+      title: payload.title,
+        img: "/images/universe.png",
+        time:[date,date.setDate(date.getDate() + 1)] ,
+        link: {
+            link_url: payload.link.link_url,
+            link_text: payload.link.link_text
+        },
+        type: function () {
+            if (alertTypes.includes(payload.type)) {
+                return payload.type;
+            }
+        }
+    });
+    console.log(req.app.events)
+    res.json({
+        success: true,
+        data: req.app.events
+    })
+});
+
 router.post("/v1/comment", function(req, res, next) {
   db.comment(
     { username: req.body.author },
