@@ -138,7 +138,7 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 
 - DanCodes - [dan-online](https://github.com/dan-online) - <dan@dancodes.online>
 
-- Yash Saxena - add-email-here
+- Yash Saxena - yash@openfuel.org
 
 Project Link: [https://github.com/openfuel/openfuel](https://github.com/openfuel/openfuel)
 
