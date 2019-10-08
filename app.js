@@ -83,11 +83,13 @@ app.use(
   )
 );
 
-/** Only For Offline Tests **/
-app.use((req, res, next) => {
-  req.session.user = app.conf.offline;
-  next()
-});
+if(process.env.OFFLINE) {
+  /** Only For Offline Tests **/
+  app.use((req, res, next) => {
+    req.session.user = app.conf.offline;
+    next()
+  });
+}
 
 app.use((req, res, next) => {
   res.locals.user = req.session.user ? req.session.user : false;
