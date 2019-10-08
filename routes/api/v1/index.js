@@ -119,6 +119,7 @@ router.get("/v1/search", function(req, res, next) {
     ]
   }).exec((err, all) => {
     if(req.query.lang) {
+      if(req.query.lang == "all") return res.send(all);
       var filterAll = [];
       for(var i=0; i<all.length; i++) {
           if(all[i].languages[0][req.query.lang]) {
