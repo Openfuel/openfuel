@@ -12,7 +12,14 @@
     </div>
     <br>
     <div class="container">
-    <input type="text" class="form-control" onkeyup="updateList(this.value);" placeholder="Search here..." />
+    <input type="text" id="search-box" class="form-control" onkeyup="updateList(this.value, 'search');" placeholder="Search here..." />
+    <select class="form-control" id="lang-select" onchange="updateList(this.value, 'lang');"><br>
+      <option value="all">All languages</option>
+      <option value="JavaScript">Javascript</option>
+      <option value="CSS">CSS</option>
+      <option value="HTML">HTML</option>
+      <option value="Python">Python</option>
+   </select>
     <br>
     <ul class="list-group">
       <li class="list-group-item list-group-item-primary">Total Users</li>

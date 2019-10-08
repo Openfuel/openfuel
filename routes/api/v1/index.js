@@ -118,7 +118,18 @@ router.get("/v1/search", function(req, res, next) {
       { lastname: { $regex: regx } }
     ]
   }).exec((err, all) => {
-    return res.send(all);
+    if(req.query.lang) {
+      var filterAll = [];
+      for(var i=0; i<all.length; i++) {
+          if(all[i].languages[0][req.query.lang]) {
+             filterAll.push(all[i]);
+          }
+        }
+        return res.send(filterAll);
+    }
+    else {
+      return res.send(all);
+    }
   });
 });
 

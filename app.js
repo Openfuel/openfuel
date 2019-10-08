@@ -82,6 +82,13 @@ app.use(
       : {}
   )
 );
+
+/** Only For Offline Tests **/
+app.use((req, res, next) => {
+  req.session.user = app.conf.offline;
+  next()
+});
+
 app.use((req, res, next) => {
   res.locals.user = req.session.user ? req.session.user : false;
   next();
@@ -98,6 +105,7 @@ app.use("/products", extraRouter);
 app.use("/chat", chatRouter);
 app.use("/developer", publicApiRouter);
 app.use('/console', proxy('http://localhost:5000'));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
