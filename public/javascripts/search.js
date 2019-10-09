@@ -41,7 +41,7 @@ function updateList(query, type) {
             $("#user-list").append(`<li class="list-group-item">
                <img src="${data[i].profile_picture}" class="logo">
                <b><a href="/u/@${data[i].username}" id="list-username">${data[i].username}</a></b>
-               <i class="badge">${query.toLowerCase()}</i>
+               <i class="badge badge-info">${query.toLowerCase()}</i>
             </li>`)
           }
 

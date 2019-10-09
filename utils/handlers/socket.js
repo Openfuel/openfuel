@@ -9,7 +9,7 @@ sio.use(function(socket, next) {
 });
 
 function type(socket) {
-  User.findOne({ _id: socket.session._id }).exec(function(err, u) {
+  User.findOne({ id: socket.session.user.id }).exec(function(err, u) {
     socket
       .to(socket.session.socket.room)
       .emit("typing", { username: u.username });
@@ -22,11 +22,11 @@ function sendMsg(socket, chat) {
   if (!room.chats) {
     room.chats = [];
   }
-  User.findOne({ _id: socket.session._id }).exec(function(err, u) {
+  User.findOne({ id: socket.session.user.id }).exec(function(err, u) {
     const user = {
       username: u.username,
-      profile_pic: u.profile_pic,
-      _id: u._id
+      profile_picture: u.profile_picture,
+      id: u.id
     }; //hide stuff like password
     room.chats.push({ txt: chat.txt, by: user, time });
     console.log({ txt: chat.txt, by: user, time });
@@ -44,7 +44,7 @@ sio.on("connection", function(socket) {
   const session = socket.request.session;
   socket.session = session;
   socket.join(session.socket.room);
-  Room.findOne({ _id: session.socket.room }, function(err, room) {
+  Room.findOne({ id: session.socket.room }, function(err, room) {
     if (!room) {
       return socket.disconnect("unauthorized");
     }
