@@ -42,7 +42,7 @@
 
     <ul class="list-group">
       <li class="list-group-item">
-        <img class="logo" style="height: 30px;width: 30px;" src="<%= room.chats[i].by.profile_pic %>">
+        <img class="logo" style="height: 30px;width: 30px;" src="<%= room.chats[i].by.profile_picture %>">
         <a href="/u/@<%= room.chats[i].by.username %>"><b><%= room.chats[i].by.username %></b></a><span data-time="<%= room.chats[i].time %>" class="timeSince float-right"><%= timeSince(new Date(room.chats[i].time)) %></span>
         <br><br> <span class="msg"><%= room.chats[i].txt %></span>
 
@@ -129,7 +129,7 @@
 
 
     socket.on('connect', function (data) {
-      console.log('Connected')
+      console.log('Connected! Enjoy Openfuel Direct Messages.')
     });
     socket.on('new msg', function (data) {
       addMessage(data);
