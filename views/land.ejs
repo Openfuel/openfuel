@@ -31,7 +31,7 @@
         <header class="masthead text-center text-white">
           <div
             class="container d-flex align-items-center flex-column"
-            style="padding: 10%; padding-top:10%"
+            style="padding: 10%; padding-top:10%;"
           >
             <div class="row m-5">
               <img src="/images/logo/logo.png" width="200">
@@ -44,7 +44,7 @@
               </h5>
               <% if(!user) { %>
               <a
-                class="btn btn-success"
+                class="btn btn-primary"
                 style="z-index:999; position:sticky"
                 href="/account/github"
                 ><i class="fab fa-github"></i> Login with Github</a
@@ -58,7 +58,7 @@
     <div class="container wave" style="width:100%!important">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path
-          fill="#ea5455"
+          fill="#155263"
           fill-opacity="1"
           d="M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,250.7C672,277,768,267,864,224C960,181,1056,107,1152,101.3C1248,96,1344,160,1392,192L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
           style="--darkreader-inline-fill:#2a6171;"
@@ -76,6 +76,12 @@
         </svg>
       <section class="text-center bg-white" style="margin:10%; ">
         <div class="row">
+            <div class="col-md-4 mt-2">
+                <img
+                  style="border-radius: 50%; height: 100%; width:100%"
+                  src="/images/front-first" alt="first image for hackathon"
+                />
+              </div>
           <div class="col-md-8 mt-3">
             <h2
               class="h1-responsive font-weight-bold my-5 one-day"
@@ -93,12 +99,6 @@
             </p>
             <button class="btn btn-primary">Learn More</button>
             <button class="btn btn-primary">Get involved</button>
-          </div>
-          <div class="col-md-4 mt-2">
-            <img
-              style="border-radius: 50%; height: 100%; width:100%"
-              src="/images/hackathon.jpg"
-            />
           </div>
         </div>
       </section>
@@ -137,7 +137,7 @@
       },
       particles: {
         number: { value: 25, density: { enable: true, value_area: 800 } },
-        color: { value: ["#ea5455", "#ffb400","#2d4059","#f6f6f6"] },
+        color: { value: ["#f9f8eb", "#76b39d","#155263","#f0b917"] },
         shape: {
           type: "circle",
           stroke: { width: 0, color: "#fff" },

@@ -68,16 +68,16 @@ canvas{
 }
 .invert-navbar {
   border: none!important;
-  color: #ea5455!important;
+  color: #155263!important;
   background: white!important;
 }
 .bottom-navbar {
   border: none!important;
-  background: #ea5455!important;
+  background: #155263!important;
   color: white!important;
 }
 .invert-navbar a, .invert-navbar small,  .invert-navbar span,  .invert-navbar i {
-  color: #ea5455!important;
+  color: #155263!important;
 }
 
 
@@ -770,5 +770,5 @@ a {
   }
 }
 #mainPage {
-  margin-top:8rem
+  margin-top:7rem
 }
