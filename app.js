@@ -98,8 +98,12 @@ app.use((req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/", indexRouter);
-app.use("/u", usersRouter);
 app.use("/account", accountRouter);
+app.use(function(req, res, next) {
+  if(req.session.user) return next();
+    res.redirect("/");
+})
+app.use("/u", usersRouter);
 app.use("/me", meRouter);
 app.use("/api", restApi);
 app.use("/category", categoryRouter);
