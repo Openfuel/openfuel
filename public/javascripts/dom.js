@@ -1,10 +1,10 @@
 $(document).on('click', '#sidebarToggle', function(){
-        $('.row-offcanvas').toggleClass('active');
+        $('#sidebar').toggleClass('active');
         $('#sidebar').toggleClass('hidden-xs');
         $('#sidebar').toggleClass('hidden-sm');
         $('#sidebar').toggleClass('hidden-md');
         $('#sidebar').toggleClass('hidden-lg');
-        if($('.row-offcanvas').hasClass('active')){
+        if($('#sidebar').hasClass('active')){
             $('#main').removeClass('col-sm-9 col-lg-10');
             $('#main').addClass('col-sm-12 col-lg-12');
         }else{
