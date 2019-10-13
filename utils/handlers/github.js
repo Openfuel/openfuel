@@ -20,7 +20,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID || " ",
       clientSecret: process.env.GITHUB_CLIENT_SECRET || " ",
-      callbackURL: process.env.GITHUB_REDIRECT
+      callbackURL: "https://openfuel.org/account/github/callback"
     },
     function(accessToken, refreshToken, profile, cb) {
       User.findOne({ id: profile.id }).exec((err, dbUser) => {
