@@ -789,3 +789,10 @@ a {
 }
 
 .img-wrapper img {width: 100%;}
+.landing-main {
+  height: 100%;
+  background-image: url(/images/station.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white
+}
