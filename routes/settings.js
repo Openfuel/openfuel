@@ -4,7 +4,7 @@ var path = require("path");
 var guid = require("guid");
 var mv = require("mv");
 const mime = require("mime-types");
-var db = require("../utils/handlers/user");
+var db = require("../utils/models/user");
 var formParser = require("../utils/form-parser.js");
 const fs = require("file-system");
 
@@ -17,7 +17,7 @@ router.get("/", function(req, res, next) {
 });
 
 router.get("/settings", function(req, res, next) {
-  db.findOne({ _id: req.session._id }, (err, user) => {
+  db.findOne({ _id: req.session.user._id }).exec((err, user) => {
     res.render("me/settings", {
       title: req.app.conf.name,
       user: user
@@ -26,7 +26,7 @@ router.get("/settings", function(req, res, next) {
 });
 
 router.get("/activity", function(req, res, next) {
-  db.findOne({ _id: req.session.user._id }, (err, user) => {
+  db.findOne({ _id: req.session.user._id }).exec((err, user) => {
     res.render("me/activity", {
       title: req.app.conf.name,
       activity: user.notifications
@@ -41,7 +41,7 @@ router.get("/post/:action/:query", function(req, res, next) {
       break;
     case "delete":
       {
-        db.findOne({ username: req.session.user.username }, (err, u) => {
+        db.findOne({ username: req.session.user.username }).exec((err, u) => {
           let id = req.params.query;
           console.log(u);
           if (
@@ -62,7 +62,7 @@ router.get("/post/:action/:query", function(req, res, next) {
       }
       break;
     default:
-      res.send("hi");
+      res.send("What are you trynna do? (-_-)");
   }
 });
 
@@ -101,7 +101,7 @@ router.post("/upload", formParser, function(req, res, next) {
   } else {
     final_location = null;
   }
-  db.findOne({ username: req.session.user.username }, (err, u) => {
+  db.findOne({ id: req.session.user.id }).exec((err, u) => {
     u.posts.push({
       _id: random_id,
       author: req.session.user.username,
@@ -115,6 +115,7 @@ router.post("/upload", formParser, function(req, res, next) {
       createdAt: new Date(),
       lastEditedAt: new Date()
     });
+    u = new db(u);
     u.save(err => {
       if (err) throw err;
       console.log("Post saved");
@@ -128,7 +129,7 @@ router.post("/upload/code", (req, res, next) => {
   var random_id = guid.raw();
   console.log(req.body);
   if (req.body.code) {
-    db.findOne({ username: req.session.user.username }, function(err, user) {
+    db.findOne({ username: req.session.user.username }).exec(function(err, user) {
       user.posts.push({
         _id: random_id,
         author: req.session.user.username,
