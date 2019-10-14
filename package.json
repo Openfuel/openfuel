@@ -37,6 +37,7 @@
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
     "passport-google-oauth": "^2.0.0",
+    "prismjs": "^1.17.1",
     "request": "2.88.0",
     "socket.io": "^2.2.0",
     "time-ago": "0.2.1"
