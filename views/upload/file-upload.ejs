@@ -5,50 +5,25 @@
   <script src="/javascripts/codemirror.js"></script>
 <link rel="stylesheet" href="/stylesheets/codemirror.css">
 <script src="/javascripts/mode/javascript/javascript.js"></script>
-  <body style="background-color:#155263;">
- <div
-  class="container-fluid navbar-fixed-top box-shadow switch-gradient"
-  style="background-color:#155263; margin-bottom:2rem; border:none;"
->
-  <div class="float-left black" href="/">
-    <a href="/">
-      <h2 class="white">
-        <img src="/images/logo/logo.png" class="logo" />
-        <span class="white one-day">openfuel</span>
-
-      </h2>
-    </a>
-  </div>
-  <div class="float-right margin-top-20">
-    <a href="/" class="btn btn-link">
-      <i class="fa fa-lg fa-igloo pills"></i>
-      </a>
-     </div>
- </div><br><br><br><br><br>
-    <br>
-    <div class="column no-side-pad col-xs-12 col-sm-12 col-lg-6 sidebar-offcanvas">
+  <body>
+<%- include("../navbar") %>
+    <div class="container">
+      <div class="row" style="margin-top:15%">
+        <div class="col-md-5">
 
       <form action="/me/upload" method="post" enctype="multipart/form-data">
         <div class="gram-card">
     <div class="gram-card-header">
-      <img src="/images/logo/logo.png" class="gram-card-user-image">
+      <img src="<%= user.profile_picture %>" class="gram-card-user-image">
       <a class="gram-card-user-name" href="/u/@<%= user.username %>"><%= user.username %></a>
 
-            <div class="dropdown gram-card-time">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-option-vertical"></i></a>
-              <ul class="dropdown-menu dropdown-menu-right">
-                <li><a disabled><i class="fa fa-share"></i> View</a></li>
-
-              </ul>
-              </div>
-              <div class="time"></div>
     </div>
 <br>
 <br>
     <div class="gram-card-image">
       <center>
          <div class="upload-btn-wrapper">
-         <button class="btn agradient btn-action whoop" id="post">   <i class="fa fa-lg fa-upload"></i> Upload an image.
+         <button class="btn agradient btn-action whoop" id="post">   <i class="fa fa-lg fa-upload"></i> Upload an image (optional)
          </button>
          <input type='file' name='filetoupload' onchange="readURL(this);" id="file"/>
         </div>
@@ -60,9 +35,10 @@
     </div>
 
     <div class="gram-card-content">
-      <p><a class="gram-card-content-user" href="/u/@<%= user.username %>"><%= user.username %></a><br>
+      <p><br>
         <input type="text" name="caption" placeholder="some_cool_text" class="form-control">
-        <select class="form-control" name="type">
+        <select class="form-control" name="type" style="margin-top:2%">
+          <option>thoughts</option>
           <option>promotions</option>
           <option>tutorials</option>
           <option>events</option>
@@ -75,13 +51,8 @@
     </div>
 
     <div class="gram-card-footer">
-
-      <button class="footer-action-icons likes btn btn-link non-hoverable" disabled onclick="like('{{_id}}')" id="{{_id}}">
-        <i class="glyphicon glyphicon-thumbs-up"></i> 10</button>
-
-
-      <input class="comments-input" id="input_{{_id}}" type="text" placeholder="Comment here..."/>
-      <button class="footer-action-icons btn btn-primary" onclick="comment('{{_id}}')"><i class="glyphicon glyphicon-file-invoice"></i> Post</button>
+      <button class="footer-action-icons btn btn-primary float-right" style="margin-right:2%;" onclick="comment('{{_id}}')"><i class="glyphicon glyphicon-file-invoice"></i> Post</button>
+      <p style="margin:0">By posting you agree to the <a href="/terms">terms and conditions</a></p>
     </div>
 
   </div>
@@ -90,16 +61,20 @@
 <br>
 </div>
       </form>
-    </div>
-    <div class="column col-xs-12 col-sm-9 col-lg-6">
+      <div class="col-md-2 text-center align-center">
+        <p class="mx-auto">OR</p>
+      </div>
+    <div class="col-md-5">
       <form action="/me/upload/code" method="post"  class="gram-card">
         <textarea name="code" id="code" height="500" class="form-control"></textarea><br>
         <div class="container-fluid">
           <input type="text" name="caption" class="form-control" placeholder="about_your_code"><br>
-          <button type="submit" class="btn btn-warning">Upload</button><br><br>
+          <button type="submit" class="btn btn-primary">Post</button><br><br>
         </div>
       </form>
     </div>
+  </div>
+</div>
 
   <div id="notify_message" class=" notify_message-success">
   	<center>You are now a part of openfuel!</center>

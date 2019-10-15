@@ -1,24 +1,27 @@
 
 <div class="column col-xs-12 col-sm-9 col-lg-10" style="margin:auto" id="main">
    <% for(var y=0;y<events.length;y++) { %>
-<ul class="list-group" style="background-color:black;background-image: url('<%= events[y].img %>');background-repeat: no-repeat;border-radius:10px;">
-  <li class="list-group-item list-group-item-primary" style="background: transparent; color:#fff;">
-      <h3><%- events[y].title %></h3>
-    <h4><%- events[y].text %></h4>
+  <ul class="list-group" style="background-color:black;background-image: url('<%= events[y].img %>');background-repeat: no-repeat;border-radius:10px;">
+    <li class="list-group-item list-group-item-primary" style="background: transparent; color:#fff;">
+        <h3><%- events[y].title %></h3>
+      <h4><%- events[y].text %></h4>
      <a class="float-right" style="color:#fff"  href="<%= events[y].link.link_url %>"><%= events[y].link.link_text %></a> <br>
      </li>
     
- </ul>
+  </ul>
  <% } %>
-<ul class="list-group">
+ <div id="posts" username="<%= user.username %>">
+    
+</div>
+<% /* %>
+
+ <ul class="list-group">
   <li class="list-group-item list-group-item-primary">
     <img src="<%= user.profile_picture %>?cache=<%= Math.random() %>" class="gram-card-user-image">
      <a class="gram-card-user-name" href="/me"> @<%= user.username %>'s Dashboard</a> <br>
      </li>
  </ul>
- <% for(var i=0;i<people.length;i++) { %>
- <% for(var z=0;z<people[i].posts.length;z++) { %>
-<% if(people[i].posts[z].code) { %>
+ <div id="posts">
   <div class="gram-card">
     <div class="gram-card-header">
       <img src="<%= people[i].profile_picture %>?cache=<%= Math.random() %>" class="gram-card-user-image lozad">
@@ -61,10 +64,10 @@
       <div>
         <% for(var c=0;c<people[i].posts[z].comments.length;c++) { %>
         <a class="user-comment" href="/u/@<%= people[i].posts[z].comments[c].by %>">
-        <%= people[i].posts[z].comments[c].by %>
-      </a>
-       <%= people[i].posts[z].comments[c].text %>
-       <br>
+          <%= people[i].posts[z].comments[c].by %>
+        </a>
+        <%= people[i].posts[z].comments[c].text %>
+        <br/>
        <% } %>
       </div>
 
@@ -81,9 +84,7 @@
     </div>
 
   </div>
-<br>
-<% } %>
-<div class="gram-card">
+  <div class="gram-card">
     <div class="gram-card-header">
       <img src="<%= people[i].profile_picture %>?cache=<%= Math.random() %>" class="gram-card-user-image lozad">
       <a class="gram-card-user-name" href="/u/@<%= people[i].posts[z].author %>"><%= people[i].posts[z].author %></a>
@@ -151,8 +152,8 @@
     </div>
 
   </div>
-<br>
+ </div>
 
   <% } %>
-  <% } %>
+  <% } */%>
   </div>

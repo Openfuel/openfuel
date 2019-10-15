@@ -8,47 +8,63 @@ var formParser = require("../../../utils/form-parser.js");
 var formidable = require("formidable");
 var fs = require("file-system");
 
-router.get('/threat', (req, res, next) => {
-    if (req.params.key == process.env.API_KEY) {
-        res.json({ success: true })
-        return process.exit(0);
-    } else {
-        res.json({ success: false, error: "Inavlid API Key" });
-    }
+router.get("/threat", (req, res, next) => {
+  if (req.params.key == process.env.API_KEY) {
+    res.json({ success: true });
+    return process.exit(0);
+  } else {
+    res.json({ success: false, error: "Inavlid API Key" });
+  }
 });
 
-router.post('/event', (req, res, next) => {
-    if (req.body.key !== process.env.API_KEY) return res.json({ success: false, error: "Inavlid API Key" })
-    var date = new Date();
-    var payload = {
-      text:req.body.text,
-      title:req.body.title,
-      link: {
-        link_url: req.body.link_url,
-        link_text: req.body.link_text
+router.post("/event", (req, res, next) => {
+  if (req.body.key !== process.env.API_KEY)
+    return res.json({ success: false, error: "Inavlid API Key" });
+  var date = new Date();
+  var payload = {
+    text: req.body.text,
+    title: req.body.title,
+    link: {
+      link_url: req.body.link_url,
+      link_text: req.body.link_text
+    }
+  };
+  console.log(payload);
+  req.app.events.push({
+    text: payload.text,
+    title: payload.title,
+    img: "/images/universe.png",
+    time: [date, date.setDate(date.getDate() + 1)],
+    link: {
+      link_url: payload.link.link_url,
+      link_text: payload.link.link_text
+    },
+    type: function() {
+      if (alertTypes.includes(payload.type)) {
+        return payload.type;
       }
     }
-    console.log(payload)
-    req.app.events.push({
-        text: payload.text,
-      title: payload.title,
-        img: "/images/universe.png",
-        time:[date,date.setDate(date.getDate() + 1)] ,
-        link: {
-            link_url: payload.link.link_url,
-            link_text: payload.link.link_text
-        },
-        type: function () {
-            if (alertTypes.includes(payload.type)) {
-                return payload.type;
-            }
-        }
-    });
-    console.log(req.app.events)
-    res.json({
-        success: true,
-        data: req.app.events
+  });
+  console.log(req.app.events);
+  res.json({
+    success: true,
+    data: req.app.events
+  });
+});
+
+router.get("/v1/posts", function(req, res) {
+  if(!req.session.user) res.sendStatus(404);
+  db.getAll(function(err, results) {
+    if(err) res.status(500).send(err);
+    let posts = [];
+    results.forEach(function(res) {
+      res.access_token = null;
+      res.posts.forEach(post => {
+        posts.push({author: res, post, owner: res.id == req.session.user.id ? true : false})
+      });
     })
+    res.status(200).send(posts);
+  });
 });
 
 router.post("/v1/comment", function(req, res, next) {
@@ -118,17 +134,16 @@ router.get("/v1/search", function(req, res, next) {
       { lastname: { $regex: regx } }
     ]
   }).exec((err, all) => {
-    if(req.query.lang) {
-      if(req.query.lang == "all") return res.send(all);
+    if (req.query.lang) {
+      if (req.query.lang == "all") return res.send(all);
       var filterAll = [];
-      for(var i=0; i<all.length; i++) {
-          if(all[i].languages[0][req.query.lang]) {
-             filterAll.push(all[i]);
-          }
+      for (var i = 0; i < all.length; i++) {
+        if (all[i].languages[0][req.query.lang]) {
+          filterAll.push(all[i]);
         }
-        return res.send(filterAll);
-    }
-    else {
+      }
+      return res.send(filterAll);
+    } else {
       return res.send(all);
     }
   });

@@ -43,6 +43,11 @@
         url: "/api/v1/notifications"
       }).done(function(data) {
         if (data != 0) {
+          if(data == localStorage.notified) {
+            return;
+          } else {
+            localStorage.notified = data;
+          }
           show_new_notification(
             { msg: `You have ${data} new notification(s).` },
             "notice"
@@ -51,6 +56,5 @@
       });
     });
   </script>
-  <script type="text/javascript" src="/javascripts/like.js"></script>
-  <script type="text/javascript" src="/javascripts/comment.js"></script>
+  <script src="/javascripts/posts.js"></script>
 </html>

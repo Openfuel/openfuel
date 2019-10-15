@@ -41,10 +41,13 @@ router.get("/post/:action/:query", function(req, res, next) {
       break;
     case "delete":
       {
-        db.findOne({ username: req.session.user.username }).exec((err, u) => {
+        db.findOne({ id: req.session.user.id }).exec((err, u) => {
           let id = req.params.query;
+          if(!u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))]) {
+            return res.redirect("/");
+          }
           console.log(u);
-          if (
+          if (u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))] && 
             u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))].static_url
           )
             try {
