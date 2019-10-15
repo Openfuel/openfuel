@@ -84,7 +84,7 @@
                     ${c.text}
                     <br>
                    `
-                   )}
+                   ).join("")}
                   </div>
             
                   </div>
@@ -112,7 +112,7 @@
                 </div>
             
               </div>`
-      )
+      ).join(" ")
     );
     $(".like-button-box").on("click", likeById);
     $(".post").dblclick(likeById);
