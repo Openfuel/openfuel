@@ -3,6 +3,7 @@ var router = express.Router();
 var user = require("../utils/handlers/user");
 var ta = require("time-ago");
 var array_tools = require("array-tools");
+const Prism = require('prismjs');
 
 router.get("/", function(req, res, next) {
   if (req.session.user) {
@@ -10,6 +11,9 @@ router.get("/", function(req, res, next) {
       for (var i = 0; i < users.length; i++) {
         for (var j = 0; j < users[i].posts.length; j++) {
           users[i].posts[j].timeago = ta.ago(users[i].posts[j].createdAt);
+          if(users[i].posts[j].code) {
+            users[i].posts[j].code = Prism.highlight(users[i].posts[j].code, Prism.languages.javascript, 'javascript')
+          }
         }
       }
       var posts = [];
@@ -27,7 +31,7 @@ router.get("/", function(req, res, next) {
           posts: true
         });
       });
-    }); 
+    });
   } else {
     res.render("land", {
       title: req.app.conf.name,

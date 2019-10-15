@@ -86,7 +86,7 @@ app.use(
 if(process.env.OFFLINE) {
   /** Only For Offline Tests **/
   app.use((req, res, next) => {
-    req.session.user = app.conf.offline;
+    if(req.url == '/') req.session.user = app.conf.offline;
     next()
   });
 }
