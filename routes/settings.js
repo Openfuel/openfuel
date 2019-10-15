@@ -47,11 +47,13 @@ router.get("/post/:action/:query", function(req, res, next) {
           if (
             u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))].static_url
           )
-            fs.unlinkSync(
-              "./public" +
-                u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))]
-                  .static_url
-            );
+            try {
+              fs.unlinkSync(
+                "./public" +
+                  u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))]
+                    .static_url
+              );
+            } catch (err) {}
           u.posts.splice(u.posts.indexOf(u.posts.find(x => x._id == id)), 1);
           u.save(err => {
             if (err) throw err;
@@ -77,13 +79,19 @@ router.post("/upload", formParser, function(req, res, next) {
   var random_id = guid.raw();
   if (req.files.filetoupload.name) {
     // Assign static_url path
-	var oldpath = req.files.filetoupload.path;
-	console.log(req.files.filetoupload.name)
-	var type = req.files.filetoupload.name.split(".")[req.files.filetoupload.name.split(".").length-1].toLowerCase();
-	console.log(type)
-	if(file_types.indexOf(type) < 0) {
-		return res.status(403).render("error", {error: new Error("Only images and videos are allowed for upload!")});
-	}
+    var oldpath = req.files.filetoupload.path;
+    console.log(req.files.filetoupload.name);
+    var type = req.files.filetoupload.name
+      .split(".")
+      [req.files.filetoupload.name.split(".").length - 1].toLowerCase();
+    console.log(type);
+    if (file_types.indexOf(type) < 0) {
+      return res
+        .status(403)
+        .render("error", {
+          error: new Error("Only images and videos are allowed for upload!")
+        });
+    }
     var newpath = path.join(
       __dirname,
       `../public/feeds/${req.session.user.username}_${random_id}.${type}`
