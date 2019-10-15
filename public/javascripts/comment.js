@@ -16,7 +16,7 @@ function commentById(key) {
     console.log(author)
     $.ajax({
         method: 'POST',
-        url: '/api/v1/comment',
+        url: '/api/v1/comment?cache=' + Math.random(),
         data: {
           "_id":this.id,
           "author":author,

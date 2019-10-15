@@ -39,7 +39,7 @@
     $(function() {
       $.ajax({
         method: "GET",
-        url: "/api/v1/notifications"
+        url: "/api/v1/notifications?cache=" + Math.random()
       }).done(function(data) {
         if (data != 0) {
           if(data == localStorage.notified) {

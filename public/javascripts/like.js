@@ -6,7 +6,7 @@ function likeById() {
 	var author = $(`#${this.id}`).attr("author");
 	$.ajax({
         method: 'POST',
-        url: '/api/v1/like',
+        url: '/api/v1/like?cache=' + Math.random(),
         data: {
         	"_id":this.id.toString().split('-like')[0],
 					"author":author
