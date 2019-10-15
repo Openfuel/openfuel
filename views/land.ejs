@@ -27,7 +27,7 @@
     <div id="particles-js"></div>
     <%- include('navbar') -%>
     <div class="landing-main">
-      <div id="mainPage">
+      <!-- <div id="mainPage" style="background: rgba(0,0,0, 0.5); height:100%">
         <div class="container">
           <header class="masthead text-center text-white">
             <div
@@ -58,8 +58,8 @@
             </div>
           </header>
         </div>
-      </div>
-      <div class="container wave" style="width:100%!important">
+      <div class="container" style="width:100%!important; background: #155263; height:90vh; padding-top:5%">
+        <!--
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
           <path
             fill="#155263"
@@ -69,19 +69,15 @@
             data-darkreader-inline-fill=""
           ></path>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120">
-            <!-- <path
+            <path
           fill="#ffb400"
           fill-opacity="1"
           d="M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,250.7C672,277,768,267,864,224C960,181,1056,107,1152,101.3C1248,96,1344,160,1392,192L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
           style="--darkreader-inline-fill:yellow;"
           data-darkreader-inline-fill=""
-        ></path> -->
+        ></path> 
           </svg>
-        </svg>
-        <section
-          class="text-center bg-white"
-          style="padding:5%; margin-top:-1rem; height: 90vh;color: white"
-        ></section>
+        </svg>-->
         <!-- <svg
         style="position:absolute"
         xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +88,7 @@
           fill-opacity="1"
           d="M0,32L34.3,64C68.6,96,137,160,206,160C274.3,160,343,96,411,58.7C480,21,549,11,617,16C685.7,21,754,43,823,69.3C891.4,96,960,128,1029,138.7C1097.1,149,1166,139,1234,117.3C1302.9,96,1371,64,1406,48L1440,32L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"
         ></path>
-      </svg> -->
+      </svg> 
         <section style="margin-top: 5%">
           <div class="container p-5">
             <div class="row">
@@ -146,16 +142,46 @@
               <button class="btn btn-primary">Learn More</button>
               <button class="btn btn-primary">Get involved</button>
             </div>
-          </div> -->
+          </div> 
           </div>
         </section>
       </div>
+    </div> -->
+    <div class="view" style="background-image: url('/images/station.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+      
+      <div class="mask rgba-black-light align-items-center">
+        
+        <div class="container">
+          
+          <div class="row">
+            
+            <div class="col-md-12 mb-4 white-text text-center">
+              <img src="/images/logo/logo.png" width="200"><br>
+              <h1 class="h1-reponsive white-text text-uppercase font-weight-bold mb-0 pt-md-5 pt-5" ><strong>OpenFuel</strong></h1>
+              <hr class="hr-light my-4" >
+              <h5 class="text-uppercase mb-4 white-text front-text" style="width: 50%"><strong>
+                  A platform to connect opensource contributors to organizations
+                  & startups willing to adopt opensource software.</strong></h5>
+              <a class="btn btn-primary" href="/account/github">Log in with Github</a>
+            </div>
+            
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  </header>
+  
+  
     </div>
     <%- include('footer') -%>
     <div id="notify_message" class="notify_message-success"></div>
   </body>
 
-  <!-- End of your HTML body -->
+  
   <script src="/animations/jquery-sakura.min.js"></script>
   <script src="javascripts/classie.js"></script>
   <script type="text/javascript" src="/javascripts/particles.min.js"></script>

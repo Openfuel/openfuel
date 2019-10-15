@@ -770,7 +770,7 @@ a {
   }
 }
 #mainPage {
-  margin-top:7rem
+  margin-top:9rem
 }
 .img-wrapper {
   position: relative;
@@ -791,8 +791,55 @@ a {
 .img-wrapper img {width: 100%;}
 .landing-main {
   height: 100%;
-  background-image: url(/images/station.png);
+  /* background-image: url(/images/station.png); */
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   color: white
+}
+@media (max-width: 740px) {
+  html,
+  body,
+  header,
+  .view {
+    height: 100vh;
+  }
+}
+.mask {
+  padding-top:20vh;
+  height:100vh
+}
+
+.top-nav-collapse {
+  background-color: #78909c !important;
+}
+
+.navbar:not(.top-nav-collapse) {
+  background: transparent !important;
+}
+
+@media (max-width: 991px) {
+  .navbar:not(.top-nav-collapse) {
+    background: #78909c !important;
+  }
+}
+.rgba-black-light {
+  background: rgba(0,0,0,0.5)
+}
+h1 {
+  letter-spacing: 8px;
+}
+
+h5 {
+  letter-spacing: 3px;
+}
+
+.front-text {
+  line-height: 2rem;
+  margin-left:25%
+}
+
+.hr-light {
+  border-top: 3px solid #fff;
+  margin-top: 0;
+  width: 80px;
 }

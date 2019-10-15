@@ -56,7 +56,7 @@
                   <video author="${p.author.username}" src="${p.post.static_url}" id="${p.post._id}" class="post img-responsive" controls></video>
                   `
                         }`
-                      : ""
+                      : p.post.code ? `<pre style="margin:5%">${p.post.code}</pre>` : ""
                   }
                   </center>
                 </div>
@@ -66,7 +66,7 @@
                     p.author.username
                   }">${p.author.username}</a>
                   ${p.post.caption}
-                    <span class="label label-info">${p.post.category}</span>
+                    <span class="label label-info">${p.post.category ? p.post.category : p.post.code ? "Code" : "Unknown"}</span>
             
                  </p>
             
