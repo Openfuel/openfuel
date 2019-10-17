@@ -1,8 +1,8 @@
 (function() {
   $.ajax("/api/v1/posts").done(function(posts) {
-    posts.sort((one, two) => {
-      return Date(one.post.createdAt) - Date(two.post.createdAt);
-    });
+    console.log(posts)
+    posts.sort((one, two) => new Date(two.post.createdAt) - new Date(one.post.createdAt));
+    console.log(posts)
     $("#posts").html(
       posts.map(
         p =>
