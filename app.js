@@ -67,7 +67,7 @@ app.use(passport.initialize());
 app.events = [{
   title: "OpenFuel",
   text: "Launching soon...",
-  img: "/images/universe.png",
+  img: "/images/station.png",
   time:[date,date.setDate(date.getDate() + 1)] ,
   link: {
     link_url: "https://openfuel.org",
