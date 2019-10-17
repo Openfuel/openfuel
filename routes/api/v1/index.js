@@ -87,6 +87,7 @@ router.get("/v1/posts", function(req, res) {
 });
 
 router.post("/v1/comment", function(req, res, next) {
+  if(!req.session.user) res.status(404).send("Unauthorized")
   db.comment(
     { username: req.body.author },
     { by: req.session.user.username, text: req.body.text },
@@ -102,6 +103,7 @@ router.post("/v1/comment", function(req, res, next) {
 });
 
 router.post("/v1/like", function(req, res, next) {
+  if(!req.session.user) res.status(404).send("Unauthorized");
   console.log(req.body);
   db.like(
     { username: req.body.author },
