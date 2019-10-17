@@ -36,8 +36,8 @@
 
     <div class="gram-card-content">
       <p><br>
-        <input type="text" name="caption" placeholder="some_cool_text" class="form-control">
-        <select class="form-control" name="type" style="margin-top:2%">
+        <input type="text" name="caption" placeholder="some_cool_text" required class="form-control">
+        <select class="form-control" name="type" style="margin-top:2%" required>
           <option>thoughts</option>
           <option>promotions</option>
           <option>tutorials</option>
@@ -51,7 +51,7 @@
     </div>
 
     <div class="gram-card-footer">
-      <button class="footer-action-icons btn btn-primary float-right" style="margin-right:2%;" onclick="comment('{{_id}}')"><i class="glyphicon glyphicon-file-invoice"></i> Post</button>
+      <button class="footer-action-icons btn btn-primary float-right" style="margin-right:2%;"><i class="glyphicon glyphicon-file-invoice"></i> Post</button>
       <p style="margin:0">By posting you agree to the <a href="/terms">terms and conditions</a></p>
     </div>
 
@@ -66,9 +66,9 @@
       </div>
     <div class="col-md-5">
       <form action="/me/upload/code" method="post"  class="gram-card">
-        <textarea name="code" id="code" height="500" class="form-control"></textarea><br>
+        <textarea required name="code" id="code" height="500" class="form-control"></textarea><br>
         <div class="container-fluid">
-          <input type="text" name="caption" class="form-control" placeholder="about_your_code"><br>
+          <input required type="text" name="caption" class="form-control" placeholder="about_your_code"><br>
           <button type="submit" class="btn btn-primary">Post</button><br><br>
         </div>
       </form>

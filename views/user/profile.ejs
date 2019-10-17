@@ -51,14 +51,15 @@
         <div class="col-md-9">
           <div id="overview" class="profile-content tabs">
                 <h2>Posts</h2><br>
-                <% if(user.posts) { for(var x=0;x<user.posts.length;x++) {
-                  if(user.posts[x].static_url) { %>
+                <% if(u.posts) { 
+                  for(var x=0;x<u.posts.length;x++) {
+                  if(u.posts[x].static_url) { %>
                     <blockquote>
-                      <img src="<%= user.posts[x].static_url %>" class="feed-view-img">
+                      <img src="<%= u.posts[x].static_url %>" class="feed-view-img">
                     </blockquote>
                 <%} else { %>
                   <blockquote>
-                      <a href="/post/<%= user.posts[x]._id %>"><%= user.posts[x].caption.length > 10 ? user.posts[x].caption.slice(0, 10) + "..." : user.posts[x].caption %></a> posted on <%= new Date(user.posts[x].createdAt.toString()).toISOString().split("T")[0] %>
+                      <a href="/post/<%= u.posts[x]._id %>"><%= u.posts[x].caption.length > 10 ? u.posts[x].caption.slice(0, 10) + "..." : u.posts[x].caption %></a> posted on <%= new Date(u.posts[x].createdAt.toString()).toISOString().split("T")[0] %>
                   </blockquote>
                 <% } }} %>
           </div>
