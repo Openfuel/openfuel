@@ -6,7 +6,7 @@
     <a href="/">
       <h2 class="white">
         <img src="/images/logo/logo.png" class="logo" />
-        <span class="white one-day">openfuel</span>
+        <span class="white one-day openfuel">openfuel</span>
        
       </h2>
     </a>
@@ -21,7 +21,8 @@
     <a href="/u" class="btn btn-link hidden-xs margin-top-20">
       <i class="fa fa-lg fa-search pills"></i>
     </a>
-    <button
+    <% if(where == "/") { %>
+      <button
       style="outline: none"
       type="button"
       class="btn btn-link margin-top-20"
@@ -29,6 +30,7 @@
     >
       <i class="fa fa-lg fa-align-left pills"></i>
     </button>
+    <% } %>
     <button id="darkmode" class="btn btn-link margin-top-20">
       <i class="fa fa-moon fa-align-left pills"></i>
     </button>

@@ -953,3 +953,10 @@ h5 {
   padding: 20px;
   background: #fff;
 }
+
+
+@media screen and (max-device-width: 480px) and (orientation: portrait){
+  .openfuel {
+    display:none
+  }
+}

@@ -95,6 +95,7 @@ if(process.env.OFFLINE) {
 
 app.use((req, res, next) => {
   res.locals.user = req.session.user ? req.session.user : false;
+  res.locals.where = req.url;
   next();
 });
 app.use(passport.initialize());
