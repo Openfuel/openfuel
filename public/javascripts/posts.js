@@ -1,10 +1,19 @@
 (function() {
   var page = 1;
   var finished;
-  function getPosts(page = 1) {
+  var lastSorted = "feed";
+  $(".sort-btn").on("click", function() {
+    $(".sort-btn").removeClass("active");
+    $(this).addClass("active");
+    lastSorted = $(this).text().toLowerCase()
+    finished = false;
+    $("#posts").html("");
+    getPosts(1, lastSorted)
+  });
+  function getPosts(page = 1, sort=lastSorted) {
     if(page == 1) var method = "prepend";
       else var method = "append";
-    $.ajax("/api/v1/posts?page=" + page).done(function(posts) {
+    $.ajax(`/api/v1/posts?page=${page}&sort=${sort}`).done(function(posts) {
       if(finished) return;
       if(posts.length == 0) {
         finished = true;

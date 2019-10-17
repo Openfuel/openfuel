@@ -137,7 +137,10 @@ module.exports = (username, cb) => {
             }
             finalData.repos = data;
             finalData.languages = languages;
-            cb(finalData)
+            github_user_orgs(username, function(data) {
+                finalData.orgs = data;
+                cb(finalData)
+            })
         })
     });
     /** WIP....
@@ -431,5 +434,8 @@ var github_user_issues = function(username, callback, page_number, prev_data) {
 }
 
 var github_user_orgs = function(username, callback) {
-    $.getJSON('https://api.github.com/users/' + username + '/orgs?callback=?', callback);
+    axios.get('https://api.github.com/users/' + username + '/orgs').then(function(orgs) {
+        var data = orgs.data;
+        callback(data)
+    });
 }

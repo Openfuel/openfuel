@@ -20,13 +20,15 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID || " ",
       clientSecret: process.env.GITHUB_CLIENT_SECRET || " ",
-      callbackURL: process.env.GITHUB_REDIRECT || "http://localhost:8000/account/github/callback" 
+      callbackURL:
+        process.env.GITHUB_REDIRECT ||
+        "http://localhost:8000/account/github/callback"
     },
     function(accessToken, refreshToken, profile, cb) {
       User.findOne({ id: profile.id }).exec((err, dbUser) => {
         if (dbUser) return cb(null, dbUser);
-        console.info(profile)
-        github(profile.username, (data) => {
+        console.log("New user!");
+        github(profile.username, data => {
           var newUser = new User({
             id: profile.id,
             username: profile.username,
@@ -45,12 +47,14 @@ passport.use(
             gists: profile._json.public_gists,
             user_status: data.profile.userStatus,
             new: data.profile.earlyAdopter,
+            openFollowers: [],
             followers: profile._json.followers,
             following: profile._json.following,
             access_token: accessToken,
             refresh_token: refreshToken,
-            notifications:[]
+            notifications: []
           });
+          console.log(newUser.openFollowers)
           newUser.save((err, done) => {
             if (err) return cb(err);
             if (done) return cb(null, done);

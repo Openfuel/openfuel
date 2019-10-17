@@ -55,10 +55,19 @@ router.post("/event", (req, res, next) => {
 
 router.get("/v1/posts", function(req, res) {
   if(!req.session.user) res.sendStatus(404);
+  req.query.sort = req.query.sort.split(" ").length > 1 ? req.query.sort.split(" ")[1] : req.query.sort;
   let page = req.query.page || 1;
-  db.getAll(function(err, results) {
+  db.findOne({id: req.session.user.id}, function(err, user) {
+    db.getAll(function(err, results) {
     if(err) res.status(500).send(err);
     let posts = [];
+    if(!user.openFollowers || user.openFollowers == []) user.openFollowers = [req.session.user.id];
+    if(req.query.sort == "feed") {
+      results = results.filter(u => user.openFollowers.find(f => f == u.id));
+    }
+    if(req.query.sort == "top") {
+
+    }
     results.forEach(function(res) {
       res.access_token = null;
       res.posts.forEach(post => {
@@ -72,6 +81,8 @@ router.get("/v1/posts", function(req, res) {
     posts = posts.slice(page == 1 ? 0 : (10 * (page-1)), page == 1 ? 10 : undefined);
     console.log(posts.length)
     res.status(200).send(posts);
+    user.save()
+    });
   });
 });
 
