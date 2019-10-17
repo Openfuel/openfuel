@@ -2,16 +2,9 @@
 <html>
   <%- include('../head') -%>
   <body ng-app="">
-    <div class="container-fluid">
-      <a href="/" class="float-left">
-        <h2>
-  	    	<img src="/images/logo/logo.png" class="logo">
-  	    	openfuel
-  	    </h2>
-  </a>
-    </div>
+    <%- include("../navbar") %>
     <br>
-    <div class="container">
+    <div class="container" id="mainPage">
     <input type="text" id="search-box" style="margin-bottom: 2%" class="form-control" onkeyup="updateList(this.value, 'search');" placeholder="Search here..." />
     <select class="form-control" id="lang-select" onchange="updateList(this.value, 'lang');"><br>
       <option value="all">All languages</option>
