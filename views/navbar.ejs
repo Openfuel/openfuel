@@ -12,15 +12,20 @@
     </a>
   </div>
   <% if(user) { %>
-  <div class="float-right margin-top-20">
-    <a href="/u" class="btn btn-link hidden-xs">
+  <div class="float-right">
+      <div style="display:inline">
+        <a href="/me">
+          <img width="50" style="border-radius: 50%" src="<%= user.profile_picture %>">
+        </a>
+      </div>
+    <a href="/u" class="btn btn-link hidden-xs margin-top-20">
       <i class="fa fa-lg fa-search pills"></i>
     </a>
     <button
       style="outline: none"
       type="button"
-      class="btn btn-link"
-      id="sidebarToggle"
+      class="btn btn-link margin-top-20"
+      id="sidebarToggle" 
     >
       <i class="fa fa-lg fa-align-left pills"></i>
     </button>

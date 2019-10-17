@@ -28,7 +28,8 @@ passport.use(
       User.findOne({ id: profile.id }).exec((err, dbUser) => {
         if (dbUser) return cb(null, dbUser);
         console.log("New user!");
-        github(profile.username, data => {
+        profile.access_token = accessToken
+        github(profile, data => {
           var newUser = new User({
             id: profile.id,
             username: profile.username,

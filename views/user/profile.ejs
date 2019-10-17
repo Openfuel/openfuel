@@ -3,71 +3,106 @@
   <%- include('../head') -%>
   <link rel="stylesheet" type="text/css" href="/stylesheets/moment.css">
   <body>
-    <div
-      class="container-fluid navbar-fixed-top box-shadow switch-gradient"
-      style="background-color:#155263; margin-bottom:2rem; border:none;"
-    >
-      <div class="float-left black" href="/">
-        <a href="/">
-          <h2 class="white">
-            <img src="/images/logo/logo.png" class="logo" />
-            <span class="white one-day">openfuel</span>
-
-          </h2>
-        </a>
-      </div>
-
-    </div>
+    <%- include("../navbar") %>
     <br><br><br>
-    <div style="background: #155263;"><br>
-      <div class="container" style="background: #fff; border-radius:20px;">
-          <div style="text-align:center;background: #F9C038;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;"><br>
-            <img src="<%= user.profile_picture %>" width="100px" style="border-radius: 50%; background-color: #fff;"><br><br>
-            <div class="container" style="text-align:center;color:#fff;">
-              <h3 class="one-day" style="margin: 0" href="#">@<%= user.username %></h3> <span><%= user.name %></span><br>
-
-            </div><br>
-          </div><br>
-          <a class="btn btn-action btn-sm btn-primary float-right one-day" style="margin-left: 0; margin-right:20px;" href="/chat/<%= user.id %>">Message</a>
-
-
-          <br>
-          <h3 class="one-day">About</h3><br><span class="bio"><%- user.bio %></span><br><br>
-          <blockquote>
-            Github: <a href="<%- user.profile_url %>"><%- user.profile_url %></a><br>
-            Followers: <%- user.followers %><br>
-            Following: <%- user.following %>
-            <br>
-            <% if(user.website) { %>
-              Website: <a style="margin: 0" href="<%- user.website %>"><%- user.website %></a>
-            <% } %>
-          </blockquote>
-          <h3 class="one-day">Posts</h3><br>
-          <% if(user.posts) { for(var x=0;x<user.posts.length;x++) {
-            if(user.posts[x].static_url) { %>
-              <blockquote>
-                <img src="<%= user.posts[x].static_url %>" class="feed-view-img">
-              </blockquote>
-          <%} else { %>
-            <blockquote>
-                <a href="/post/<%= user.posts[x]._id %>"><%= user.posts[x].caption.length > 10 ? user.posts[x].caption.slice(0, 10) + "..." : user.posts[x].caption %></a> posted on <%= new Date(user.posts[x].createdAt.toString()).toISOString().split("T")[0] %>
-            </blockquote>
-          <% } }} %>
-        <br><br>
-        <br><br><br>
-      </div>
-<br><br>
-    </div>
     <div class="container">
-
+        <div class="row profile">
+        <div class="col-md-3">
+          <div class="profile-sidebar">
+            <div class="profile-userpic">
+              <img src="<%= u.profile_picture %>" class="img-responsive" alt="">
+            </div>
+            <div class="profile-usertitle">
+              <div class="profile-usertitle-name">
+                @<%= u.username %><br>
+                (<%= u.name %>)
+              </div>
+              <div class="profile-usertitle-job">
+                <%= u.user_status %> since <%= u.since %>
+              </div>
+              <div class="profile-user-desc">
+                <%= u.bio %>
+              </div>
+            </div>
+            <div class="profile-userbuttons">
+              <div class="row">
+                <div class="col-md-6"><button type="button" id="follow-btn" class="btn btn-primary btn-sm">Follow</button></div>
+                <div class="col-md-6"><a type="button" href="/chat/<%= u.id %>" class="btn btn-primary btn-sm">Message</a></div>
+              <% if(u.email) { %><div class="col-md-6"><a type="button" style="margin-top:5px" href="mailto:<%= u.email %>" class="btn btn-primary btn-sm">Email</a></div><% } %>
+              <% if(u.website) { %><div class="col-md-6"><a type="button" style="margin-top:5px" href="<%= u.website %>" class="btn btn-primary btn-sm">Website</a></div><% } %>
+              </div>
+            </div>
+            <div class="profile-usermenu">
+              <ul class="nav">
+                <li name="overview" class="tab active">
+                  <a href="#">
+                  <i class="glyphicon glyphicon-home"></i>
+                  Overview </a>
+                </li>
+                <li name="repos" class="tab">
+                  <a href="#">
+                  <i class="fab fa-github"></i>
+                  Repos </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div id="overview" class="profile-content tabs">
+                <h2>Posts</h2><br>
+                <% if(user.posts) { for(var x=0;x<user.posts.length;x++) {
+                  if(user.posts[x].static_url) { %>
+                    <blockquote>
+                      <img src="<%= user.posts[x].static_url %>" class="feed-view-img">
+                    </blockquote>
+                <%} else { %>
+                  <blockquote>
+                      <a href="/post/<%= user.posts[x]._id %>"><%= user.posts[x].caption.length > 10 ? user.posts[x].caption.slice(0, 10) + "..." : user.posts[x].caption %></a> posted on <%= new Date(user.posts[x].createdAt.toString()).toISOString().split("T")[0] %>
+                  </blockquote>
+                <% } }} %>
+          </div>
+          <div id="repos" style="display: none" class="profile-content tabs">
+            <h2>Pinned Repositories</h2>
+            <div class="row">
+              <%- u.repos.map(r => `
+              <div class="col-md-6">
+                <div class="gram-card">
+                  <div class="gram-card-header"><h4><a class="gram-card-content-user" href="https://github.com/${r.owner}/${r.repo}">${r.repo}</a></h4></div>
+                  <div class="gram-card-content">
+                  
+                    <span class="label label-info">${r.language || "Code"}</span>
+            
+                 </p>
+                  <p><i class="fa fa-star"></i> ${r.stars.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ${r.stars == 1 ? "star" : "stars"}<br>&nbsp;<i class="fa fa-code-branch"></i>&nbsp;${r.forks.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ${r.forks == 1 ? "fork" : "forks"}</p>
+                   
+            
+                </div>
+              </div>
+              </div>
+            `).join("") %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div id="notify_message" class="notify_message-success">
     	<center>Follow @<%= user.username %>!</center>
     </div>
     <%- include('../footer') -%>
-  </body>
-  <script type="text/javascript">
-    const _id = "<%= user._id %>";
+    <script>
+    var tabs = $(".tab");
+    tabs.on("click", function(e) {
+      let tab = this;
+      e.preventDefault();
+      tabs.removeClass("active");
+      $(tab).addClass("active");
+      $(".tabs").fadeOut(500,function() {
+        $("#" + $(tab).attr("name")).delay(500).fadeIn();
+      });
+      return false;
+    })
   </script>
+  </body>
   <script type="text/javascript" src="/javascripts/follow.js"></script>
 </html>

@@ -21,7 +21,7 @@ router.get('/@:username', function(req, res, next) {
 		user.bio = textParser(user.bio);
 		res.render('user/profile', {
 			title:req.app.conf.name,
-			user:user,
+			u:user,
 			userId: req.session._id
 		})
 	})

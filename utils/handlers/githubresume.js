@@ -1,4 +1,4 @@
-var axios = require('axios');
+var axios = require("axios");
 
 var s = /([^&=]+)=?([^&]*)/g;
 var finalData = {};
@@ -7,143 +7,152 @@ var finalData = {};
  USAGE: getDetails('username', data => { }
  **/
 
-module.exports = (username, cb) => {
-    var itemCount = 0,
-        maxItems = 5,
-        maxLanguages = 9
+module.exports = (profile, cb) => {
+    console.log(profile);
+    const username = profile.username;
+  var itemCount = 0,
+    maxItems = 5,
+    maxLanguages = 9;
 
-    var res = github_user(username, function(data) {
-        data = data.data;
-        var sinceDate = new Date(data.created_at);
-        var sinceMonth = sinceDate.getMonth();
-        var since = sinceDate.getFullYear();
-        var sinceMonth = sinceDate.getMonth();
-        var currentYear = (new Date).getFullYear();
-        switch (since) {
-          case currentYear-1:
-            since = 'last year';
-            break;
-          case currentYear:
-            since = 'this year';
-            break;
+  var res = github_user(username, function(data) {
+    data = data.data;
+    var sinceDate = new Date(data.created_at);
+    var sinceMonth = sinceDate.getMonth();
+    var since = sinceDate.getFullYear();
+    var sinceMonth = sinceDate.getMonth();
+    var currentYear = new Date().getFullYear();
+    switch (since) {
+      case currentYear - 1:
+        since = "last year";
+        break;
+      case currentYear:
+        since = "this year";
+        break;
+    }
+
+    var addHttp = "";
+    if (data.blog && data.blog.indexOf("http") < 0) {
+      addHttp = "http://";
+    }
+
+    // set view.name to the "friendly" name e.g. "John Doe". If not defined
+    // (in which case data.name is empty), fall back to the login
+    // name e.g. "johndoe"
+    var name = username;
+    if (data.name !== null && data.name !== undefined && data.name.length) {
+      name = data.name;
+    }
+
+    var avatar = "";
+    if (data.type == "Organization") {
+      avatar = data.avatar_url.match(
+        /https:\/\/secure.gravatar.com\/avatar\/[0-9a-z]+/
+      )[0];
+      avatar +=
+        "?s=140&amp;d=https://github.com/images/gravatars/gravatar-140.png";
+    }
+
+    var view = {
+      name: name,
+      type: data.type,
+      email: data.email,
+      created_at: data.created_at,
+      earlyAdopter: 0,
+      location: data.location,
+      gravatar_id: data.gravatar_id,
+      avatar_url: avatar,
+      repos: data.public_repos,
+      reposLabel: data.public_repos > 1 ? "repositories" : "repository",
+      followers: data.followers,
+      followersLabel: data.followers > 1 ? "followers" : "follower",
+      username: username,
+      userStatus: "GitHub user",
+      since: since
+    };
+
+    // We consider a limit of 4 months since the GitHub opening (Feb 2008) to be considered as an early adopter
+    if ((since == "2008" && sinceMonth <= 5) || since <= "2007") {
+      view.earlyAdopter = 1;
+    }
+
+    view.userStatus = getUserStatus();
+    function getUserStatus() {
+      var COEF_REPOS = 2;
+      var COEF_GISTS = 0.25;
+      var COEF_FOLLOWERS = 0.5;
+      var COEF_FOLLOWING = 0.25;
+      var FIRST_STEP = 0;
+      var SECOND_STEP = 5;
+      var THIRD_STEP = 20;
+      var FOURTH_STEP = 50;
+      var FIFTH_STEP = 150;
+      var EXTRA_POINT_GAIN = 1;
+
+      var statusScore =
+        data.public_repos * COEF_REPOS +
+        data.public_gists * COEF_GISTS +
+        data.followers * COEF_FOLLOWERS +
+        data.following * COEF_FOLLOWING;
+
+      // Extra points
+      // - Early adopter
+      if (view.earlyAdopter == 1) {
+        statusScore += EXTRA_POINT_GAIN;
+      }
+      // - Blog & Email & Location
+      if (
+        view.location &&
+        view.location != "" &&
+        view.email &&
+        view.email != "" &&
+        data.blog &&
+        data.blog != ""
+      ) {
+        statusScore += EXTRA_POINT_GAIN;
+      }
+
+      if (statusScore == FIRST_STEP) {
+        return "Inactive GitHub user";
+      } else if (statusScore > FIRST_STEP && statusScore <= SECOND_STEP) {
+        return "Newbie GitHub user";
+      } else if (statusScore > SECOND_STEP && statusScore <= THIRD_STEP) {
+        return "Regular GitHub user";
+      } else if (statusScore > THIRD_STEP && statusScore <= FOURTH_STEP) {
+        return "Advanced GitHub user";
+      } else if (statusScore > FOURTH_STEP && statusScore <= FIFTH_STEP) {
+        return "Enthusiastic GitHub user";
+      } else if (statusScore > FIFTH_STEP) {
+        return "Passionate GitHub user";
+      }
+    }
+
+    if (data.blog !== undefined && data.blog !== null && data.blog !== "") {
+      view.website = addHttp + data.blog;
+    }
+
+    finalData.profile = view;
+    console.log(finalData)
+    github_user_repos(username,profile.access_token, function(data) {
+      var languages = {},
+        popularity;
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].language) {
+          if (data[i].language in languages) {
+            languages[data[i].language]++;
+          } else {
+            languages[data[i].language] = 1;
+          }
         }
-
-        var addHttp = '';
-        if (data.blog && data.blog.indexOf('http') < 0) {
-            addHttp = 'http://';
-        }
-
-        // set view.name to the "friendly" name e.g. "John Doe". If not defined
-        // (in which case data.name is empty), fall back to the login
-        // name e.g. "johndoe"
-        var name = username;
-        if (data.name !== null && data.name !== undefined && data.name.length) {
-            name = data.name;
-        }
-
-        var avatar = '';
-        if (data.type == 'Organization'){
-            avatar = data.avatar_url.match(/https:\/\/secure.gravatar.com\/avatar\/[0-9a-z]+/)[0];
-            avatar += '?s=140&amp;d=https://github.com/images/gravatars/gravatar-140.png';
-        }
-
-        var view = {
-            name: name,
-            type: data.type,
-            email: data.email,
-            created_at: data.created_at,
-            earlyAdopter: 0,
-            location: data.location,
-            gravatar_id: data.gravatar_id,
-            avatar_url: avatar,
-            repos: data.public_repos,
-            reposLabel: data.public_repos > 1 ? 'repositories' : 'repository',
-            followers: data.followers,
-            followersLabel: data.followers > 1 ? 'followers' : 'follower',
-            username: username,
-            userStatus: 'GitHub user',
-            since: since
-        };
-
-        // We consider a limit of 4 months since the GitHub opening (Feb 2008) to be considered as an early adopter
-        if ((since == '2008' && sinceMonth <= 5) || since <= '2007') {
-            view.earlyAdopter = 1;
-        }
-
-        view.userStatus = getUserStatus();
-        function getUserStatus() {
-            var COEF_REPOS = 2;
-            var COEF_GISTS = 0.25;
-            var COEF_FOLLOWERS = 0.5;
-            var COEF_FOLLOWING = 0.25;
-            var FIRST_STEP = 0;
-            var SECOND_STEP = 5;
-            var THIRD_STEP = 20;
-            var FOURTH_STEP = 50;
-            var FIFTH_STEP = 150;
-            var EXTRA_POINT_GAIN = 1;
-
-            var statusScore = data.public_repos * COEF_REPOS
-                            + data.public_gists * COEF_GISTS
-                            + data.followers * COEF_FOLLOWERS
-                            + data.following * COEF_FOLLOWING;
-
-            // Extra points
-            // - Early adopter
-            if (view.earlyAdopter == 1) {
-                statusScore += EXTRA_POINT_GAIN;
-            }
-            // - Blog & Email & Location
-            if (view.location && view.location != '' && view.email && view.email != '' && data.blog && data.blog != '') {
-              statusScore += EXTRA_POINT_GAIN;
-            }
-
-            if (statusScore == FIRST_STEP) {
-              return 'Inactive GitHub user';
-            }
-            else if (statusScore > FIRST_STEP && statusScore <= SECOND_STEP) {
-              return 'Newbie GitHub user';
-            }
-            else if (statusScore > SECOND_STEP && statusScore <= THIRD_STEP) {
-              return 'Regular GitHub user';
-            }
-            else if (statusScore > THIRD_STEP && statusScore <= FOURTH_STEP) {
-              return 'Advanced GitHub user';
-            }
-            else if (statusScore > FOURTH_STEP && statusScore <= FIFTH_STEP) {
-              return 'Enthusiastic GitHub user';
-            }
-            else if (statusScore > FIFTH_STEP) {
-              return 'Passionate GitHub user';
-            }
-        };
-
-        if (data.blog !== undefined && data.blog !== null && data.blog !== '') {
-            view.website = addHttp + data.blog;
-        }
-
-        finalData.profile = view;
-        github_user_repos(username, function(data) {
-             var languages = {},
-                popularity;
-            for (var i = 0; i < data.length; i++) {
-              if (data[i].language) {
-                  if (data[i].language in languages) {
-                      languages[data[i].language]++;
-                  } else {
-                      languages[data[i].language] = 1;
-                  }
-              }
-            }
-            finalData.repos = data;
-            finalData.languages = languages;
-            github_user_orgs(username, function(data) {
-                finalData.orgs = data;
-                cb(finalData)
-            })
-        })
+      }
+      finalData.repos = data;
+      finalData.languages = languages;
+      github_user_orgs(username, function(data) {
+        finalData.orgs = data;
+        cb(finalData);
+      });
     });
-    /** WIP....
+  });
+  /** WIP....
     github_user_repos(username, function(data) {
         var sorted = [],
             languages = {},
@@ -387,55 +396,66 @@ module.exports = (username, cb) => {
         });
     });
     **/
- };
+};
 
 // ToDo: Change from jQuery to Axios
 
 var github_user = function(username, callback) {
-    // This is supposed to be getJson...
-    axios
-    .get('https://api.github.com/users/' + username)
-    .then(res => callback(res))
-}
+  // This is supposed to be getJson...
+  axios
+    .get("https://api.github.com/users/" + username)
+    .then(res => callback(res));
+};
 
-var github_user_repos = function(username, callback, page_number, prev_data) {
-    var page = (page_number ? page_number : 1),
-        url = 'https://api.github.com/users/' + username + '/repos?per_page=100',
-        data = (prev_data ? prev_data : []);
+var github_user_repos = function(
+  username,
+  token,
+  callback,
+  page_number,
+  prev_data
+) {
+  var page = page_number ? page_number : 1,
+    url = "https://gh-pinned-repos.now.sh/?username=" + username,
+    data = prev_data ? prev_data : [];
 
-    if (page_number > 1) {
-        url += '&page=' + page_number;
-    }
-    axios
+  if (page_number > 1) {
+    url += "&page=" + page_number;
+  }
+  axios
     .get(url)
     .then(repos => {
-        data = data.concat(repos.data);
-        callback(data)
-      })
- }
+      data = data.concat(repos.data);
+      callback(data);
+    });
+};
 
 var github_user_issues = function(username, callback, page_number, prev_data) {
-    var page = (page_number ? page_number : 1),
-        url = 'https://api.github.com/search/issues?q=type:pr+is:merged+author:' + username + '&per_page=100&callback=?'
-        data = (prev_data ? prev_data : []);
+  var page = page_number ? page_number : 1,
+    url =
+      "https://api.github.com/search/issues?q=type:pr+is:merged+author:" +
+      username +
+      "&per_page=100&callback=?";
+  data = prev_data ? prev_data : [];
 
-    if (page_number > 1) {
-        url += '&page=' + page_number;
+  if (page_number > 1) {
+    url += "&page=" + page_number;
+  }
+
+  $.getJSON(url, function(repos) {
+    data = data.concat(repos.data.items);
+    if (repos.data.total_count == 100) {
+      github_user_issues(username, callback, page + 1, data);
+    } else {
+      callback(data);
     }
-
-    $.getJSON(url, function(repos) {
-        data = data.concat(repos.data.items);
-        if (repos.data.total_count == 100) {
-            github_user_issues(username, callback, page + 1, data);
-        } else {
-            callback(data);
-        }
-    });
-}
+  });
+};
 
 var github_user_orgs = function(username, callback) {
-    axios.get('https://api.github.com/users/' + username + '/orgs').then(function(orgs) {
-        var data = orgs.data;
-        callback(data)
+  axios
+    .get("https://api.github.com/users/" + username + "/orgs")
+    .then(function(orgs) {
+      var data = orgs.data;
+      callback(data);
     });
-}
+};
