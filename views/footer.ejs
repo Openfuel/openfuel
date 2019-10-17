@@ -1,3 +1,28 @@
+<style>
+.btn:focus {
+  outline:none!important
+}</style>
+<script src="https://unpkg.com/darkreader"></script>
+<script>
+  if(!localStorage.nightMode) {
+      localStorage.nightMode = "off";
+  } else {
+    toggleNight(true);
+  }
+  $("#darkmode").on("click", toggleNight);
+  function toggleNight(force) {
+    console.log(localStorage.nightMode)
+    if(localStorage.nightMode == "on" && force != true) {
+      console.log("Disable")
+      DarkReader.disable();
+      localStorage.nightMode = "off";
+    } else {
+      console.log("Enable")
+      DarkReader.enable();
+      localStorage.nightMode = "on";
+    }
+  }
+</script>
 <footer
   class="page-footer font-small pt-4 bg-white container"
   style="margin-bottom:5%; color: #f0b917!important"
