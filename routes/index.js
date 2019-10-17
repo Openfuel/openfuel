@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 var user = require("../utils/handlers/user");
-var ta = require("time-ago");
 var array_tools = require("array-tools");
 const Prism = require('prismjs');
 

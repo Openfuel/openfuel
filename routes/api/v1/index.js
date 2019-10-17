@@ -1,13 +1,9 @@
 var express = require("express");
 var router = express.Router();
 var path = require("path");
-var tool = require("array-tools");
 var db = require("../../../utils/handlers/user");
 var User = require("../../../utils/models/user");
-var formParser = require("../../../utils/form-parser.js");
-var formidable = require("formidable");
-var fs = require("file-system");
-
+var ta = require("time-ago");
 
 router.get("/threat", (req, res, next) => {
   if (req.params.key == process.env.API_KEY) {
@@ -71,6 +67,7 @@ router.get("/v1/posts", function(req, res) {
     results.forEach(function(res) {
       res.access_token = null;
       res.posts.forEach(post => {
+        post.timeago = ta.ago(post.createdAt)
         posts.push({author: res, post, owner: res.id == req.session.user.id ? true : false})
       });
     });
