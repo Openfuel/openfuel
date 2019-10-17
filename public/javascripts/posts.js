@@ -97,9 +97,8 @@
                   <p class="comments">${p.post.comments.length} comment(s).</p>
                   <br>
             
-                  <div class="comments-div">
+                  <div class="comments-div" id="comments-${p.post._id}">
             
-                  <div>
                    ${p.post.comments
                      .map(
                        c => `
@@ -111,7 +110,6 @@
                    `
                      )
                      .join("")}
-                  </div>
             
                   </div>
                 <hr>
@@ -171,22 +169,22 @@
       function commentById(key) {
         if (!this.value) return;
         else if (key.keyCode == 13) {
-          var author = $(`#${this.id}`).attr("author");
-          console.log(author);
+          var el = this;
           $.ajax({
             method: "POST",
             url: "/api/v1/comment",
             data: {
-              _id: this.id,
-              author: author,
-              text: this.value
+              _id: el.id,
+              author:$(el).attr("author"),
+              text: el.value
             }
           })
             .done(function(data) {
-              show_notification("Adding comment!", "success");
-              setTimeout(() => {
-                window.location.reload();
-              }, 1000);
+              $("#comments-" + el.id).append(`<a class="user-comment" href="/u/@dan-online">
+              ${$(el).attr("author")}
+          </a> ${el.value}<br>`)
+              el.value = "";
+              show_notification("Comment added!", "success")
             })
             .fail(function(data) {
               show_notification(
