@@ -8,6 +8,7 @@ var formParser = require("../../../utils/form-parser.js");
 var formidable = require("formidable");
 var fs = require("file-system");
 
+
 router.get("/threat", (req, res, next) => {
   if (req.params.key == process.env.API_KEY) {
     res.json({ success: true });
@@ -54,6 +55,7 @@ router.post("/event", (req, res, next) => {
 
 router.get("/v1/posts", function(req, res) {
   if(!req.session.user) res.sendStatus(404);
+  let page = req.query.page || 1;
   db.getAll(function(err, results) {
     if(err) res.status(500).send(err);
     let posts = [];
@@ -62,7 +64,13 @@ router.get("/v1/posts", function(req, res) {
       res.posts.forEach(post => {
         posts.push({author: res, post, owner: res.id == req.session.user.id ? true : false})
       });
-    })
+    });
+    posts.sort(
+      (one, two) =>
+        new Date(two.post.createdAt) - new Date(one.post.createdAt)
+    );
+    posts = posts.slice(page == 1 ? 0 : (10 * (page-1)), page == 1 ? 10 : undefined);
+    console.log(posts.length)
     res.status(200).send(posts);
   });
 });

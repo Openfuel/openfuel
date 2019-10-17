@@ -2,6 +2,7 @@ const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -33,7 +34,8 @@ const cooky = {
   secret: "work hard",
   resave: true,
   expires: new Date() * 60 * 60 * 24 * 7,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: new MongoStore({ url: app.conf.db.connectionUri })
 };
 
 app.sessionMiddleware = session(cooky);

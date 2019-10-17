@@ -1,12 +1,19 @@
 (function() {
-  $.ajax("/api/v1/posts").done(function(posts) {
-    console.log(posts)
-    posts.sort((one, two) => new Date(two.post.createdAt) - new Date(one.post.createdAt));
-    console.log(posts)
-    $("#posts").html(
-      posts.map(
-        p =>
-          `<div class="gram-card">
+  var page = 1;
+  var finished;
+  function getPosts(page = 1) {
+    if(page == 1) var method = "prepend";
+      else var method = "append";
+    $.ajax("/api/v1/posts?page=" + page).done(function(posts) {
+      if(finished) return;
+      if(posts.length == 0) {
+        finished = true;
+        $("#posts").append('<h2 style="text-align: center;color:#155263">You are all up to date!</h2><br><br>')
+      }
+      console.log(posts);
+      posts.reverse();
+      posts.forEach(p =>
+        $("#posts")[method](`<div class="gram-card">
                 <div class="gram-card-header">
                   <img src="${
                     p.author.profile_picture
@@ -56,7 +63,9 @@
                   <video author="${p.author.username}" src="${p.post.static_url}" id="${p.post._id}" class="post img-responsive" controls></video>
                   `
                         }`
-                      : p.post.code ? `<pre style="margin:5%">${p.post.code}</pre>` : ""
+                      : p.post.code
+                      ? `<pre style="margin:5%">${p.post.code}</pre>`
+                      : ""
                   }
                   </center>
                 </div>
@@ -66,7 +75,13 @@
                     p.author.username
                   }">${p.author.username}</a>
                   ${p.post.caption}
-                    <span class="label label-info">${p.post.category ? p.post.category : p.post.code ? "Code" : "Unknown"}</span>
+                    <span class="label label-info">${
+                      p.post.category
+                        ? p.post.category
+                        : p.post.code
+                        ? "Code"
+                        : "Unknown"
+                    }</span>
             
                  </p>
             
@@ -76,15 +91,17 @@
                   <div class="comments-div">
             
                   <div>
-                   ${p.post.comments.map(
-                     c => `
+                   ${p.post.comments
+                     .map(
+                       c => `
                     <a class="user-comment" href="/u/@${c.by}">
                         ${c.by}
                     </a>
                     ${c.text}
                     <br>
                    `
-                   ).join("")}
+                     )
+                     .join("")}
                   </div>
             
                   </div>
@@ -93,12 +110,10 @@
             
                 <div class="gram-card-footer">
                   <button data="${JSON.stringify(p.post.likes)}" ${
-            p.post.likes.includes($("#posts").attr("username"))
-              ? "disabled"
-              : ""
-          } onclick="this.innerHTML =  ${`'<i class=\\'glyphicon glyphicon-thumbs-up\\'></i> ' + (parseInt(${p.post.likes.length}) + 1); this.disabled = true;`}" class="footer-action-icons likes btn btn-link non-hoverable like-button-box" author="${
-            p.author.username
-          }" id="${p.post._id}-like">
+          p.post.likes.includes($("#posts").attr("username")) ? "disabled" : ""
+        } onclick="this.innerHTML =  ${`'<i class=\\'glyphicon glyphicon-thumbs-up\\'></i> ' + (parseInt(${p.post.likes.length}) + 1); this.disabled = true;`}" class="footer-action-icons likes btn btn-link non-hoverable like-button-box" author="${
+          p.author.username
+        }" id="${p.post._id}-like">
                     <i class="glyphicon glyphicon-thumbs-up"></i> ${
                       p.post.likes.length
                     }</button>
@@ -106,70 +121,81 @@
                   <input id="${
                     p.post._id
                   }" class="comments-input comment-input-box" author="${
-            p.author.username
-          }" type="text" id="comment" placeholder="Click enter to comment here..."/>
+          p.author.username
+        }" type="text" id="comment" placeholder="Click enter to comment here..."/>
             
                 </div>
             
-              </div>`
-      ).join(" ")
-    );
-    $(".like-button-box").on("click", likeById);
-    $(".post").dblclick(likeById);
+              </div>`)
+      );
 
-    function likeById() {
-      console.log(this.id);
-      var author = $(`#${this.id}`).attr("author");
-      $.ajax({
-        method: "POST",
-        url: "/api/v1/like?cache=" + Math.random(),
-        data: {
-          _id: this.id.toString().split("-like")[0],
-          author: author
-        }
-      })
-        .done(function(data) {
-          if (data.event) {
-            show_notification(data.msg, "success");
-          } else {
-            show_notification(data.msg, "danger");
-          }
-        })
-        .fail(function(data) {
-          show_notification("Some error while liking the feed", "danger");
-          console.log(data);
-        });
-    }
-    $(".comment-input-box").on("keydown", commentById);
+      $(".like-button-box").off("click");
+      $(".like-button-box").on("click", likeById);
+      
 
-    function commentById(key) {
-      if (!this.value) return;
-      else if (key.keyCode == 13) {
+      function likeById() {
+        console.log(this.id);
         var author = $(`#${this.id}`).attr("author");
-        console.log(author);
         $.ajax({
           method: "POST",
-          url: "/api/v1/comment",
+          url: "/api/v1/like?cache=" + Math.random(),
           data: {
-            _id: this.id,
-            author: author,
-            text: this.value
+            _id: this.id.toString().split("-like")[0],
+            author: author
           }
         })
           .done(function(data) {
-            show_notification("Adding comment!", "success");
-            setTimeout(() => {
-              window.location.reload();
-            }, 1000);
+            if (data.event) {
+              show_notification(data.msg, "success");
+            } else {
+              show_notification(data.msg, "danger");
+            }
           })
           .fail(function(data) {
-            show_notification(
-              "Some error while posting the comment.",
-              "danger"
-            );
+            show_notification("Some error while liking the feed", "danger");
             console.log(data);
           });
       }
+      $(".comment-input-box").off("keydown")
+      $(".comment-input-box").on("keydown", commentById);
+
+      function commentById(key) {
+        if (!this.value) return;
+        else if (key.keyCode == 13) {
+          var author = $(`#${this.id}`).attr("author");
+          console.log(author);
+          $.ajax({
+            method: "POST",
+            url: "/api/v1/comment",
+            data: {
+              _id: this.id,
+              author: author,
+              text: this.value
+            }
+          })
+            .done(function(data) {
+              show_notification("Adding comment!", "success");
+              setTimeout(() => {
+                window.location.reload();
+              }, 1000);
+            })
+            .fail(function(data) {
+              show_notification(
+                "Some error while posting the comment.",
+                "danger"
+              );
+              console.log(data);
+            });
+        }
+      }
+    });
+  }
+  getPosts();
+  $(window).on("scroll", function() {
+    if(finished == true) return;
+    if(($(document).height() - $(document).scrollTop()) < 1369) {
+      page++;
+      getPosts(page)
     }
-  });
+  })
 })();
