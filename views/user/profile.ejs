@@ -69,12 +69,15 @@
               <%- u.repos.map(r => `
               <div class="col-md-6">
                 <div class="gram-card">
-                  <div class="gram-card-header"><h4><a class="gram-card-content-user" href="https://github.com/${r.owner}/${r.repo}">${r.repo}</a></h4></div>
+                  <div class="gram-card-header">
+                    <h4>
+                      <a class="gram-card-content-user" href="https://github.com/${r.owner}/${r.repo}">${r.repo}</a>
+                    </h4>
+                  </div>
                   <div class="gram-card-content">
                   
-                    <span class="label label-info">${r.language || "Code"}</span>
+                    <span class="label label-info">${r.language || "Code"}</span><br>
             
-                 </p>
                   <p><i class="fa fa-star"></i> ${r.stars.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ${r.stars == 1 ? "star" : "stars"}<br>&nbsp;<i class="fa fa-code-branch"></i>&nbsp;${r.forks.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ${r.forks == 1 ? "fork" : "forks"}</p>
                    
             
