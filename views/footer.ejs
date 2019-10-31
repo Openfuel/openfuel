@@ -5,6 +5,14 @@
 </style>
 <script src="https://unpkg.com/darkreader"></script>
 <script>
+  console.log(window.location.href);
+  if (
+    window.location.href.split("?logged-in") &&
+    window.location.href.split("?logged-in").length > 1
+  ) {
+    show_notification("Welcome to Openfuel");
+    window.history.pushState(null, null, window.location.pathname);
+  }
   const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const isLightMode = window.matchMedia("(prefers-color-scheme: light)")
     .matches;
