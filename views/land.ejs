@@ -149,6 +149,9 @@
   <script src="javascripts/classie.js"></script>
   <script type="text/javascript" src="/javascripts/particles.min.js"></script>
   <script>
+    if(window.location.href.split("?logged-in") && window.location.href.split("?logged-in").length > 1) {
+      window.history.pushState(null,null,window.location.pathname)
+    }
     particlesJS("particles-js", {
       interactivity: {
         detect_on: "canvas",
