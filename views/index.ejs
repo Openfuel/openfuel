@@ -31,7 +31,6 @@
     <%- include('tabs') -%> <%- include('footer') -%>
     <div id="notify_message" class="notify_message-success"></div>
   </body>
-
   <script src="/animations/jquery-sakura.min.js"></script>
   <script src="javascripts/classie.js"></script>
   <script src="javascripts/notificationFx.js"></script>
@@ -42,7 +41,7 @@
         url: "/api/v1/notifications?cache=" + Math.random()
       }).done(function(data) {
         if (data != 0) {
-          if(data == localStorage.notified) {
+          if (data == localStorage.notified) {
             return;
           } else {
             localStorage.notified = data;
@@ -54,6 +53,14 @@
         }
       });
     });
+    console.log(window.location.href);
+    if (
+      window.location.href.split("?logged-in") &&
+      window.location.href.split("?logged-in").length > 1
+    ) {
+      show_notification("Welcome to Openfuel");
+      window.history.pushState(null, null, window.location.pathname);
+    }
   </script>
   <script src="/javascripts/posts.js?cache=<%= Math.random() %>"></script>
 </html>
