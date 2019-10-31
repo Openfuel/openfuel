@@ -5,19 +5,20 @@
   $(".sort-btn").on("click", function() {
     $(".sort-btn").removeClass("active");
     $(this).addClass("active");
-    lastSorted = $(this).text().toLowerCase()
+    lastSorted = $(this)
+      .text()
+      .toLowerCase();
     finished = false;
     $("#posts").html("");
-    getPosts(1, lastSorted)
+    getPosts(1, lastSorted);
   });
-  function getPosts(page = 1, sort=lastSorted) {
-    if(page == 1) var method = "prepend";
-      else var method = "append";
+  function getPosts(page = 1, sort = lastSorted) {
+    if (page == 1) var method = "prepend";
+    else var method = "append";
     $.ajax(`/api/v1/posts?page=${page}&sort=${sort}`).done(function(posts) {
-      if(finished) return;
-      if(posts.length == 0) {
+      if (finished) return;
+      if (posts.length == 0) {
         finished = true;
-        $("#posts").append('<h2 style="text-align: center;color:#155263">You are all up to date!</h2><br><br>')
       }
       console.log(posts);
       posts.reverse();
@@ -138,7 +139,6 @@
 
       $(".like-button-box").off("click");
       $(".like-button-box").on("click", likeById);
-      
 
       function likeById() {
         console.log(this.id);
@@ -163,7 +163,7 @@
             console.log(data);
           });
       }
-      $(".comment-input-box").off("keydown")
+      $(".comment-input-box").off("keydown");
       $(".comment-input-box").on("keydown", commentById);
 
       function commentById(key) {
@@ -175,16 +175,18 @@
             url: "/api/v1/comment",
             data: {
               _id: el.id,
-              author:$(el).attr("author"),
+              author: $(el).attr("author"),
               text: el.value
             }
           })
             .done(function(data) {
-              $("#comments-" + el.id).append(`<a class="user-comment" href="/u/@dan-online">
+              $(
+                "#comments-" + el.id
+              ).append(`<a class="user-comment" href="/u/@dan-online">
               ${$(el).attr("author")}
-          </a> ${el.value}<br>`)
+          </a> ${el.value}<br>`);
               el.value = "";
-              show_notification("Comment added!", "success")
+              show_notification("Comment added!", "success");
             })
             .fail(function(data) {
               show_notification(
@@ -199,10 +201,10 @@
   }
   getPosts();
   $(window).on("scroll", function() {
-    if(finished == true) return;
-    if(($(document).height() - $(document).scrollTop()) < 1369) {
+    if (finished == true) return;
+    if ($(document).height() - $(document).scrollTop() < 1369) {
       page++;
-      getPosts(page)
+      getPosts(page);
     }
-  })
+  });
 })();
