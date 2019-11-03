@@ -62,8 +62,6 @@ router.get("/v1/posts", function(req, res) {
       db.getAll(function(err, results) {
         if (err) res.status(500).send(err);
         let posts = [];
-        if (!user.openFollowers || user.openFollowers == [])
-          user.openFollowers = [req.session.user.id];
         if (req.query.sort == "feed") {
           results = results.filter(u =>
             user.openFollowers.find(f => f == u.id)

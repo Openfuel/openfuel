@@ -2,7 +2,7 @@ const GitHubStrategy = require("passport-github").Strategy;
 const passport = require("passport");
 const User = require("../models/user");
 const github = require("./githubresume");
-var following = require('github-following');
+var following = require("github-following");
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -27,47 +27,56 @@ passport.use(
     },
     function(accessToken, refreshToken, profile, cb) {
       User.findOne({ id: profile.id }).exec((err, dbUser) => {
-        if (dbUser) return cb(null, dbUser);
-        console.log("New user!");
-        profile.access_token = accessToken;
-        following({
-          token: accessToken
-        }, (error, results, info) => {
-          console.log(results);
-          github(profile, data => {
-          var newUser = new User({
-            id: profile.id,
-            username: profile.username,
-            profile_url: profile.profileUrl,
-            email: profile._json.email,
-            profile_picture: profile._json.avatar_url,
-            name: profile._json.name,
-            website: profile._json.blog,
-            location: profile._json.location,
-            hirable: profile._json.hirable,
-            bio: profile._json.bio,
-            since: data.profile.since,
-            created_at: data.profile.created_at,
-            repos: data.repos,
-            languages: data.languages,
-            gists: profile._json.public_gists,
-            user_status: data.profile.userStatus,
-            new: data.profile.earlyAdopter,
-            openFollowers: [],
-            followers: profile._json.followers,
-            following: profile._json.following,
-            access_token: accessToken,
-            refresh_token: refreshToken,
-            notifications: []
-          });
-          console.log(newUser.openFollowers);
-          newUser.save((err, done) => {
-            if (err) return cb(err);
-            if (done) return cb(null, done);
-          });
-        });
-      });
-        
+        if (dbUser) {
+          if (dbUser.openFollowers) return cb(null, dbUser);
+          else User.deleteOne({ id: profile.id }, userCreate);
+        } else {
+          userCreate();
+        }
+        function userCreate() {
+          console.log("New user!");
+          profile.access_token = accessToken;
+          following(
+            {
+              token: accessToken
+            },
+            (error, results, info) => {
+              console.log("RESULTS", results);
+              github(profile, data => {
+                var newUser = new User({
+                  id: profile.id,
+                  username: profile.username,
+                  profile_url: profile.profileUrl,
+                  email: profile._json.email,
+                  profile_picture: profile._json.avatar_url,
+                  name: profile._json.name,
+                  website: profile._json.blog,
+                  location: profile._json.location,
+                  hirable: profile._json.hirable,
+                  bio: profile._json.bio,
+                  since: data.profile.since,
+                  created_at: data.profile.created_at,
+                  repos: data.repos,
+                  languages: data.languages,
+                  gists: profile._json.public_gists,
+                  user_status: data.profile.userStatus,
+                  new: data.profile.earlyAdopter,
+                  openFollowers: results || [],
+                  followers: profile._json.followers,
+                  following: profile._json.following,
+                  access_token: accessToken,
+                  refresh_token: refreshToken,
+                  notifications: []
+                });
+                console.log(newUser);
+                newUser.save((err, done) => {
+                  if (err) return cb(err);
+                  if (done) return cb(null, done);
+                });
+              });
+            }
+          );
+        }
       });
     }
   )
