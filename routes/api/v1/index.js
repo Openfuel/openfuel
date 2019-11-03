@@ -4,6 +4,7 @@ var path = require("path");
 var db = require("../../../utils/handlers/user");
 var User = require("../../../utils/models/user");
 var ta = require("time-ago");
+const q = require("queue")({ autostart: true });
 
 router.get("/threat", (req, res, next) => {
   if (req.params.key == process.env.API_KEY) {
@@ -50,41 +51,56 @@ router.post("/event", (req, res, next) => {
 });
 
 router.get("/v1/posts", function(req, res) {
-  if(!req.session.user) res.sendStatus(404);
-  req.query.sort = req.query.sort.split(" ").length > 1 ? req.query.sort.split(" ")[1] : req.query.sort;
-  let page = req.query.page || 1;
-  db.findOne({id: req.session.user.id}, function(err, user) {
-    db.getAll(function(err, results) {
-    if(err) res.status(500).send(err);
-    let posts = [];
-    if(!user.openFollowers || user.openFollowers == []) user.openFollowers = [req.session.user.id];
-    if(req.query.sort == "feed") {
-      results = results.filter(u => user.openFollowers.find(f => f == u.id));
-    }
-    if(req.query.sort == "top") {
-
-    }
-    results.forEach(function(res) {
-      res.access_token = null;
-      res.posts.forEach(post => {
-        post.timeago = ta.ago(post.createdAt)
-        posts.push({author: res, post, owner: res.id == req.session.user.id ? true : false})
+  if (!req.session.user) res.sendStatus(404);
+  q.push(async function(done) {
+    req.query.sort =
+      req.query.sort.split(" ").length > 1
+        ? req.query.sort.split(" ")[1]
+        : req.query.sort;
+    let page = req.query.page || 1;
+    db.findOne({ id: req.session.user.id }, function(err, user) {
+      db.getAll(function(err, results) {
+        if (err) res.status(500).send(err);
+        let posts = [];
+        if (!user.openFollowers || user.openFollowers == [])
+          user.openFollowers = [req.session.user.id];
+        if (req.query.sort == "feed") {
+          results = results.filter(u =>
+            user.openFollowers.find(f => f == u.id)
+          );
+        }
+        if (req.query.sort == "top") {
+        }
+        results.forEach(function(res) {
+          res.access_token = null;
+          res.posts.forEach(post => {
+            post.timeago = ta.ago(post.createdAt);
+            posts.push({
+              author: res,
+              post,
+              owner: res.id == req.session.user.id ? true : false
+            });
+          });
+        });
+        posts.sort(
+          (one, two) =>
+            new Date(two.post.createdAt) - new Date(one.post.createdAt)
+        );
+        posts = posts.slice(
+          page == 1 ? 0 : 10 * (page - 1),
+          page == 1 ? 10 : undefined
+        );
+        console.log(posts.length);
+        res.status(200).send(posts);
+        user.save();
+        done();
       });
-    });
-    posts.sort(
-      (one, two) =>
-        new Date(two.post.createdAt) - new Date(one.post.createdAt)
-    );
-    posts = posts.slice(page == 1 ? 0 : (10 * (page-1)), page == 1 ? 10 : undefined);
-    console.log(posts.length)
-    res.status(200).send(posts);
-    user.save()
     });
   });
 });
 
 router.post("/v1/comment", function(req, res, next) {
-  if(!req.session.user) res.status(404).send("Unauthorized")
+  if (!req.session.user) res.status(404).send("Unauthorized");
   db.comment(
     { username: req.body.author },
     { by: req.session.user.username, text: req.body.text },
@@ -100,7 +116,7 @@ router.post("/v1/comment", function(req, res, next) {
 });
 
 router.post("/v1/like", function(req, res, next) {
-  if(!req.session.user) res.status(404).send("Unauthorized");
+  if (!req.session.user) res.status(404).send("Unauthorized");
   console.log(req.body);
   db.like(
     { username: req.body.author },
