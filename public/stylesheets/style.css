@@ -681,6 +681,7 @@ a {
     text-align: center;
     font-size: 22px;
     color: white;
+    background: #155263!important
 }
 
 .notify_message-success{

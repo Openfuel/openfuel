@@ -18,6 +18,8 @@
       $("#posts").append(
         '<div id="loader" class="col-md-12 text-center"><br><br><img src="/images/logo.gif"></div>'
       );
+    } else {
+      show_notification("Loaded posts");
     }
   }
   function getPosts(page = 1, sort = lastSorted) {
