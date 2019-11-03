@@ -30,7 +30,10 @@ passport.use(
         if (dbUser) return cb(null, dbUser);
         console.log("New user!");
         profile.access_token = accessToken;
-        github(profile, data => {
+        followers({
+          token: accessToken
+        }, () => {
+          github(profile, data => {
           var newUser = new User({
             id: profile.id,
             username: profile.username,
@@ -62,6 +65,8 @@ passport.use(
             if (done) return cb(null, done);
           });
         });
+      });
+        
       });
     }
   )
