@@ -150,5 +150,5 @@ Project Link: [https://github.com/openfuel/openfuel](https://github.com/openfuel
 [stars-shield]: https://img.shields.io/github/stars/openfuel/openfuel?style=flat-square
 [stars-url]: https://github.com/openfuel/openfuel/stargazers
 [issues-shield]: https://img.shields.io/github/issues/openfuel/openfuel?style=flat-square
-[issues-url]: https://github.com/conferly/conferly/issues
+[issues-url]: https://github.com/openfuel/openfuel/issues
 [product-screenshot]: docs/img/screenshot.png
