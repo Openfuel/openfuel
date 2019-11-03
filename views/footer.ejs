@@ -31,16 +31,16 @@
   if (isDarkMode) toggleNight(true);
   if (isLightMode && !localStorage.nightMode) toggleNight(false);
   if (
-    isNotSpecified ||
-    hasNoSupport ||
-    (isLightMode && localStorage.nightMode)
+    ((isNotSpecified || hasNoSupport) && !localStorage.nightMode) ||
+    (isLightMode && localStorage.nightMode) ||
+    localStorage.nightMode == "off"
   ) {
     console.log(
       "You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time."
     );
     now = new Date();
     hour = now.getHours();
-    if (localStorage.nightMode == "on") toggleNight(false);
+    if (localStorage.nightMode == "on") toggleNight(true);
   }
   $("#darkmode").on("click", toggleNight);
   function toggleNight(force = undefined) {
