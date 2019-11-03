@@ -27,14 +27,24 @@ function sendMsg(socket, chat) {
       username: u.username,
       profile_picture: u.profile_picture,
       id: u.id
-    }; //hide stuff like password
+    };
     room.chats.push({ txt: chat.txt, by: user, time });
     console.log({ txt: chat.txt, by: user, time });
+
     room.save((err, obj) => {
       sio.to(socket.session.socket.room).emit("new msg", {
         txt: chat.txt,
         by: user,
         time
+      });
+      //userData.notifications
+      let otherUser = room.users.find(x => x != u.id);
+      User.findOne({ id: otherUser }).exec(function(err, otherU) {
+        otherU.notifications.push({
+          msg: `${otherU.username} sent you a message: ${chat.txt}`,
+          link: `/chat/${u.id}`,
+          time: new Date()
+        });
       });
     });
   });
