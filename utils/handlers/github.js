@@ -2,6 +2,7 @@ const GitHubStrategy = require("passport-github").Strategy;
 const passport = require("passport");
 const User = require("../models/user");
 const github = require("./githubresume");
+var followers = require('github-followers');
 
 passport.serializeUser(function(user, done) {
   done(null, user);
