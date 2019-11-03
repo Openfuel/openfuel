@@ -33,7 +33,7 @@ passport.use(
         followers({
           token: accessToken
         }, (error, results, info) => {
-          console.log(results)!
+          console.log(results);
           github(profile, data => {
           var newUser = new User({
             id: profile.id,
