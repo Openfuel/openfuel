@@ -2,7 +2,7 @@ const GitHubStrategy = require("passport-github").Strategy;
 const passport = require("passport");
 const User = require("../models/user");
 const github = require("./githubresume");
-var followers = require('github-followers');
+var following = require('github-following');
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -30,7 +30,7 @@ passport.use(
         if (dbUser) return cb(null, dbUser);
         console.log("New user!");
         profile.access_token = accessToken;
-        followers({
+        following({
           token: accessToken
         }, (error, results, info) => {
           console.log(results);
