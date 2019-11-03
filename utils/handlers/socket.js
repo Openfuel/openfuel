@@ -1,4 +1,3 @@
-const io = require("socket.io");
 var User = require("../models/user");
 var Room = require("../models/room");
 const sio = require("../../bin/www").sio;
@@ -68,4 +67,4 @@ sio.on("connection", function(socket) {
   });
 });
 
-module.exports = io;
+module.exports = sio;
