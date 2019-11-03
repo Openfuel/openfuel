@@ -12,7 +12,16 @@
     $("#posts").html("");
     getPosts(1, lastSorted);
   });
+  function load(loaded) {
+    $("#loader").remove();
+    if (!loaded) {
+      $("#posts").append(
+        '<div id="loader" class="col-md-12 text-center"><br><br><img src="/images/logo.gif"></div>'
+      );
+    }
+  }
   function getPosts(page = 1, sort = lastSorted) {
+    load();
     if (page == 1) var method = "prepend";
     else var method = "append";
     $.ajax(`/api/v1/posts?page=${page}&sort=${sort}`).done(function(posts) {
@@ -136,7 +145,7 @@
             
               </div>`)
       );
-
+      load(true);
       $(".like-button-box").off("click");
       $(".like-button-box").on("click", likeById);
 
