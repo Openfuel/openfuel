@@ -6,7 +6,8 @@ const a = require("array-tools");
 const _ = require("lodash/_arrayIncludes");
 
 mongoose.connect(require("../../config/app").db.connectionUri, {
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 
 function checkSpace(name) {
@@ -38,9 +39,7 @@ function createNew(obj, cb) {
       if (user) {
         return cb(null, false);
       } else {
-        var bio = `Hey there! I'm ${obj.fn} ;)! Wish me on ${obj.day} ${
-          obj.month
-        }`;
+        var bio = `Hey there! I'm ${obj.fn} ;)! Wish me on ${obj.day} ${obj.month}`;
         var dob = obj.day + " " + obj.month + " " + obj.year;
         var newUser = new User({
           username: obj.username,
