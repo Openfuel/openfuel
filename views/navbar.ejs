@@ -1,36 +1,28 @@
-<div
-  class="container-fluid navbar-fixed-top box-shadow switch-gradient"
-  style="background-color:#155263; margin-bottom:2rem; border:none;"
->
-  <div class="float-left black" href="/">
-    <a href="/">
-      <h2 class="white">
-        <img src="/images/logo/logo.png" class="logo" />
-        <span class="white one-day openfuel">openfuel</span>
-       
-      </h2>
-    </a>
-  </div>
-  <% if(user) { %>
-  <div class="float-right">
-      <div style="display:inline">
-        <a href="/me">
-          <img width="50" style="border-radius: 50%" src="<%= user.profile_picture %>">
-        </a>
-      </div>
-    <% if(where == "/") { %>
-      <button
-      style="outline: none"
-      type="button"
-      class="btn btn-link margin-top-20"
-      id="sidebarToggle" 
-    >
-      <i class="fa fa-lg fa-align-left pills"></i>
-    </button>
-    <% } %>
-    <!--<button id="darkmode" class="btn btn-link margin-top-20">
-      <i class="fa fa-moon fa-align-left pills"></i>
-    </button>-->
-  </div>
-  <% } %>
+<div>
+    <header id="header">
+        
+        <h1>
+          <a href="index.html"><img src="/images/logo/logo.png" class="logo" />Openfuel</a>
+        </h1>
+        <% if(!user) {%>
+          <a href="account/github">Log In</a>
+        <% } %>
+				
+        <% if(user) { %>
+        
+          <a href="/me"><img width="50" style="border-radius: 50%" src="<%= user.profile_picture %>"></a>
+          
+            
+              <a
+              style="outline: none"
+              type="button"
+              class="btn btn-link margin-top-20"
+              id="sidebarToggle" 
+            >
+              <i class="fa fa-lg fa-align-left pills"></i>
+            </a>
+          <% } %>
+		</header>
+  
+  
 </div>
