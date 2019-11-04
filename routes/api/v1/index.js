@@ -145,6 +145,7 @@ router.post("/v1/follow", function(req, res, next) {
     } else {
       user.followers.push(req.session.user._id);
       user.notifications.push({
+        id: Math.random(),
         msg: `${req.session.user.username} started following you.`,
         link: `/u/@${data[i].username}`,
         time: new Date()

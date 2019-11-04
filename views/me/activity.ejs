@@ -22,7 +22,7 @@
             <% } %>
         <ul class="list-group">
             <% for(var i=activity.length-1;i != -1;i--) { %>
-                <li class="list-group-item"><a href="<%= activity[i].link %>"><%= activity[i].msg %></a> - <b><%= timeSince(new Date(activity[i].time)) %> ago</b><br></li>
+                <li class="list-group-item"><a href="<%= activity[i].link %>?delete_notif=<%= activity[i].id %>"><%= activity[i].msg %></a> - <b><%= timeSince(new Date(activity[i].time)) %> ago</b><br></li>
             <% } %>    
          </ul>
   </div>

@@ -6,9 +6,9 @@ const MongoStore = require("connect-mongo")(session);
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const proxy = require('express-http-proxy');
+const proxy = require("express-http-proxy");
 const passport = require("passport");
-
+const User = require("./utils/models/user");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const accountRouter = require("./routes/auth");
@@ -63,17 +63,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(passport.initialize());
- var date = new Date();
-app.events = [{
-  title: "OpenFuel",
-  text: "Launching soon...",
-  img: "/images/station.png",
-  time:[date,date.setDate(date.getDate() + 1)] ,
-  link: {
-    link_url: "https://openfuel.org",
-    link_text:"Visit"
+var date = new Date();
+app.events = [
+  {
+    title: "OpenFuel",
+    text: "Launching soon...",
+    img: "/images/station.png",
+    time: [date, date.setDate(date.getDate() + 1)],
+    link: {
+      link_url: "https://openfuel.org",
+      link_text: "Visit"
+    }
   }
-}];
+];
 app.use(
   express.static(
     path.join(__dirname, "public"),
@@ -85,11 +87,11 @@ app.use(
   )
 );
 
-if(process.env.OFFLINE) {
+if (process.env.OFFLINE) {
   /** Only For Offline Tests **/
   app.use((req, res, next) => {
-    if(req.url == '/') req.session.user = app.conf.offline;
-    next()
+    if (req.url == "/") req.session.user = app.conf.offline;
+    next();
   });
 }
 
@@ -100,12 +102,30 @@ app.use((req, res, next) => {
 });
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(function(req, res, next) {
+  if (!req.query.delete_notif || !req.session.user) return next();
+  next = function() {
+    console.log(req.originalUrl);
+    return res.redirect(
+      req.originalUrl.split("delete_notif=" + req.query.delete_notif).join("")
+    );
+  };
+  User.findOne({ id: req.session.user.id }, function(err, user) {
+    if (!user || err) return next();
+    let notif = user.notifications.find(x => x.id == req.query.delete_notif);
+    if (!notif) return next();
+    user.notifications.splice(user.notifications.indexOf(notif), 1);
+    user.save(function() {
+      next();
+    });
+  });
+});
 app.use("/", indexRouter);
 app.use("/account", accountRouter);
 app.use(function(req, res, next) {
-  if(req.session.user) return next();
-    res.redirect("/");
-})
+  if (req.session.user) return next();
+  res.redirect("/");
+});
 app.use("/u", usersRouter);
 app.use("/me", meRouter);
 app.use("/api", restApi);
@@ -113,8 +133,7 @@ app.use("/category", categoryRouter);
 app.use("/products", extraRouter);
 app.use("/chat", chatRouter);
 app.use("/developer", publicApiRouter);
-app.use('/console', proxy('http://localhost:5000'));
-
+app.use("/console", proxy("http://localhost:5000"));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
