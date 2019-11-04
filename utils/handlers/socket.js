@@ -40,7 +40,7 @@ function sendMsg(socket, chat) {
       let otherUser = room.users.find(x => x != u.id);
       User.findOne({ id: otherUser }).exec(function(err, otherU) {
         otherU.notifications.push({
-          msg: `${otherU.username} sent you a message: ${chat.txt}`,
+          msg: `@${u.username} sent you a message: ${chat.txt}`,
           link: `/chat/${u.id}`,
           time: new Date()
         });
