@@ -44,6 +44,7 @@ function sendMsg(socket, chat) {
           link: `/chat/${u.id}`,
           time: new Date()
         });
+        otherU.save();
       });
     });
   });
