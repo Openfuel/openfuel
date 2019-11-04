@@ -168,7 +168,6 @@ header p {
 @media screen and (max-width: 980px) {
 
     #header {
-        height: 44px;
         line-height: 44px;
     }
 
