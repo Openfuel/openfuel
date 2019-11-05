@@ -19,9 +19,9 @@
     <a href="https://openfuel.org"><strong>Get started »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/conferly/conferly/issues">Report Bug</a>
+    <a href="https://github.com/openfuel/openfuel/issues">Report Bug</a>
     ·
-    <a href="https://github.com/conferly/conferly/issues">Request Feature</a>
+    <a href="https://github.com/openfuel/openfuel/issues">Submit Feature</a>
   </p>
 </p>
 
