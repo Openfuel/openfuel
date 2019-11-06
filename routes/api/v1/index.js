@@ -118,7 +118,7 @@ router.post("/v1/like", function(req, res, next) {
   console.log(req.body);
   db.like(
     { id: req.session.user.id },
-    { by: req.session.user.id },
+    { by: req.session.user.id, username: req.session.user.username },
     req.body._id,
     (err, result, amount, liked) => {
       if (result) {

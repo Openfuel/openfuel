@@ -186,7 +186,7 @@ function like(user, like, _id, cb) {
       post.likes.push(like.by);
       obj.notifications.push({
         id: Math.random(),
-        msg: `@${like.by} liked your post.`,
+        msg: `@${like.username} liked your post.`,
         link: `/u/@${obj.username}`,
         time: new Date()
       });
