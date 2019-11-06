@@ -6,16 +6,7 @@
     <br>
     <div class="container" id="mainPage">
     <input type="text" id="search-box" style="margin-bottom: 2%" class="form-control" onkeyup="updateList(this.value, 'search');" placeholder="Search here..." />
-    <select class="form-control" id="lang-select" onchange="updateList(this.value, 'lang');"><br>
-      <option value="all">All languages</option>
-      <option value="JavaScript">Javascript</option>
-      <option value="CSS">CSS</option>
-      <option value="HTML">HTML</option>
-      <option value="Python">Python</option>
-      <option value="Scala">Scala</option>
-      <option value="Ruby">Ruby</option>
-   </select>
-    <br>
+
     <ul class="list-group">
       <li class="list-group-item list-group-item-primary">Total Users</li>
            <li class="list-group-item">
@@ -26,7 +17,7 @@
     <ul class="list-group">
       <li class="list-group-item list-group-item-primary">Results</li>
       <div id="user-list">
-      <% for(var i=0;i<list.length;i++) { %>
+      <% for(var i=0;i<list.length && i != 10;i++) { %>
          <li class="list-group-item">
             <img src="<%= list[i].profile_picture %>" class="logo">
             <b><a href="/u/@<%= list[i].username %>" id="list-username"><%= list[i].username %></a></b>
@@ -34,6 +25,7 @@
       <% } %>
     </div>
    </ul>
+   </div>
 
     <div id="notify_message" class=" notify_message-success">
     	<center>Search for people on Openfuel...</center>

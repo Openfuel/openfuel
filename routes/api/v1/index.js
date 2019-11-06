@@ -4,6 +4,7 @@ var path = require("path");
 var db = require("../../../utils/handlers/user");
 var User = require("../../../utils/models/user");
 var ta = require("time-ago");
+const Fuse = require("fuse.js");
 const q = require("queue")({ autostart: true });
 
 router.get("/threat", (req, res, next) => {
@@ -159,26 +160,29 @@ router.post("/v1/follow", function(req, res, next) {
 });
 
 router.get("/v1/search", function(req, res, next) {
-  var regx = "^" + req.query.q + ".*";
-  User.find({
-    $or: [
-      { username: { $regex: regx } },
-      { firstname: { $regex: regx } },
-      { lastname: { $regex: regx } }
-    ]
-  }).exec((err, all) => {
-    if (req.query.lang) {
-      if (req.query.lang == "all") return res.send(all);
-      var filterAll = [];
-      for (var i = 0; i < all.length; i++) {
-        if (all[i].languages[0][req.query.lang]) {
-          filterAll.push(all[i]);
-        }
-      }
-      return res.send(filterAll);
-    } else {
-      return res.send(all);
+  var options = {
+    shouldSort: true,
+    threshold: 0.3,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 1,
+    keys: ["username", "name", "languages", "repos.repo", "repos.owner"]
+  };
+  User.find({}, function(err, users) {
+    users.forEach(x => {
+      let langs = [];
+      x.languages.forEach(l => {
+        Object.keys(l).forEach(la => langs.push(la));
+      });
+      x.languages = langs;
+    });
+    var fuse = new Fuse(users, options);
+    if (!req.query || !req.query.q) {
+      return res.send(users);
     }
+    let searched = fuse.search(req.query.q);
+    return res.send(searched);
   });
 });
 
