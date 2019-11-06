@@ -6,6 +6,7 @@ if (lang) {
   updateList();
 }
 function updateList(query, type) {
+  $("#searchLoad").css("display", "");
   $.ajax({
     method: "GET",
     url: "/api/v1/search",
@@ -29,9 +30,11 @@ function updateList(query, type) {
           .join(" ")}</b>
             </li>`);
       }
+      $("#searchLoad").fadeOut();
     })
     .fail(function(data) {
       show_notification("Oops! Error: " + data.message, "danger");
+      $("#searchLoad").fadeOut();
     });
   // } else if (type == "lang") {
   //   $.ajax({

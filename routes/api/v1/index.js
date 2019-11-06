@@ -89,7 +89,6 @@ router.get("/v1/posts", function(req, res) {
           page == 1 ? 0 : 10 * (page - 1),
           page == 1 ? 10 : undefined
         );
-        console.log(posts.length);
         res.status(200).send(posts);
         user.save();
         done();
@@ -160,29 +159,31 @@ router.post("/v1/follow", function(req, res, next) {
 });
 
 router.get("/v1/search", function(req, res, next) {
-  var options = {
-    shouldSort: true,
-    threshold: 0.3,
-    location: 0,
-    distance: 100,
-    maxPatternLength: 32,
-    minMatchCharLength: 1,
-    keys: ["username", "name", "languages", "repos.repo", "repos.owner"]
-  };
-  User.find({}, function(err, users) {
-    users.forEach(x => {
-      let langs = [];
-      x.languages.forEach(l => {
-        Object.keys(l).forEach(la => langs.push(la));
+  q.push(async function() {
+    var options = {
+      shouldSort: true,
+      threshold: 0.3,
+      location: 0,
+      distance: 100,
+      maxPatternLength: 32,
+      minMatchCharLength: 1,
+      keys: ["username", "name", "languages", "repos.repo", "repos.owner"]
+    };
+    User.find({}, function(err, users) {
+      users.forEach(x => {
+        let langs = [];
+        x.languages.forEach(l => {
+          Object.keys(l).forEach(la => langs.push(la));
+        });
+        x.languages = langs;
       });
-      x.languages = langs;
+      var fuse = new Fuse(users, options);
+      if (!req.query || !req.query.q) {
+        return res.send(users);
+      }
+      let searched = fuse.search(req.query.q);
+      return res.send(searched);
     });
-    var fuse = new Fuse(users, options);
-    if (!req.query || !req.query.q) {
-      return res.send(users);
-    }
-    let searched = fuse.search(req.query.q);
-    return res.send(searched);
   });
 });
 
