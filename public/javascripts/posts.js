@@ -128,9 +128,13 @@
                 </div>
             
                 <div class="gram-card-footer">
-                  <button data="${JSON.stringify(p.post.likes)}" ${
-          p.post.likes.includes($("#posts").attr("username")) ? "disabled" : ""
-        } onclick="this.innerHTML =  ${`'<i class=\\'glyphicon glyphicon-thumbs-up\\'></i> ' + (parseInt(${p.post.likes.length}) + 1); this.disabled = true;`}" class="footer-action-icons likes btn btn-link non-hoverable like-button-box" author="${
+                  <button data="${JSON.stringify(
+                    p.post.likes
+                  )}" style="color: ${
+          p.post.likes.find(x => x == $("#posts").attr("user-id"))
+            ? "grey"
+            : "#f0b917"
+        }" class="footer-action-icons likes btn btn-link non-hoverable like-button-box" author="${
           p.author.username
         }" id="${p.post._id}-like">
                     <i class="glyphicon glyphicon-thumbs-up"></i> ${
@@ -153,6 +157,7 @@
 
       function likeById() {
         console.log(this.id);
+        const elem = this;
         var author = $(`#${this.id}`).attr("author");
         $.ajax({
           method: "POST",
@@ -164,6 +169,14 @@
         })
           .done(function(data) {
             if (data.event) {
+              $(elem).html(
+                $(elem)
+                  .html()
+                  .split("</i>")[0] +
+                  "</i> " +
+                  data.amount
+              );
+              $(elem).css("color", data.msg != "Liked!" ? "#f0b917" : "grey");
               show_notification(data.msg, "success");
             } else {
               show_notification(data.msg, "danger");

@@ -177,21 +177,24 @@ function like(user, like, _id, cb) {
   User.findOne(user).exec((err, obj) => {
     //	if (!obj) return cb("Does not exist.",null);
     //console.log(obj);
-    for (var i = 0; i < obj.posts.length; i++) {
-      if (obj.posts[i]._id == _id) {
-        obj.posts[i].likes.push(like.by);
-        obj.notifications.push({
-          id: Math.random(),
-          msg: `@${like.by} liked your post.`,
-          link: `/u/@${obj.username}`,
-          time: new Date()
-        });
-        obj = new User(obj);
-        obj.save(err => {
-          cb(err, true);
-        });
-      }
+    let liked;
+    let post = obj.posts.find(x => x._id == _id);
+    if (post.likes.find(x => x == like.by)) {
+      post.likes.splice(post.likes.indexOf(like.by), 1);
+    } else {
+      liked = true;
+      post.likes.push(like.by);
+      obj.notifications.push({
+        id: Math.random(),
+        msg: `@${like.by} liked your post.`,
+        link: `/u/@${obj.username}`,
+        time: new Date()
+      });
     }
+    obj = new User(obj);
+    obj.save(err => {
+      cb(err, true, post.likes.length, liked);
+    });
   });
 }
 
