@@ -1,4 +1,5 @@
 @font-face{font-family:'One Day';src:url(/fonts/ONEDAY.ttf)}
+
 @import url('https://fonts.googleapis.com/css?family=Cardo:400,400i,700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,700&display=swap');
 
@@ -193,3 +194,376 @@ header p {
 
 }
 /* END - Added css support for header - conflicts with existing css*/
+
+/*css support for footer added 4Nov19*/
+    /* Footer */
+
+	#footer {
+		background-color: #545669;
+		color: #e5e6e9;
+		padding: 5em 0 3em 0 ;
+	}
+
+		#footer input, #footer select, #footer textarea {
+			color: #ffffff;
+		}
+
+		#footer a {
+			color: #72c9d4;
+		}
+
+		#footer strong, #footer b {
+			color: #ffffff;
+		}
+
+		#footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6 {
+			color: #ffffff;
+		}
+
+			#footer h1.major:after, #footer h2.major:after, #footer h3.major:after, #footer h4.major:after, #footer h5.major:after, #footer h6.major:after {
+				background-color: rgba(0, 0, 0, 0.3);
+			}
+
+		#footer blockquote {
+			border-left-color: rgba(0, 0, 0, 0.3);
+		}
+
+		#footer code {
+			background: rgba(0, 0, 0, 0.1);
+			border-color: rgba(0, 0, 0, 0.3);
+		}
+
+		#footer hr {
+			border-bottom-color: rgba(0, 0, 0, 0.3);
+		}
+
+		#footer .box {
+			border-color: rgba(0, 0, 0, 0.3);
+		}
+
+		#footer input[type="submit"],
+		#footer input[type="reset"],
+		#footer input[type="button"],
+		#footer button,
+		#footer .button {
+			background-color: transparent;
+			border-color: rgba(0, 0, 0, 0.3);
+			color: #ffffff !important;
+		}
+
+			#footer input[type="submit"]:hover,
+			#footer input[type="reset"]:hover,
+			#footer input[type="button"]:hover,
+			#footer button:hover,
+			#footer .button:hover {
+				background-color: rgba(0, 0, 0, 0.1);
+			}
+
+			#footer input[type="submit"]:active,
+			#footer input[type="reset"]:active,
+			#footer input[type="button"]:active,
+			#footer button:active,
+			#footer .button:active {
+				background-color: rgba(0, 0, 0, 0.2);
+			}
+
+			#footer input[type="submit"].icon:before,
+			#footer input[type="reset"].icon:before,
+			#footer input[type="button"].icon:before,
+			#footer button.icon:before,
+			#footer .button.icon:before {
+				color: #ffffff;
+			}
+
+			#footer input[type="submit"].primary,
+			#footer input[type="reset"].primary,
+			#footer input[type="button"].primary,
+			#footer button.primary,
+			#footer .button.primary {
+				border: none;
+				background-color: #72c9d4;
+				color: #ffffff !important;
+			}
+
+				#footer input[type="submit"].primary:hover,
+				#footer input[type="reset"].primary:hover,
+				#footer input[type="button"].primary:hover,
+				#footer button.primary:hover,
+				#footer .button.primary:hover {
+					background-color: #86d0da;
+				}
+
+				#footer input[type="submit"].primary:active,
+				#footer input[type="reset"].primary:active,
+				#footer input[type="button"].primary:active,
+				#footer button.primary:active,
+				#footer .button.primary:active {
+					background-color: #5ec2ce;
+				}
+
+				#footer input[type="submit"].primary.icon:before,
+				#footer input[type="reset"].primary.icon:before,
+				#footer input[type="button"].primary.icon:before,
+				#footer button.primary.icon:before,
+				#footer .button.primary.icon:before {
+					color: #ffffff;
+				}
+
+		#footer label {
+			color: #ffffff;
+		}
+
+		#footer input[type="text"],
+		#footer input[type="password"],
+		#footer input[type="email"],
+		#footer select,
+		#footer textarea {
+			background-color: rgba(0, 0, 0, 0.1);
+			border-color: rgba(0, 0, 0, 0.3);
+		}
+
+			#footer input[type="text"]:focus,
+			#footer input[type="password"]:focus,
+			#footer input[type="email"]:focus,
+			#footer select:focus,
+			#footer textarea:focus {
+				border-color: #72c9d4;
+				box-shadow: 0 0 0 1px #72c9d4;
+			}
+
+		#footer select {
+			background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' preserveAspectRatio='none' viewBox='0 0 40 40'%3E%3Cpath d='M9.4,12.3l10.4,10.4l10.4-10.4c0.2-0.2,0.5-0.4,0.9-0.4c0.3,0,0.6,0.1,0.9,0.4l3.3,3.3c0.2,0.2,0.4,0.5,0.4,0.9 c0,0.4-0.1,0.6-0.4,0.9L20.7,31.9c-0.2,0.2-0.5,0.4-0.9,0.4c-0.3,0-0.6-0.1-0.9-0.4L4.3,17.3c-0.2-0.2-0.4-0.5-0.4-0.9 c0-0.4,0.1-0.6,0.4-0.9l3.3-3.3c0.2-0.2,0.5-0.4,0.9-0.4S9.1,12.1,9.4,12.3z' fill='rgba(0, 0, 0, 0.3)' /%3E%3C/svg%3E");
+		}
+
+			#footer select option {
+				color: #ffffff;
+				background: #545669;
+			}
+
+		#footer input[type="checkbox"] + label,
+		#footer input[type="radio"] + label {
+			color: #e5e6e9;
+		}
+
+			#footer input[type="checkbox"] + label:before,
+			#footer input[type="radio"] + label:before {
+				background: rgba(0, 0, 0, 0.1);
+				border-color: rgba(0, 0, 0, 0.3);
+			}
+
+		#footer input[type="checkbox"]:checked + label:before,
+		#footer input[type="radio"]:checked + label:before {
+			background-color: #72c9d4;
+			border-color: #72c9d4;
+			color: #ffffff;
+		}
+
+		#footer input[type="checkbox"]:focus + label:before,
+		#footer input[type="radio"]:focus + label:before {
+			border-color: #72c9d4;
+			box-shadow: 0 0 0 1px #72c9d4;
+		}
+
+		#footer ::-webkit-input-placeholder {
+			color: #bbbbc3 !important;
+		}
+
+		#footer :-moz-placeholder {
+			color: #bbbbc3 !important;
+		}
+
+		#footer ::-moz-placeholder {
+			color: #bbbbc3 !important;
+		}
+
+		#footer :-ms-input-placeholder {
+			color: #bbbbc3 !important;
+		}
+
+		#footer .formerize-placeholder {
+			color: #bbbbc3 !important;
+		}
+
+		#footer ul.alt li {
+			border-top-color: rgba(0, 0, 0, 0.3);
+		}
+
+		#footer header p {
+			color: #bbbbc3;
+		}
+
+		#footer table tbody tr {
+			border-color: rgba(0, 0, 0, 0.3);
+		}
+
+			#footer table tbody tr:nth-child(2n + 1) {
+				background-color: rgba(0, 0, 0, 0.1);
+			}
+
+		#footer table th {
+			color: #ffffff;
+		}
+
+		#footer table thead {
+			border-bottom-color: rgba(0, 0, 0, 0.3);
+		}
+
+		#footer table tfoot {
+			border-top-color: rgba(0, 0, 0, 0.3);
+		}
+
+		#footer table.alt tbody tr td {
+			border-color: rgba(0, 0, 0, 0.3);
+		}
+
+		#footer .features > li {
+			border-top-color: rgba(0, 0, 0, 0.1);
+		}
+
+		#footer .spotlight {
+			border-bottom-color: rgba(0, 0, 0, 0.3);
+		}
+
+		#footer .icon.major:before {
+			color: #72c9d4;
+		}
+
+		#footer a {
+			color: inherit;
+			text-decoration: none;
+		}
+
+			#footer a:hover {
+				color: #ffffff;
+			}
+
+		#footer > .inner {
+			display: -moz-flex;
+			display: -webkit-flex;
+			display: -ms-flex;
+			display: flex;
+			-moz-flex-wrap: wrap;
+			-webkit-flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+			margin: 0 auto;
+			max-width: 75em;
+			width: 100%;
+		}
+
+		#footer .about {
+			width: 50%;
+			margin-bottom: 2em;
+		}
+
+		#footer .contact-info {
+			display: -moz-flex;
+			display: -webkit-flex;
+			display: -ms-flex;
+			display: flex;
+			-moz-flex-wrap: wrap;
+			-webkit-flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+			margin-bottom: 2em;
+			padding-left: 4em;
+			width: 50%;
+		}
+
+			#footer .contact-info h4 {
+				width: 100%;
+			}
+
+			#footer .contact-info ul {
+				width: 50%;
+			}
+
+		#footer .copyright {
+			color: #bbb;
+			font-size: 0.9em;
+			margin: 0 0 2em 0;
+			padding: 0;
+			text-align: center;
+		}
+
+			#footer .copyright li {
+				border-left: solid 1px rgba(144, 144, 144, 0.3);
+				display: inline-block;
+				list-style: none;
+				margin-left: 1.5em;
+				padding-left: 1.5em;
+			}
+
+				#footer .copyright li:first-child {
+					border-left: 0;
+					margin-left: 0;
+					padding-left: 0;
+				}
+
+		@media screen and (max-width: 1280px) {
+
+			#footer {
+				padding: 4em 2em 2em 2em ;
+			}
+
+				#footer .contact-info {
+					padding-left: 2em;
+				}
+
+		}
+
+		@media screen and (max-width: 980px) {
+
+			#footer {
+				padding: 4em 2em 2em 2em ;
+			}
+
+				#footer .about {
+					width: 100%;
+				}
+
+				#footer .contact-info {
+					padding-left: 0;
+					width: 100%;
+				}
+
+		}
+
+		@media screen and (max-width: 736px) {
+
+			#footer {
+				padding: 3.5em 2em 1.5em 2em ;
+			}
+
+				#footer .about,
+				#footer .contact-info {
+					margin-bottom: 1em;
+				}
+
+				#footer .copyright li {
+					display: block;
+					border-left: 0;
+					margin-left: 0;
+					padding-left: 0;
+				}
+
+		}
+
+		@media screen and (max-width: 480px) {
+
+			#footer {
+				padding: 3em 2em 1em 2em ;
+			}
+
+				#footer .copyright {
+					text-align: left;
+				}
+
+				#footer .contact-info ul {
+					margin-bottom: 0;
+					width: 100%;
+				}
+
+		}
+
+/* END: css support for footer*/
