@@ -169,12 +169,12 @@ router.post("/v1/follow", function(req, res, next) {
     } else {
       fetch("https://api.github.com/users/" + req.body.username, function(
         err,
-        res
+        resGH
       ) {
-        if (err || !res)
+        if (err || !resGH)
           return res.status(500).send(err || "Could not find user");
-        user.openFollowers.push(res);
-        db.findOne({ id: res.id }, function(err, u) {
+        user.openFollowers.push(resGH);
+        db.findOne({ id: resGH.id }, function(err, u) {
           if (u) {
             u.notifications.push({
               id: Math.random(),
