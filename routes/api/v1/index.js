@@ -7,6 +7,27 @@ var ta = require("time-ago");
 const Fuse = require("fuse.js");
 const q = require("queue")({ autostart: true });
 
+// Rate limiting
+
+router.use(function(req, res, next) {
+  const date = new Date();
+  const sessionDate = new Date(req.session.lastApi);
+  if (sessionDate) {
+    if (date - sessionDate < 2000) {
+      setTimeout(function() {
+        next();
+        req.session.lastApi = date;
+      }, 1000);
+    } else {
+      next();
+      req.session.lastApi = date;
+    }
+  } else {
+    req.session.lastApi = date;
+    next();
+  }
+});
+
 router.get("/threat", (req, res, next) => {
   if (req.params.key == process.env.API_KEY) {
     res.json({ success: true });
