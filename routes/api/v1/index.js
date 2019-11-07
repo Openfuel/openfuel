@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var path = require("path");
+const fetch = require("request");
 var db = require("../../../utils/handlers/user");
 var User = require("../../../utils/models/user");
 var ta = require("time-ago");
@@ -154,27 +155,41 @@ router.post("/v1/like", function(req, res, next) {
 });
 
 router.post("/v1/follow", function(req, res, next) {
-  db.findOne(req.body, (err, user) => {
-    var disabled = false;
-    for (var i = 0; i < user.followers.length; i++) {
-      if (user.followers[i] == req.session.user._id) {
-        console.log(i);
-        return (disabled = true);
-      }
-    }
-    if (disabled) {
-      res.status(200).send("disabled");
-    } else {
-      user.followers.push(req.session.user._id);
-      user.notifications.push({
-        id: Math.random(),
-        msg: `${req.session.user.username} started following you.`,
-        link: `/u/@${data[i].username}`,
-        time: new Date()
-      });
+  db.findOne({ id: req.session.user.id }, (err, user) => {
+    let foundUser = user.openFollowers.find(
+      x => x.username == req.body.username
+    );
+    if (foundUser) {
+      user.openFollowers.splice(user.openFollowers.indexOf(foundUser), 1);
       user = User(user);
-      user.save(err => {
-        res.status(200).send("done");
+      user.save(function() {
+        res.send({ followed: false, msg: "Un-Followed!" });
+      });
+      return;
+    } else {
+      fetch("https://api.github.com/users/" + req.body.username, function(
+        err,
+        res
+      ) {
+        if (err || !res)
+          return res.status(500).send(err || "Could not find user");
+        user.openFollowers.push(res);
+        db.findOne({ id: res.id }, function(err, u) {
+          if (u) {
+            u.notifications.push({
+              id: Math.random(),
+              msg: `${req.session.user.username} started following you.`,
+              link: `/u/@${data[i].username}`,
+              time: new Date()
+            });
+            u = User(u);
+            u.save();
+          }
+          user = User(user);
+          user.save(err => {
+            res.status(200).send({ followed: true, msg: "Followed!" });
+          });
+        });
       });
     }
   });

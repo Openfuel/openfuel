@@ -29,7 +29,7 @@
             </div>
             <div class="profile-userbuttons">
               <div class="row">
-                <div class="col-md-6"><button type="button" id="follow-btn" style="margin-top:5px" class="btn btn-primary btn-sm">Follow</button></div>
+                <% if(u.id != user.id) { %><div class="col-md-6"><button type="button" id="follow-btn" data-follow="<%= user.username %>" style="margin-top:5px" class="btn btn-primary btn-sm"><%= user.openFollowers.find(x => x.id == u.id) ? "Unfollow" : "Follow" %></button></div> <% } %>
                 <div class="col-md-6"><a type="button" href="/chat/<%= u.id %>" style="margin-top:5px" class="btn btn-primary btn-sm">Message</a></div>
               <% if(u.email) { %><div class="col-md-6"><a type="button" style="margin-top:5px" href="mailto:<%= u.email %>" class="btn btn-primary btn-sm">Email</a></div><% } %>
               <% if(u.website) { %><div class="col-md-6"><a type="button" style="margin-top:5px" href="<%= u.website %>" class="btn btn-primary btn-sm">Website</a></div><% } %>
