@@ -43,11 +43,12 @@ router.get("/post/:action/:query", function(req, res, next) {
       {
         db.findOne({ id: req.session.user.id }).exec((err, u) => {
           let id = req.params.query;
-          if(!u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))]) {
+          if (!u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))]) {
             return res.redirect("/");
           }
           console.log(u);
-          if (u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))] && 
+          if (
+            u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))] &&
             u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))].static_url
           )
             try {
@@ -89,11 +90,9 @@ router.post("/upload", formParser, function(req, res, next) {
       [req.files.filetoupload.name.split(".").length - 1].toLowerCase();
     console.log(type);
     if (file_types.indexOf(type) < 0) {
-      return res
-        .status(403)
-        .render("error", {
-          error: new Error("Only images and videos are allowed for upload!")
-        });
+      return res.status(403).render("error", {
+        error: new Error("Only images and videos are allowed for upload!")
+      });
     }
     var newpath = path.join(
       __dirname,
@@ -140,7 +139,10 @@ router.post("/upload/code", (req, res, next) => {
   var random_id = guid.raw();
   console.log(req.body);
   if (req.body.code) {
-    db.findOne({ username: req.session.user.username }).exec(function(err, user) {
+    db.findOne({ username: req.session.user.username }).exec(function(
+      err,
+      user
+    ) {
       user.posts.push({
         _id: random_id,
         author: req.session.user.username,

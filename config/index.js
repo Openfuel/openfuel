@@ -1,3 +1,3 @@
 module.exports = {
-  github: require('./github')
+  github: require("./github")
 };

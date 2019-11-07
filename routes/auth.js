@@ -15,7 +15,13 @@ router.get(
   function(req, res) {
     // Successful authentication, redirect home.
     req.session.user = req.session.passport.user;
-    res.redirect("/?logged-in=" + Math.random().toString().slice(2).slice(0, 5));
+    res.redirect(
+      "/?logged-in=" +
+        Math.random()
+          .toString()
+          .slice(2)
+          .slice(0, 5)
+    );
   }
 );
 
