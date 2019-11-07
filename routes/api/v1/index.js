@@ -10,6 +10,12 @@ const q = require("queue")({ autostart: true });
 // Rate limiting
 
 router.use(function(req, res, next) {
+  q.push(async function() {
+    next();
+  });
+});
+
+router.use(function(req, res, next) {
   const date = new Date();
   const sessionDate = new Date(req.session.lastApi);
   if (sessionDate) {
@@ -74,46 +80,41 @@ router.post("/event", (req, res, next) => {
 
 router.get("/v1/posts", function(req, res) {
   if (!req.session.user) res.sendStatus(404);
-  q.push(async function(done) {
-    req.query.sort =
-      req.query.sort.split(" ").length > 1
-        ? req.query.sort.split(" ")[1]
-        : req.query.sort;
-    let page = req.query.page || 1;
-    db.findOne({ id: req.session.user.id }, function(err, user) {
-      db.getAll(function(err, results) {
-        if (err) res.status(500).send(err);
-        let posts = [];
-        if (req.query.sort == "feed") {
-          results = results.filter(u =>
-            user.openFollowers.find(f => f == u.id)
-          );
-        }
-        if (req.query.sort == "top") {
-        }
-        results.forEach(function(res) {
-          res.access_token = null;
-          res.posts.forEach(post => {
-            post.timeago = ta.ago(post.createdAt);
-            posts.push({
-              author: res,
-              post,
-              owner: res.id == req.session.user.id ? true : false
-            });
+  req.query.sort =
+    req.query.sort.split(" ").length > 1
+      ? req.query.sort.split(" ")[1]
+      : req.query.sort;
+  let page = req.query.page || 1;
+  db.findOne({ id: req.session.user.id }, function(err, user) {
+    db.getAll(function(err, results) {
+      if (err) res.status(500).send(err);
+      let posts = [];
+      if (req.query.sort == "feed") {
+        results = results.filter(u => user.openFollowers.find(f => f == u.id));
+      }
+      if (req.query.sort == "top") {
+      }
+      results.forEach(function(res) {
+        res.access_token = null;
+        res.posts.forEach(post => {
+          post.timeago = ta.ago(post.createdAt);
+          posts.push({
+            author: res,
+            post,
+            owner: res.id == req.session.user.id ? true : false
           });
         });
-        posts.sort(
-          (one, two) =>
-            new Date(two.post.createdAt) - new Date(one.post.createdAt)
-        );
-        posts = posts.slice(
-          page == 1 ? 0 : 10 * (page - 1),
-          page == 1 ? 10 : undefined
-        );
-        res.status(200).send(posts);
-        user.save();
-        done();
       });
+      posts.sort(
+        (one, two) =>
+          new Date(two.post.createdAt) - new Date(one.post.createdAt)
+      );
+      posts = posts.slice(
+        page == 1 ? 0 : 10 * (page - 1),
+        page == 1 ? 10 : undefined
+      );
+      res.status(200).send(posts);
+      user.save();
     });
   });
 });
@@ -180,31 +181,29 @@ router.post("/v1/follow", function(req, res, next) {
 });
 
 router.get("/v1/search", function(req, res, next) {
-  q.push(async function() {
-    var options = {
-      shouldSort: true,
-      threshold: 0.3,
-      location: 0,
-      distance: 100,
-      maxPatternLength: 32,
-      minMatchCharLength: 1,
-      keys: ["username", "name", "languages", "repos.repo", "repos.owner"]
-    };
-    User.find({}, function(err, users) {
-      users.forEach(x => {
-        let langs = [];
-        x.languages.forEach(l => {
-          Object.keys(l).forEach(la => langs.push(la));
-        });
-        x.languages = langs;
+  var options = {
+    shouldSort: true,
+    threshold: 0.3,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 1,
+    keys: ["username", "name", "languages", "repos.repo", "repos.owner"]
+  };
+  User.find({}, function(err, users) {
+    users.forEach(x => {
+      let langs = [];
+      x.languages.forEach(l => {
+        Object.keys(l).forEach(la => langs.push(la));
       });
-      var fuse = new Fuse(users, options);
-      if (!req.query || !req.query.q) {
-        return res.send(users);
-      }
-      let searched = fuse.search(req.query.q);
-      return res.send(searched);
+      x.languages = langs;
     });
+    var fuse = new Fuse(users, options);
+    if (!req.query || !req.query.q) {
+      return res.send(users);
+    }
+    let searched = fuse.search(req.query.q);
+    return res.send(searched);
   });
 });
 

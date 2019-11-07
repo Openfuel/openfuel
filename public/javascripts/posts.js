@@ -1,6 +1,7 @@
 (function() {
   var page = 1;
   var finished;
+  var running;
   var lastSorted = "feed";
   $(".sort-btn").on("click", function() {
     $(".sort-btn").removeClass("active");
@@ -21,11 +22,14 @@
     }
   }
   function getPosts(page = 1, sort = lastSorted) {
+    if (running) return;
     load();
     if (finished) return load(true);
     if (page == 1) var method = "prepend";
     else var method = "append";
+    running = true;
     $.ajax(`/api/v1/posts?page=${page}&sort=${sort}`).done(function(posts) {
+      running = false;
       console.log("posts", posts);
       posts.reverse();
       console.log(posts.length);
