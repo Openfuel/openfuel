@@ -3,6 +3,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0bace90fd3b74d318afb939f3943705b)](https://www.codacy.com/manual/Openfuel/openfuel?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Openfuel/openfuel&amp;utm_campaign=Badge_Grade)
 
 <!-- PROJECT LOGO -->
 <br />
