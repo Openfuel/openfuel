@@ -156,7 +156,9 @@ router.post("/v1/like", function(req, res, next) {
 
 router.post("/v1/follow", function(req, res, next) {
   db.findOne({ id: req.session.user.id }, (err, user) => {
-    let foundUser = user.openFollowers.find(x => x.login == req.body.username);
+    let foundUser = user.openFollowers.find(
+      x => (x.login || x.username) == req.body.username
+    );
     if (foundUser) {
       user.openFollowers.splice(user.openFollowers.indexOf(foundUser), 1);
       user = User(user);
