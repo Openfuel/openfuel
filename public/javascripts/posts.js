@@ -28,11 +28,17 @@
     else var method = "append";
     $.ajax(`/api/v1/posts?page=${page}&sort=${sort}`).done(function(posts) {
       if (finished) return;
-      if (posts.length == 0) {
-        finished = true;
-      }
-      console.log(posts);
+      console.log("posts", posts);
       posts.reverse();
+      console.log(posts.length);
+      if (posts.length == 0 && page == 1) {
+        finished = true;
+        $("#posts").append(`
+        <div class="alert alert-dismissible alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Well done!</strong> You are all up to date!
+        </div>`);
+      }
       posts.forEach(p =>
         $("#posts")[method](`<div class="gram-card">
                 <div class="gram-card-header">
@@ -152,6 +158,13 @@
               </div>`)
       );
       load(true);
+      $(window).on("scroll", function() {
+        if (finished == true) return $(window).off(this);
+        if ($(document).height() - $(document).scrollTop() < 1369) {
+          page++;
+          getPosts(page);
+        }
+      });
       $(".like-button-box").off("click");
       $(".like-button-box").on("click", likeById);
 
@@ -224,11 +237,4 @@
     });
   }
   getPosts();
-  $(window).on("scroll", function() {
-    if (finished == true) return;
-    if ($(document).height() - $(document).scrollTop() < 1369) {
-      page++;
-      getPosts(page);
-    }
-  });
 })();
