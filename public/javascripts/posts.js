@@ -22,10 +22,10 @@
   }
   function getPosts(page = 1, sort = lastSorted) {
     load();
+    if (finished) return load(true);
     if (page == 1) var method = "prepend";
     else var method = "append";
     $.ajax(`/api/v1/posts?page=${page}&sort=${sort}`).done(function(posts) {
-      if (finished) return;
       console.log("posts", posts);
       posts.reverse();
       console.log(posts.length);
@@ -36,6 +36,9 @@
           <button type="button" class="close" data-dismiss="alert">&times;</button>
           <strong>Well done!</strong> You are all up to date!
         </div>`);
+      } else if (posts.length == 0 && page > 1) {
+        load(true);
+        return $(window).off("scroll");
       }
       posts.forEach(p =>
         $("#posts")[method](`<div class="gram-card">
