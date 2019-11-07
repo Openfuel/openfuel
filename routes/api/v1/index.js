@@ -185,6 +185,8 @@ router.post("/v1/follow", function(req, res, next) {
             u = User(u);
             u.save();
           }
+          console.log("u", u);
+          console.log("user", user);
           user = User(user);
           user.save(err => {
             res.status(200).send({ followed: true, msg: "Followed!" });
