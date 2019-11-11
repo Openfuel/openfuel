@@ -1,9 +1,8 @@
-
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0bace90fd3b74d318afb939f3943705b)](https://www.codacy.com/manual/Openfuel/openfuel?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Openfuel/openfuel&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0bace90fd3b74d318afb939f3943705b)](https://www.codacy.com/manual/Openfuel/openfuel?utm_source=github.com&utm_medium=referral&utm_content=Openfuel/openfuel&utm_campaign=Badge_Grade)[![CircleCI](https://circleci.com/gh/Openfuel/openfuel.svg?style=svg)](https://circleci.com/gh/Openfuel/openfuel)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -26,42 +25,40 @@
   </p>
 </p>
 
-
-
 <!-- TABLE OF CONTENTS -->
+
 ## Table of Contents
 
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Development](#develipment)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [License](#license)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
-
-
+- [About the Project](#about-the-project)
+  - [Built With](#built-with)
+- [Development](#develipment)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
-<!-- 
+
+<!--
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 -->
 
-
 ### Built With
+
 This project would never have been possible without these wonderful frameworks and project.
-* [Spruce](https://github.com/dan-divy/spruce)
+
+- [Spruce](https://github.com/dan-divy/spruce)
   Openfuel is a modified version of Spruce!
-* [Github-resume](https://resume.github.io/)
+- [Github-resume](https://resume.github.io/)
   We use github-resume to customize our experience!
 
-
-
-
 <!-- GETTING STARTED -->
+
 ## Development
 
 This is an example of how you may give instructions on setting up your project locally.
@@ -70,7 +67,9 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 Clone the repo and hit npm install.
-* npm
+
+- npm
+
 ```sh
 npm install
 ```
@@ -78,27 +77,31 @@ npm install
 ### Startup
 
 1. Clone the repo
+
 ```sh
 git clone https:://github.com/your_username_/Project-Name.git
 ```
+
 2. Install NPM packages
+
 ```sh
 npm install
 ```
+
 3. Start the project
+
 ```JS
 npm start
 ```
 
-
 <!-- ROADMAP -->
+
 ## Roadmap
 
 See the [open issues](https://github.com/openfuel/openfuel/issues) for a list of proposed features (and known issues).
 
-
-
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -109,15 +112,14 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
-
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE.md` for more information.
 
-
 <!-- CONTACT -->
+
 ## Contact
 
 - Divy Srivastava - [@undefined_void](https://twitter.com/@undefined_void) - dj.srivastava23@gmail.com
@@ -127,7 +129,6 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 - Yash Saxena - yash@openfuel.org
 
 Project Link: [https://github.com/openfuel/openfuel](https://github.com/openfuel/openfuel)
-
 
 [contributors-shield]: https://img.shields.io/github/contributors/openfuel/openfuel?style=flat-square
 [contributors-url]: https://github.com/openfuel/openfuel/graphs/contributors
