@@ -150,4 +150,10 @@ app.use(function(err, req, res, next) {
   res.render("error");
 });
 
+setTimeout(() => {
+  if (process.argv.find(x => x == "--test")) {
+    return process.exit(0);
+  }
+}, 2000);
+
 module.exports = app;
