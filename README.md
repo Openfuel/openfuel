@@ -2,7 +2,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]<br>
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0bace90fd3b74d318afb939f3943705b)](https://www.codacy.com/manual/Openfuel/openfuel?utm_source=github.com&utm_medium=referral&utm_content=Openfuel/openfuel&utm_campaign=Badge_Grade) [![CircleCI](https://circleci.com/gh/Openfuel/openfuel.svg?style=svg)](https://circleci.com/gh/Openfuel/openfuel)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0bace90fd3b74d318afb939f3943705b)](https://www.codacy.com/manual/Openfuel/openfuel?utm_source=github.com&utm_medium=referral&utm_content=Openfuel/openfuel&utm_campaign=Badge_Grade) [![CircleCI](https://circleci.com/gh/Openfuel/openfuel.svg?style=svg)](https://circleci.com/gh/Openfuel/openfuel) [![Build Status](https://travis-ci.com/Openfuel/openfuel.svg?branch=master)](https://travis-ci.com/Openfuel/openfuel)
 
 <!-- PROJECT LOGO -->
 <br />
