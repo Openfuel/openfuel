@@ -4,8 +4,16 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/moment.css">
   <body>
     <%- include("../navbar") %>
+    <style>
+    #sidebar,
+    #main {
+      background: #fff;
+    }
+    </style>
     <br><br><br>
-    <div class="container">
+    <%- include('../sidebar') %>
+    <div class="col-xs-12 col-sm-9 col-lg-10" style="margin:auto" id="main">
+
         <div class="row profile">
         <div class="col-md-3">
           <div class="profile-sidebar">
@@ -40,7 +48,7 @@
                 <li name="repos" class="tab active">
                   <a href="#">
                     <i class="fab fa-github"></i>
-                    Repos 
+                    Repos
                   </a>
                 </li>
                 <li name="overview" class="tab">
@@ -55,7 +63,7 @@
         <div class="col-md-9">
           <div id="overview" style="display: none" class="profile-content tabs">
                 <h2>Posts</h2><br>
-                <% if(u.posts) { 
+                <% if(u.posts) {
                   for(var x=0;x<u.posts.length;x++) {
                   if(u.posts[x].static_url) { %>
                     <blockquote>
@@ -79,12 +87,12 @@
                     </h4>
                   </div>
                   <div class="gram-card-content">
-                  
+
                     <span class="label label-info">${r.language || "Code"}</span><br><br>
-            
+
                   <p><i class="fa fa-star"></i> ${r.stars.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ${r.stars == 1 ? "star" : "stars"}<br>&nbsp;<i class="fa fa-code-branch"></i>&nbsp;${r.forks.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ${r.forks == 1 ? "fork" : "forks"}</p>
-                   
-            
+
+
                 </div>
               </div>
               </div>
@@ -93,10 +101,14 @@
           </div>
         </div>
       </div>
-    </div>
+
+  </div>
+
     <div id="notify_message" class="notify_message-success">
     	<center>Follow @<%= user.username %>!</center>
     </div>
+    <br>
+    <br>
     <%- include('../footer') -%>
     <script>
     var tabs = $(".tab");
