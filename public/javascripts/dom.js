@@ -18,11 +18,14 @@ function show_notification(msg, type) {
         $('#notify_message').addClass('notify_message-'+type)
         $('#notify_message').html('<center>'+msg+'</center>');
         $('#notify_message').slideDown(600).delay(3000).slideUp(600, function(){
-                
+
         });
-        
+
 }
-function show_new_notification(obj, type) {
+function activity_bubble(n) {
+  $("#activity").html(n)
+}
+function show_new_notification(obj, type, n) {
        // domReady
   $(function() {
     var notification = new NotificationFx({
@@ -35,6 +38,7 @@ function show_new_notification(obj, type) {
 
 						// show the notification
 						notification.show();
+            activity_bubble(n)
     });
     // create the notification
 }
