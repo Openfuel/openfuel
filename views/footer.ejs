@@ -13,52 +13,62 @@
     show_notification("Welcome to Openfuel");
     window.history.pushState(null, null, window.location.pathname);
   }
-  const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const isLightMode = window.matchMedia("(prefers-color-scheme: light)")
-    .matches;
-  const isNotSpecified = window.matchMedia(
-    "(prefers-color-scheme: no-preference)"
-  ).matches;
-  const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified;
+  // const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  // const isLightMode = window.matchMedia("(prefers-color-scheme: light)")
+  //   .matches;
+  // const isNotSpecified = window.matchMedia(
+  //   "(prefers-color-scheme: no-preference)"
+  // ).matches;
+  // const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified;
 
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addListener(e => e.matches && toggleNight(true));
-  window
-    .matchMedia("(prefers-color-scheme: light)")
-    .addListener(e => e.matches && toggleNight(false));
+  // window
+  //   .matchMedia("(prefers-color-scheme: dark)")
+  //   .addListener(e => e.matches && toggleNight(true));
+  // window
+  //   .matchMedia("(prefers-color-scheme: light)")
+  //   .addListener(e => e.matches && toggleNight(false));
 
-  if (isDarkMode) toggleNight(true);
-  if (isLightMode && !localStorage.nightMode) toggleNight(false);
-  if (
-    ((isNotSpecified || hasNoSupport) && !localStorage.nightMode) ||
-    (isLightMode && localStorage.nightMode) ||
-    localStorage.nightMode == "off"
-  ) {
-    console.log(
-      "You specified no preference for a color scheme or your browser does not support it."
-    );
-    now = new Date();
-    hour = now.getHours();
-    if (localStorage.nightMode == "on") toggleNight(true);
+  // if (isDarkMode) toggleNight(true);
+  // if (isLightMode && !localStorage.nightMode) toggleNight(false);
+  // if (
+  //   ((isNotSpecified || hasNoSupport) && !localStorage.nightMode) ||
+  //   (isLightMode && localStorage.nightMode) ||
+  //   localStorage.nightMode == "off"
+  // ) {
+  //   console.log(
+  //     "You specified no preference for a color scheme or your browser does not support it."
+  //   );
+  //   now = new Date();
+  //   hour = now.getHours();
+  //   if (localStorage.nightMode == "on") toggleNight(true);
+  // }
+  if (localStorage.nightMode == "on") {
+    toggleNight(true);
+  } else {
+    toggleNight(false);
   }
-  $("#darkmode").on("click", toggleNight);
-  function toggleNight(force = undefined) {
-    force =
-      force == undefined || typeof force == "object"
-        ? localStorage.nightMode != "on"
-        : force;
-    console.log("FORCE: " + force);
-    console.log(localStorage.nightMode);
-    if (force == false || force != true) {
-      console.log("Disable");
-      DarkReader.disable();
-      localStorage.nightMode = "off";
+  $("#darkmode").on("click", function() {
+    toggleNight();
+  });
+  function toggleNight(night = "other") {
+    if (night != "other") {
+      if (night == true) {
+        localStorage.nightMode = "on";
+        DarkReader.enable();
+      } else {
+        localStorage.nightMode = "off";
+        DarkReader.disable();
+      }
     } else {
-      console.log("Enable");
-      DarkReader.enable();
-      localStorage.nightMode = "on";
+      if (localStorage.nightMode == "on") {
+        DarkReader.disable();
+        localStorage.nightMode = "off";
+      } else {
+        localStorage.nightMode = "on";
+        DarkReader.enable();
+      }
     }
+    return localStorage.nightMode;
   }
 </script>
 <footer id="footer">
