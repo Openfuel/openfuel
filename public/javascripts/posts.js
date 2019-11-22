@@ -88,11 +88,11 @@
                             ? `
                   <center>
                     <a href="${p.post.static_url}" class="progressive replace">
-                        <img author="${p.author.username}" src="" id="${p.post._id}" class="post img-responsive lozad preview">
+                        <img author="${p.author.id}" src="" id="${p.post._id}" class="post img-responsive lozad preview">
                     </a>        
                   `
                             : `
-                  <video author="${p.author.username}" src="${p.post.static_url}" id="${p.post._id}" class="post img-responsive" controls></video>
+                  <video author="${p.author.id}" src="${p.post.static_url}" id="${p.post._id}" class="post img-responsive" controls></video>
                   `
                         }`
                       : p.post.code
@@ -146,7 +146,7 @@
             ? "grey"
             : "#f0b917"
         }" class="footer-action-icons likes btn btn-link non-hoverable like-button-box" author="${
-          p.author.username
+          p.author.id
         }" id="${p.post._id}-like">
                     <i class="glyphicon glyphicon-thumbs-up"></i> ${
                       p.post.likes.length
@@ -155,7 +155,7 @@
                   <input id="${
                     p.post._id
                   }" class="comments-input comment-input-box" author="${
-          p.author.username
+          p.author.id
         }" type="text" id="comment" placeholder="Click enter to comment here..."/>
             
                 </div>

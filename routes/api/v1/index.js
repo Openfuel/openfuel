@@ -140,7 +140,7 @@ router.post("/v1/like", function(req, res, next) {
   if (!req.session.user) res.status(404).send("Unauthorized");
   console.log(req.body);
   db.like(
-    { id: req.session.user.id },
+    { id: req.body.author },
     { by: req.session.user.id, username: req.session.user.username },
     req.body._id,
     (err, result, amount, liked) => {
