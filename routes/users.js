@@ -18,12 +18,15 @@ router.get("/", function(req, res, next) {
 router.get("/@:username", function(req, res, next) {
   db.findOne({ username: req.params.username }, (err, user) => {
     console.log(user);
-    if (!user) return res.status(404).send("No user found");
-    user.bio = textParser(user.bio);
-    res.render("user/profile", {
-      title: req.app.conf.name,
-      u: user,
-      userId: req.session._id
+    db.getAll((err, users) => {
+      if (!user) return res.status(404).send("No user found");
+      user.bio = textParser(user.bio);
+      res.render("user/profile", {
+        title: req.app.conf.name,
+        u: user,
+        people: users,
+        userId: req.session._id
+      });
     });
   });
 });
